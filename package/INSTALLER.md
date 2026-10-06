@@ -1,31 +1,31 @@
-# Hướng dẫn bộ cài cho 9B
+# Bộ cài content 1.2 cho 9B
 
-Đường đi sử dụng: **ZIP đính kèm chat → giải nén an toàn → bootstrap → native skills install từng thư mục**. ZIP upload trong chat là file đầu vào, không phải archive cài qua Skills Upload. Native CLI nhận thư mục có SKILL.md, không nhận ZIP. Nếu policy native từ chối, không thử copy trực tiếp hay đổi policy để cài.
+Đường đi: ZIP tải/đính kèm → kiểm hash và giải nén an toàn → install-job → chờ gateway rảnh → bootstrap → native skills install từng thư mục. Không cài/thay cấu hình ngay trong lượt model đang xử lý yêu cầu cài. Không đưa ZIP cho Skills Upload hoặc skills install.
 
-Chạy bằng Node của runtime 9bizclaw đang hoạt động. CLI:
+## Giao việc từ chat
 
-```text
-node bootstrap.cjs --plan
-node bootstrap.cjs --plan --agent <id>
-node bootstrap.cjs --apply --agent <id> --install-deps
-```
+Chạy bằng Node của 9B: `node install-job.cjs launch --agent <id> --install-deps --upgrade`. launch kiểm checksum toàn bộ gói, runtime/agent và tạo job ngoài thư mục gói. Trả job_file/log_file rồi kết thúc lượt chat ngay, không poll/sleep/gọi /caidat trong cùng lượt. --upgrade cần quyền nâng cùng package đã xác minh, không vượt ownership hoặc policy.
 
-Nếu nâng bản cũ của cùng gói đã được học viên cho phép, kiểm receipt `freeup-gift-origin.json` với `package_id: freeup-content-student-gift` và kiểm quyền sở hữu/hash qua bộ cài. Dùng `--plan --upgrade`, đọc kế hoạch rồi `--apply --upgrade --install-deps` với cùng agent. Giữ kho `freeup-content-data` ngoài skill: hồ sơ, bài, ảnh và ý tưởng không bị thay bằng dữ liệu mặc định. Không dùng --upgrade để vượt policy-denied, xung đột skill khác hoặc file riêng chưa được quản lý. Khi bắt đầu từ máy chưa cài gói, dùng lệnh cài thông thường ở trên.
+Worker có thời gian bàn giao, rồi kiểm gateway.restart.preflight hai lần liên tiếp. Chỉ bắt đầu khi safe=true, counts hợp lệ và không có công việc đang chạy. Busy chờ có giới hạn; gateway không truy cập được hoặc trả trạng thái không xác định thì dừng. Đây là kiểm tra trước khi cài, không phải khóa ngăn người dùng mở lượt khác; trong lúc cài hãy để 9B rảnh. Không dùng restart/skipDeferral/đổi policy.
 
-Tuỳ chọn: `--install-root <runtime-root>`, `--state-dir <state-dir>`, `--cli <native-openclaw.mjs>`, `--workspace <expected-workspace>`, `--upgrade`. `--workspace` là kiểm tra workspace do native xác nhận, không phải tạo một workspace tuỳ ý. Dùng --state-dir/--cli cho runtime custom hoặc fixture kiểm thử; không dùng để lách chính sách của phiên.
+Lượt chat mới kiểm: `node install-job.cjs status --file <job_file>`. completed mới chứng minh cài xong; waiting/running chưa hoàn tất. Đọc log/report khi failed. Bộ cài giữ báo lỗi và không biến lỗi policy thành thành công.
 
-Manifest là nguồn tên/thư mục skill. Cài conductor và 30 skill lệnh ở cùng cấp vì native discovery ngừng đọc sâu khi đã gặp một SKILL.md. Tên skill lệnh bản 1.1 dùng tiếng Việt không dấu, không có gạch nối hoặc gạch dưới: `/caidat`, `/vietbai`, `/minhhoa`, `/anhchu`, `/boanh`, `/tudong`, `/xem`, `/mothumuc`… Không ghi AGENTS/SOUL/USER để giả lệnh.
+## Cài từ cửa sổ ngoài chat
 
-Bộ cài đọc inventory bằng native CLI của agent được chọn, nhận workspaceDir. Trước cài kiểm name/folder conflict; skill không thuộc gói thì dừng. Nếu allowlist hạn chế, chỉ bổ sung agent được chọn, không đổi các agent khác hoặc defaults. Cài lại cùng phiên bản idempotent; cùng gói khác phiên bản cần --upgrade. Native install thất bại phải giữ báo lỗi và kết quả từng skill, không báo đã cài tất cả.
+Mở CAI-DAT-9B.cmd sau khi giải nén nguyên gói. Nó tìm Node của 9B qua môi trường/metadata cài đặt máy hiện tại và chạy `node install-job.cjs run --select-agent --install-deps`; chọn nâng bản cũ nếu có yêu cầu. Có thể chỉ định --install-root, --agent cho bản cài tùy chỉnh. Không hạ ExecutionPolicy. Root install-from-github.ps1 mặc định chỉ lập kế hoạch; -Apply dùng job run chờ gateway rảnh.
 
-Sau cài, runtime.json của conductor dùng đường dẫn project tương đối; helper init tạo database/brand/media_output còn thiếu và giữ dữ liệu hiện có. Kho `freeup-content-data` nằm ngoài skill để nâng cấp không mất dữ liệu. Không copy project mẫu đã điền thương hiệu. Dependency install dùng package-lock chính gói, tải Chrome/FFmpeg lần đầu và lưu trong skill; Internet cần cho bước này. Renderer viết vào kho học viên.
+## Native installer và dữ liệu
 
-Tiếp tục `/caidat` bằng kiểm tra hồ sơ có sẵn trước: cấu hình riêng, thông tin học viên đã cung cấp, tài liệu truy cập được và hồ sơ doanh nghiệp native khi có công cụ. Chỉ hỏi mục bắt buộc còn thiếu hoặc mâu thuẫn. Không yêu cầu nhập lại một hồ sơ đầy đủ. Bản 1.1 vẫn hiểu lệnh chat cũ theo bảng tương thích trong references/commands.md; các tên ngắn là lệnh native của gói mới.
+bootstrap --plan là kiểm tra chỉ đọc. bootstrap --apply là API kỹ thuật cho worker sau idle gate, không phải đường cài trực tiếp trong chat. Manifest liệt kê 31 skill cùng cấp: conductor và 30 lệnh, gồm /caidat, /vietbai, /minhhoa, /anhchu, /boanh, /tudong, /xem, /mothumuc. Không ghi AGENTS/SOUL/USER để giả lệnh.
 
-Thành phẩm lưu cục bộ theo ngày/ID bài trong media_output. `/xem` đọc tệp thật và gửi qua công cụ đính kèm khả dụng; `/mothumuc` mở thư mục trên máy chạy 9B. Không mặc định đường dẫn này mở được trên điện thoại. Việc xem trên điện thoại cần kênh đã kết nối hỗ trợ gửi tệp và kết quả gửi thành công.
+Runtime/agent/workspace lấy từ native CLI. Chỉ thêm allowlist cho agent đích, giữ defaults và agent khác. Receipt freeup-gift-origin.json xác minh cùng package_id freeup-content-student-gift và hash trước nâng. Foreign/edited skills bị từ chối. Cài lại cùng bản giữ dữ liệu. Chỉ timeout native skill install được kiểm lại trạng thái và retry tối đa một lần khi ownership khớp; policy denial không retry.
 
-Để kiểm chứng logic helper: `node <conductor>/scripts/system-smoke.cjs --project <thu-muc-kiem-thu-moi>`. Để kiểm renderer sau cài dependencies: `node <conductor>/scripts/render-smoke.cjs --project <thu-muc-kiem-thu-moi>`. Đây là fixture tổng hợp, không đăng/kết nối tài khoản. Không trộn fixture với kho content thật.
+Kho freeup-content-data ngoài skill, init chỉ tạo phần thiếu. Hồ sơ, bài, ý tưởng, ảnh không bị thay khi nâng. npm ci dùng package-lock của conductor, tải Chrome/FFmpeg riêng; không phụ thuộc node_modules hay cache của bộ Antigravity. completed cần inventory 31 skill eligible, kho thực và kiểm dependencies khi yêu cầu cài media. Không báo thành công chỉ vì đã tạo job.
 
-Nếu toolset của phiên không có read/exec hoặc không được đọc ZIP, báo đúng capability còn thiếu. Có thể để học viên giải nén bằng chức năng chuẩn rồi cung cấp folder; policy-denied native install cần quản trị viên xử lý, không tự sửa config bảo mật. Khi công cụ tạo ảnh/giọng đọc/đăng bài chưa có, tiếp tục phần content/render cơ sở và xuất file thật.
+/caidat trong lượt mới đọc hồ sơ/tài liệu/native business data có quyền truy cập trước; chỉ hỏi phần bắt buộc thiếu/mâu thuẫn. Không dùng thông tin giảng viên hoặc buộc nhập lại hồ sơ đủ. Thành phẩm lưu theo ngày/ID; /xem gửi tệp thật khi công cụ cho phép, /mothumuc mở trên máy chạy 9B. Điện thoại cần kênh đã kết nối và receipt gửi tệp thực.
 
-Kiểm chứng đã có: bản 1.0 cài native đầy đủ 30 skill trên workspace trống, cài lại giữ dữ liệu, cùng kiểm renderer/dependencies. Bản 1.1 cập nhật manifest 31 skill/30 lệnh và đã qua kiểm tra cấu trúc/tên lệnh, 33 kiểm tra hồ sơ và 12 kiểm tra helper hệ thống. Chưa chạy lại toàn bộ lượt cài native 31 skill cho bản 1.1; bộ cài đọc manifest động và vẫn kiểm inventory/eligible trên máy học viên trước báo hoàn tất.
+## Kiểm chứng
+
+Bản 1.1 đã cài native đủ 31 skill trên 9BizClaw v3 / OpenClaw 2026.8.1 và kiểm công cụ Chrome/FFmpeg. Bản 1.2 thay cơ chế khởi chạy cài đặt; kiểm bằng runtime mô phỏng độc lập, kiểm cài lại/nâng cấp/giữ dữ liệu, hồ sơ và helper. Chưa thực hiện lượt cài native mới toàn bộ bản 1.2 trên máy học viên khác. Mỗi máy vẫn phải đạt inventory 31 skill eligible và doctor trước khi báo cài hoàn tất.
+
+Chạy install-job-smoke.cjs, bootstrap-smoke.cjs và các scripts/profile-smoke.cjs, scripts/system-smoke.cjs trong vùng fixture riêng. Không trộn fixture vào dữ liệu người dùng. Không có API key/tài khoản/kho ảnh giảng viên trong gói.

@@ -7,7 +7,7 @@ Mặc định chỉ lập kế hoạch. Thêm -Apply để cài; -InstallDepende
 param(
     [string] $Repository = 'phuongnguyendhtm/freeup-content-9b',
     [Alias('Commit')] [string] $Ref = 'main',
-    [string] $ArtifactPath = 'distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.1.zip',
+    [string] $ArtifactPath = 'distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.zip',
     [string] $Destination,
     [string] $Agent,
     [string] $InstallRoot,
@@ -18,8 +18,8 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$GiftArchiveName = 'FREEUP-CONTENT-9B-HOC-VIEN-v1.1.zip'
-$GiftArchiveSha256 = '450CB4B06548CCABAA7E0AF7473BCB30083567D959CA8337143B9E35747CD0B4'
+$GiftArchiveName = 'FREEUP-CONTENT-9B-HOC-VIEN-v1.2.zip'
+$GiftArchiveSha256 = '5680486209C45B64C851C957EF87465E41D0BE852D09F0B56471435EE7F8BC82'
 
 function Test-GiftBoundary {
     param([string] $Path, [string] $Boundary, [switch] $AllowRoot)
@@ -54,7 +54,7 @@ function Test-GiftArchiveHash {
 }
 
 function Save-GiftArchive {
-    param([string] $Repository, [string] $Ref, [string] $ArchivePath, [string] $ExpectedSha256, [string] $ArtifactPath = 'distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.1.zip')
+    param([string] $Repository, [string] $Ref, [string] $ArchivePath, [string] $ExpectedSha256, [string] $ArtifactPath = 'distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.zip')
     if ($Repository -notmatch '^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$') { throw 'Repository không hợp lệ.' }
     if ($Ref -ne 'main' -and $Ref -notmatch '^[0-9a-fA-F]{40}$') { throw 'Ref phải là main hoặc mã commit đầy đủ 40 ký tự.' }
     if ($ArtifactPath -notmatch '^[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*\.zip$' -or $ArtifactPath.Split('/') -contains '..') { throw 'ArtifactPath phải là đường dẫn ZIP tương đối an toàn trong repo.' }
@@ -122,7 +122,7 @@ function Expand-GiftArchive {
     $manifestPath = Join-Path $packageRoot 'distribution-manifest.json'
     if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) { throw 'Gói thiếu manifest.' }
     $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ($manifest.package_id -ne 'freeup-content-student-gift' -or $manifest.version -ne '1.1.0') { throw 'Manifest không khớp gói học viên 1.1.' }
+    if ($manifest.package_id -ne 'freeup-content-student-gift' -or $manifest.version -ne '1.2.0') { throw 'Manifest không khớp gói học viên 1.2.' }
     return $packageRoot
 }
 
@@ -147,9 +147,15 @@ function Find-GiftNode {
         if (Test-Path -LiteralPath $node -PathType Leaf) { Assert-GiftNoReparsePoint $node; return $node }
         if ($ExplicitInstallRoot) { throw 'Thư mục 9B đã chỉ định thiếu Node đi kèm.' }
     }
-    $command = Get-Command node.exe -CommandType Application -ErrorAction SilentlyContinue
+    $command = Get-Command node.exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
     if ($command) { return $command.Source }
     throw 'Chưa tìm thấy Node của 9BizClaw v3. Mở/khởi tạo 9B trước, hoặc truyền -InstallRoot của máy này.'
+}
+
+function Invoke-GiftInstallJob {
+    param([string] $NodePath, [string] $PackageRoot, [string[]] $Arguments)
+    & $NodePath (Join-Path $PackageRoot 'install-job.cjs') @Arguments
+    if ($LASTEXITCODE -ne 0) { throw "Bộ cài chưa hoàn tất (mã $LASTEXITCODE). Đọc trạng thái/log; không tự đổi policy hay ghi đè skill khác." }
 }
 
 function Invoke-GiftBootstrap {
@@ -171,7 +177,7 @@ $destinationRoot = [System.IO.Path]::GetFullPath($Destination)
 Assert-GiftNoReparsePoint $destinationRoot
 [void] [System.IO.Directory]::CreateDirectory($destinationRoot)
 $refLabel = $Ref.Substring(0, [Math]::Min(12, $Ref.Length))
-$runDirectory = Join-Path $destinationRoot ('v1.1-' + $refLabel + '-' + [Guid]::NewGuid().ToString('N'))
+$runDirectory = Join-Path $destinationRoot ('v1.2-' + $refLabel + '-' + [Guid]::NewGuid().ToString('N'))
 if (-not (Test-GiftBoundary $runDirectory $destinationRoot)) { throw 'Thư mục tải nằm ngoài đích.' }
 [void] [System.IO.Directory]::CreateDirectory($runDirectory)
 $archivePath = Join-Path $runDirectory $GiftArchiveName
@@ -188,9 +194,9 @@ Write-Host "Gói đã kiểm chứng: $packageRoot"
 Write-Host 'Đang kiểm tra kế hoạch cài qua công cụ native...'
 Invoke-GiftBootstrap $nodePath $packageRoot (@('--plan') + $sharedArguments)
 if ($Apply) {
-    $applyArguments = @('--apply') + $sharedArguments
+    $applyArguments = @('run') + $sharedArguments
     if ($InstallDependencies) { $applyArguments += '--install-deps' }
-    Invoke-GiftBootstrap $nodePath $packageRoot $applyArguments
+    Invoke-GiftInstallJob $nodePath $packageRoot $applyArguments
     Write-Host 'Bộ cài đã hoàn tất các kiểm tra. Mở chat 9B và chạy /caidat để kiểm hồ sơ doanh nghiệp.'
 } else {
     Write-Host 'Đã lập kế hoạch, chưa cài. Dùng cùng lệnh với -Apply; thêm -InstallDependencies khi cần công cụ ảnh/video.'

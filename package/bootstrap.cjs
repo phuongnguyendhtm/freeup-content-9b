@@ -176,7 +176,12 @@ function resolveRuntime(options, env = process.env) {
 }
 function runProcess(command, args, { cwd, env, timeout = 120000, label = 'Công cụ', inherit = false } = {}) {
   const result = cp.spawnSync(command, args, { cwd, env, encoding: 'utf8', windowsHide: true, shell: false, timeout, maxBuffer: 16 * 1024 * 1024, stdio: inherit ? 'inherit' : 'pipe' });
-  if (result.error) fail(`${label} không chạy được: ${result.error.message}`);
+  if (result.error) {
+    const error = new Error(`${label} không chạy được: ${result.error.message}`, { cause: result.error });
+    error.code = result.error.code;
+    error.nativeOutput = `${result.stderr || ''}\n${result.stdout || ''}`.trim();
+    throw error;
+  }
   if (result.status !== 0) {
     const detail = `${result.stderr || ''}\n${result.stdout || ''}`.trim().slice(-6000);
     fail(`${label} thất bại (exit ${result.status}). Không copy trực tiếp hoặc đổi policy để vượt từ chối.${detail ? '\n' + detail : ''}`);
@@ -261,6 +266,43 @@ function verifyManagedSkill(skill, target, manifest, options) {
 }
 function installedReceipt(manifest, skill, stage) {
   return { schema_version: 1, package_id: PACKAGE_ID, version: manifest.version, skill_name: skill.name, source_hash: skill.sourceHash, installed_files: treeFiles(stage), installed_at_utc: new Date().toISOString() };
+}
+function retryableNativeTimeout(error) {
+  // Only an actual process timeout is recoverable. Native refusals and policy
+  // errors are never retried, even if that process subsequently times out.
+  return error?.code === 'ETIMEDOUT' && !/\b(?:denied|blocked|refused)\b|security\.installPolicy|\b(?:policy|permission)\s+(?:denial|refusal)|không được phép|từ chối/i.test(error.nativeOutput || '');
+}
+function assertManagedInstall(skill, target, stage, manifest, options) {
+  if (verifyManagedSkill(skill, target, manifest, options).action !== 'keep') fail(`Native install '${skill.name}' chưa có receipt hoàn chỉnh của bản đang cài.`);
+  const receipt = json(path.join(target, RECEIPT_FILE));
+  const expected = json(path.join(stage, RECEIPT_FILE));
+  if (!same(receipt.installed_files, expected.installed_files)) fail(`Native install '${skill.name}' chưa khớp đầy đủ source đã chuẩn bị.`);
+}
+function installNativeWithRecovery(runtime, args, item, stage, manifest, options, invoke = native) {
+  if (verifyManagedSkill(item.skill, item.target, manifest, options).action !== item.action) fail(`Target '${item.skill.name}' thay đổi trước native install; dừng để giữ cập nhật mới.`);
+  const before = exists(item.target) ? treeFiles(item.target, { ignoreDependencies: true }) : null;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      invoke(runtime, args);
+      assertManagedInstall(item.skill, item.target, stage, manifest, options);
+      return { attempts: attempt, recovered: attempt > 1 ? 'native-retry' : null };
+    } catch (error) {
+      if (!retryableNativeTimeout(error)) throw error;
+      const ownership = verifyManagedSkill(item.skill, item.target, manifest, options);
+      if (ownership.action === 'keep') {
+        assertManagedInstall(item.skill, item.target, stage, manifest, options);
+        console.log(`Đã kiểm receipt và tệp đầy đủ sau khi native CLI hết thời gian: ${item.skill.name}`);
+        return { attempts: attempt, recovered: 'verified-receipt-after-timeout' };
+      }
+      // No direct copy, force escalation, or partial-tree repair. A retry may
+      // reuse only the original, still-unchanged native installation decision.
+      if (ownership.action !== item.action) fail(`Target '${item.skill.name}' thay đổi sau timeout; dừng để giữ dữ liệu hiện tại.`);
+      if (before && !same(before, treeFiles(item.target, { ignoreDependencies: true }))) fail(`Skill '${item.skill.name}' thay đổi trong lúc native CLI hết thời gian; không tự ghi đè.`);
+      if (attempt === 2) throw error;
+      console.log(`Native CLI hết thời gian; trạng thái skill xác nhận có thể thử lại đúng một lần: ${item.skill.name}`);
+    }
+  }
+  fail('Native retry vượt số lần cho phép.');
 }
 function assertReady(inventory, names) {
   for (const name of names) {
@@ -348,11 +390,8 @@ function main(argv = process.argv.slice(2)) {
       }
       const args = ['skills', 'install', stage, '--agent', agent.id, '--as', item.skill.name];
       if (item.action === 'upgrade') args.push('--force');
-      native(runtime, args);
-      const receipt = json(path.join(item.target, RECEIPT_FILE));
-      const actual = treeFiles(item.target, { ignoreDependencies: true });
-      for (const [file, expected] of Object.entries(receipt.installed_files)) if (actual[file] !== expected) fail(`Native install '${item.skill.name}' chưa khớp source: ${file}`);
-      transaction.completed.push({ name: item.skill.name, action: item.action === 'upgrade' ? 'upgraded' : 'installed' });
+      const nativeResult = installNativeWithRecovery(runtime, args, item, stage, manifest, options);
+      transaction.completed.push({ name: item.skill.name, action: item.action === 'upgrade' ? 'upgraded' : 'installed', ...(nativeResult.recovered ? { timeout_recovery: nativeResult.recovered, native_attempts: nativeResult.attempts } : {}) });
       writeJson(reportPath, transaction);
       console.log(`Đã cài native: ${item.skill.name}`);
     }
@@ -379,7 +418,7 @@ function main(argv = process.argv.slice(2)) {
     transaction.dependencies_installed = options.installDeps;
     writeJson(reportPath, transaction);
     console.log(`ĐÃ CÀI VÀ XÁC MINH ${names.length}/${names.length} SKILL. Hồ sơ học viên ở ${dataRoot}.`);
-    console.log('Mở lượt/chat mới trong 9b, dùng /setup để nhập thương hiệu rồi /vietbai <chủ đề>.');
+    console.log('Mở lượt/chat mới trong 9b, dùng /caidat để kiểm hồ sơ doanh nghiệp rồi /vietbai <chủ đề>.');
     console.log('Nếu lệnh ngắn trùng tên, dùng /skill freeup-content-system /vietbai <chủ đề>.');
     console.log(`Báo cáo: ${reportPath}`);
     return { ...planReport, result: transaction.state, report: reportPath };
@@ -401,4 +440,4 @@ if (require.main === module) {
   try { main(); }
   catch (error) { console.error(`CHƯA CÀI XONG: ${error.message}`); process.exitCode = 1; }
 }
-module.exports = { main, parseArgs, resolveRuntime, agentRoster, selectAgent, allowlistBatch, treeFiles, contained, loadManifest, verifyManagedSkill };
+module.exports = { main, parseArgs, resolveRuntime, agentRoster, selectAgent, allowlistBatch, treeFiles, contained, loadManifest, verifyManagedSkill, readAgents, nativeJson, runProcess, retryableNativeTimeout, installNativeWithRecovery };

@@ -1,56 +1,54 @@
 # FREEUP Content 9B — Hệ thống content cho học viên
 
-**Bản 1.1:** 31 skill, 30 lệnh tiếng Việt và kho bài/ảnh/video riêng trên máy học viên. Máy cần có **9BizClaw v3 đã khởi tạo và đang dùng được**, cùng Internet trong lần tải đầu. Hệ thống hoạt động độc lập với bộ Antigravity và thư mục của giảng viên.
+**Bản 1.2:** 31 skill, 30 lệnh tiếng Việt, kho bài/ảnh/video riêng. Máy học viên cần **9BizClaw v3 đã khởi tạo** và Internet cho lần tải đầu. Gói hoạt động độc lập với Antigravity và thư mục của giảng viên.
 
-## Cách cài nhanh trong chat 9B
+## Cách cài dễ nhất trên Windows
 
-1. Mở 9B và chọn agent muốn dùng làm content.
-2. Sao chép nguyên đoạn dưới đây vào chat của agent đó:
+1. [Tải ZIP 1.2](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.zip).
+2. Giải nén nguyên ZIP ra thư mục mới, giữ 9B đang mở và dừng các lượt chat đang chạy.
+3. Mở **CAI-DAT-9B.cmd**, chọn agent nếu được hỏi. Nếu đã có bản cũ, chỉ chọn nâng khi đó là cùng gói đã được xác minh. Chờ cửa sổ báo hoàn tất kiểm tra; lần tải công cụ ảnh/video có thể mất vài phút.
+4. Mở **lượt/chat mới cùng agent** trong 9B và gõ **/caidat**. Hệ thống dùng lại hồ sơ doanh nghiệp đã có và chỉ hỏi phần còn thiếu.
 
-```text
-Đọc https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/CAI-DAT-9B.txt và cài hệ thống content 1.1 cho agent 9B đang dùng. Tôi cho phép cài các skill qua bộ cài native, tải công cụ ảnh/video và nâng phiên bản cũ của cùng gói khi bộ cài xác minh được nguồn gói, giữ hồ sơ và dữ liệu riêng. Sau khi cài và kiểm tra thành công, chạy /caidat, dùng hồ sơ doanh nghiệp đã có và chỉ hỏi phần còn thiếu.
-```
+Tệp cài tìm 9B trên máy học viên; không cần đường dẫn hay tài khoản của giảng viên. Giữ 9B rảnh trong khi bộ cài làm việc. Nếu bộ cài báo failed/chưa hoàn tất, giữ lỗi để xử lý trước khi dùng.
 
-3. Chờ 9B tải gói, cài skill và kiểm tra. Nếu có nhiều agent và chưa xác định được phiên đang dùng, chọn agent khi 9B hỏi. Chỉ xem là cài xong khi 9B báo kiểm tra thành công.
-4. Hệ thống chạy `/caidat`, tái sử dụng hồ sơ đã có và chỉ hỏi thông tin còn thiếu. Bắt đầu bằng `/vietbai`, `/minhhoa`, `/anhchu`, `/boanh` hoặc `/tudong`.
+## Cài bằng một câu lệnh trong chat 9B
 
-[Yêu cầu cài đầy đủ](./CAI-DAT-9B.txt) · [Hướng dẫn học viên](./HUONG-DAN-HOC-VIEN.md)
-
-Nếu chat không đọc được đường dẫn, mở [CAI-DAT-9B.txt](./CAI-DAT-9B.txt), sao chép toàn bộ nội dung và dán vào 9B. Nếu chat không tải được ZIP, dùng cách đính kèm dưới đây. Khi phiên không có quyền đọc tệp/chạy bộ cài, 9B sẽ nói rõ bước còn thiếu; dùng cách PowerShell trên cùng máy hoặc cách được quản trị viên cho phép.
-
-## Cài bằng ZIP đính kèm
-
-1. [Tải ZIP bản 1.1](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.1.zip).
-2. Đính kèm nguyên ZIP vào **chat 9B** của agent muốn dùng; dùng chức năng gửi tệp trong chat.
-3. Mở [câu lệnh dành cho ZIP đính kèm](./package/CAI-DAT-9B.txt), sao chép toàn bộ và dán vào cùng chat. Không chọn ZIP trong màn hình Skills Upload.
-4. Chờ kiểm tra thành công và thực hiện `/caidat`.
-
-ZIP được đối chiếu SHA-256 trước khi cài:
+Sao chép đoạn sau vào chat của agent muốn dùng:
 
 ```text
-450CB4B06548CCABAA7E0AF7473BCB30083567D959CA8337143B9E35747CD0B4
+Đọc https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/CAI-DAT-9B.txt và cài hệ thống content 1.2 cho agent 9B đang dùng. Tôi cho phép cài skill qua bộ cài native, tải công cụ ảnh/video và nâng bản cũ của cùng gói đã được xác minh, giữ hồ sơ và dữ liệu riêng. Khởi chạy bộ cài nền rồi kết thúc lượt chat này ngay; không chờ cài hoặc chạy /caidat trong cùng lượt. Sau khi cài thành công, tôi sẽ mở lượt mới dùng /caidat; hãy dùng hồ sơ doanh nghiệp đã có và chỉ hỏi phần còn thiếu.
 ```
 
-## Dùng sau khi cài
+9B trả đường dẫn job_file và kết thúc lượt; đây là xác nhận đã khởi chạy, chưa phải cài xong. Bộ cài chờ lượt chat kết thúc rồi cài ngoài lượt đó. Sau vài phút, mở lượt mới yêu cầu **“Kiểm tra kết quả cài ở job_file đã cung cấp”**. Nếu còn chờ/đang chạy, kết thúc lượt và để bộ cài tiếp tục. Khi completed và kiểm tra thành công, dùng /caidat.
 
-| Lệnh | Tác dụng |
+[Yêu cầu đầy đủ](./CAI-DAT-9B.txt) · [Hướng dẫn học viên](./HUONG-DAN-HOC-VIEN.md) · [Câu lệnh cho ZIP đính kèm](./package/CAI-DAT-9B.txt)
+
+Nếu chat không đọc link, mở CAI-DAT-9B.txt và dán toàn bộ. Nếu không tải ZIP, tải thủ công rồi đính kèm ZIP vào chat; không chọn ZIP trong Skills Upload. Nếu phiên thiếu quyền đọc/chạy bộ cài, dùng CAI-DAT-9B.cmd hoặc cách được tổ chức cho phép.
+
+## Khi 9B báo prepared model runtime plugin generation was superseded
+
+Bản 1.2 chuyển thao tác cài ra khỏi lượt model đang chạy để tránh thay skill/cấu hình ngay trong lượt đó. Nếu lỗi xuất hiện trước khi 9B đọc yêu cầu hoặc chạy công cụ, mã Git chưa thực thi: tải ZIP và mở CAI-DAT-9B.cmd để cài từ cửa sổ riêng. Sau khi kiểm tra cài thành công, mở lượt/chat mới dùng /caidat. Nếu chat mới vẫn báo cùng lỗi, đóng hẳn/mở lại 9B hoặc kiểm tra bản ứng dụng với bộ phận hỗ trợ; không cài đi cài lại để chữa lỗi model của ứng dụng.
+
+## Lệnh và thành phẩm
+
+| Lệnh | Công việc |
 |---|---|
-| `/caidat` | Kiểm hồ sơ, chỉ hỏi phần thiếu |
-| `/vietbai` | Viết bài theo thương hiệu |
-| `/minhhoa` | Tạo Visual Insight |
-| `/anhchu` | Tạo Founder Quote từ ảnh cá nhân |
-| `/boanh` | Tạo carousel |
-| `/tudong` | Chạy quy trình theo yêu cầu |
-| `/xem` | Xem thành phẩm trong chat |
-| `/mothumuc` | Mở thư mục thành phẩm trên máy chạy 9B |
+| /caidat | Kiểm hồ sơ có sẵn, chỉ hỏi phần thiếu |
+| /vietbai | Viết bài theo thương hiệu |
+| /minhhoa | Visual Insight |
+| /anhchu | Founder Quote từ ảnh cá nhân thật |
+| /boanh | Carousel |
+| /tudong | Chạy quy trình content theo yêu cầu |
+| /xem | Xem thành phẩm trong chat |
+| /mothumuc | Mở thư mục thành phẩm trên máy chạy 9B |
 
-Ví dụ: `/tudong Làm một bài Facebook và carousel 5 trang về [chủ đề], tạo thành phẩm và cho tôi xem.`
+Ví dụ: `/tudong Làm bài Facebook và carousel 5 trang về [chủ đề], tạo thành phẩm và cho tôi xem.`
 
-Bài và ảnh/video được lưu theo ngày/ID trong `freeup-content-data/media_output/` ở workspace của agent. Mỗi bài có `index.html` để xem trên máy tính. Điện thoại xem qua kênh đã kết nối hỗ trợ gửi tệp, sau khi 9B xác minh đã gửi thành công. [Chi tiết kho thành phẩm và hồ sơ](./HUONG-DAN-HOC-VIEN.md).
+Bài, caption và ảnh/video nằm trong `freeup-content-data/media_output/ngày/ID-bài/` của workspace agent. Mỗi bài có index.html để mở xem trên máy tính. Điện thoại xem qua kênh đã kết nối hỗ trợ gửi tệp, sau khi 9B xác minh gửi thành công. Dữ liệu riêng được giữ khi cài lại/nâng cấp cùng gói đã xác minh.
 
 ## Cài bằng PowerShell trên máy chạy 9B
 
-Tải script về tệp, xem script trước khi chạy. Script đối chiếu SHA-256 của bản 1.1 trước khi giải nén và cài. Có thể dùng `main` hoặc mã commit đầy đủ 40 ký tự ở biến `$contentRef`; mã commit cố định cả script và ZIP tại một bản đã xuất bản.
+Tải và xem script trước khi chạy. -Apply khởi chạy job từ cửa sổ riêng và chờ 9B rảnh; mặc định chỉ lập kế hoạch. Không chạy -Apply rồi chờ nó trong công cụ của lượt chat 9B đang hoạt động.
 
 ```powershell
 $contentRepo = 'phuongnguyendhtm/freeup-content-9b'
@@ -61,50 +59,16 @@ Get-Content -LiteralPath $contentInstaller
 & $contentInstaller -Repository $contentRepo -Ref $contentRef -Apply -InstallDependencies
 ```
 
-Nếu máy có nhiều agent, thêm `-Agent ten-agent` cho agent muốn dùng. Nếu bộ cài yêu cầu chọn agent, chạy lại với lựa chọn đó. Nếu máy đã có phiên bản cũ của đúng bộ quà tặng và bộ cài xác minh receipt, thêm `-Upgrade`; dữ liệu và hồ sơ riêng được giữ lại. Dừng khi có xung đột skill khác hoặc chính sách native từ chối.
+Với máy có nhiều agent, PowerShell cần -Agent ten-agent ngay từ bước lập kế hoạch; cách mở CAI-DAT-9B.cmd có thể hỏi tương tác. Thêm -Upgrade để nâng đúng gói cũ đã được xác minh, -InstallRoot 'đường-dẫn-9B' cho runtime tùy chỉnh. -Ref nhận main hoặc mã commit đầy đủ 40 ký tự để cố định bản tải. -Destination chỉ đổi nơi lưu gói tải. Khi chính sách script/cài skill từ chối, dùng cách được tổ chức hỗ trợ; không đổi chính sách toàn máy.
 
-Nếu tệp bị đánh dấu tải từ Internet, mở tệp để xem trước rồi dùng `Unblock-File -LiteralPath $contentInstaller` nếu bạn đã tin cậy bản phát hành. Lệnh này chỉ bỏ dấu trên đúng tệp đó. Nếu chính sách chạy script vẫn chặn, dùng cách cài trong chat 9B ở đầu trang hoặc quy trình được tổ chức cho phép; không tự đổi chính sách toàn máy.
+## Kiểm chứng và nội dung gói
 
-Chỉ kiểm tra kế hoạch, chưa cài:
+Bản 1.1 đã cài native đủ 31 skill trên 9BizClaw v3 / OpenClaw 2026.8.1 và kiểm công cụ Chrome/FFmpeg. Bản 1.2 thay cơ chế khởi chạy cài đặt; kiểm bằng runtime mô phỏng độc lập, kiểm cài lại/nâng cấp/giữ dữ liệu, hồ sơ và helper. Chưa thực hiện lượt cài native mới toàn bộ bản 1.2 trên máy học viên khác. Mỗi máy vẫn phải đạt inventory 31 skill eligible và doctor trước khi báo cài hoàn tất.
 
-```powershell
-& $contentInstaller -Repository $contentRepo -Ref $contentRef
-```
+- [package/](./package/): nguồn gói tự chứa, manifest và checksum; giữ nguyên khi cài từ mã nguồn.
+- [distribution/](./distribution/): ZIP 1.2, giữ ZIP 1.1 cho liên kết cũ.
+- [install-from-github.ps1](./install-from-github.ps1): tải ZIP, kiểm SHA-256 và giải nén an toàn.
 
-Các tùy chọn:
+SHA-256 ZIP 1.2: `5680486209C45B64C851C957EF87465E41D0BE852D09F0B56471435EE7F8BC82`.
 
-| Tùy chọn | Ý nghĩa |
-|---|---|
-| `-Apply` | Cài qua bộ cài native sau khi kế hoạch thành công |
-| `-InstallDependencies` | Tải công cụ ảnh/video; dùng cùng `-Apply` |
-| `-Agent ten-agent` | Chọn agent của 9B |
-| `-Upgrade` | Nâng phiên bản cùng gói đã được xác minh |
-| `-InstallRoot 'đường-dẫn-9B'` | Chỉ định thư mục runtime nếu không tự tìm được |
-| `-Destination 'thư-mục-tải'` | Đổi nơi lưu bản tải; không đổi kho thành phẩm của agent |
-| `-Ref main` hoặc `-Ref mã-commit` | Chọn nhánh main hoặc commit cố định; `-Commit` cũng được hiểu |
-
-Sau khi cài, mở chat 9B và chạy `/caidat`. Hệ thống đọc hồ sơ có sẵn, chỉ hỏi phần còn thiếu. Dùng `/vietbai`, `/minhhoa`, `/anhchu`, `/boanh`, `/tudong`, `/xem` và `/mothumuc`.
-
-Thành phẩm nằm trong `freeup-content-data/media_output/ngày/ID-bài/` bên trong workspace của agent. `/mothumuc` mở thư mục trên máy chạy 9B. Điện thoại xem qua kênh đã kết nối hỗ trợ gửi tệp, khi việc gửi được xác minh thành công.
-
-
-
-## Nếu 9B báo lỗi khi chuẩn bị model
-
-Nếu thấy `prepared model runtime plugin generation was superseded`, lượt chat đã dừng trước khi model chạy công cụ. Lỗi có thể xuất hiện khi cấu hình model vừa thay đổi hoặc 9B đang nạp lại cấu hình.
-
-1. Chờ thao tác đổi model hoặc cài đặt đang chạy hoàn tất.
-2. Gửi lại câu lệnh trong một tin nhắn mới.
-3. Nếu lỗi tiếp tục lặp lại, thoát hẳn 9B, mở lại rồi gửi câu lệnh cài.
-
-Nếu chat chưa hoạt động, có thể dùng bộ cài PowerShell ở trên để cài qua công cụ native. Khi bộ cài báo kiểm tra thành công, mở chat 9B và chạy `/caidat`.
-
-## Thành phần và mức kiểm chứng
-
-- [package/](./package/): 101 tệp nguyên bản, gồm manifest, checksum và bộ cài native. Giữ nguyên thư mục này khi dùng mã nguồn; các tài liệu tải từ GitHub nằm bên ngoài gói.
-- [distribution/](./distribution/): ZIP độc lập 1.1.
-- [install-from-github.ps1](./install-from-github.ps1): bộ tải/cài Windows, mặc định chỉ kiểm kế hoạch; chọn `-Apply` để cài.
-
-Bản 1.0 đã được kiểm cài native trên workspace Windows trống; bản 1.1 đã kiểm 31 skill/30 lệnh, hồ sơ, helper và bộ tải/cài. Danh sách skill và công cụ ảnh/video được kiểm trên máy học viên trước khi báo hoàn tất. Chi tiết và giới hạn nằm trong [hướng dẫn học viên](./HUONG-DAN-HOC-VIEN.md).
-
-Gói không chứa hồ sơ doanh nghiệp, ảnh, API key hoặc tài khoản của giảng viên. Các dịch vụ ảnh AI, voice và đăng bài dùng công cụ/tài khoản đã kết nối của học viên.
+Gói không chứa hồ sơ, ảnh, tài khoản hoặc API key của giảng viên. Ảnh AI, voice và đăng bài dùng công cụ/tài khoản đã kết nối của học viên. [Chi tiết kỹ thuật và giới hạn](./package/INSTALLER.md).

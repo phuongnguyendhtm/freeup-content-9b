@@ -54,7 +54,7 @@ Mọi lệnh dùng hồ sơ thương hiệu và kho bài của **học viên hi�
 
 ## Tương thích tên cũ trong chat
 
-Gói 1.1 đăng ký các tên ngắn ở bảng trên. Khi học viên dùng câu lệnh cũ trong nội dung chat, định tuyến về chức năng mới tương ứng; không yêu cầu họ bắt đầu lại. Các tên cũ không phải skill native được cài mới. Nếu đã nâng cấp từ 1.0 và còn skill cũ trong máy, chúng vẫn cần đọc skill hệ thống hiện tại và áp dụng quy trình mới.
+Gói 1.2 đăng ký các tên ngắn ở bảng trên. Khi học viên dùng câu lệnh cũ trong nội dung chat, định tuyến về chức năng mới tương ứng; không yêu cầu họ bắt đầu lại. Các tên cũ không phải skill native được cài mới. Nếu đã nâng cấp từ 1.0 và còn skill cũ trong máy, chúng vẫn cần đọc skill hệ thống hiện tại và áp dụng quy trình mới.
 
 | Tên cũ nhận biết trong chat | Lệnh ngắn dùng từ nay |
 |---|---|

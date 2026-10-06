@@ -1,14 +1,20 @@
-# Quà tặng Hệ thống Content cho 9B — bản học viên 1.1
+# Quà tặng Hệ thống Content cho 9B — bản học viên 1.2
 
 Gói này tạo một hệ thống content riêng trên máy học viên. Máy chỉ cần có **9bizclaw v3 đang dùng được**; không cần bản Antigravity, thư mục của giảng viên, tài khoản giảng viên hay kho ảnh cũ.
 
-## Bắt đầu trong 3 bước
+## Cài trên Windows bằng một lần mở tệp
 
-1. Tải nguyên file ZIP vào **cửa sổ chat của 9B** đang dùng, chọn agent muốn làm content. Đây là tệp đính kèm chat; không chọn ZIP trong màn hình Skills Upload.
-2. Dán toàn bộ đoạn trong `CAI-DAT-9B.txt` vào cùng chat. 9B sẽ đọc gói, cài skill và các lệnh, tạo kho riêng và tải công cụ xuất ảnh/video lần đầu. Quá trình tải cần Internet.
-3. Sau khi 9B xác nhận cài và kiểm tra xong, gõ `/caidat`. Hệ thống kiểm tra hồ sơ doanh nghiệp đã lưu hoặc đã cung cấp trong 9B, chỉ hỏi phần còn thiếu. Tiếp tục bằng `/vietbai`, `/minhhoa`, `/anhchu`, `/boanh` hoặc `/tudong`.
+1. Mở và khởi tạo 9BizClaw v3 trên máy của bạn; giữ 9B đang mở và dừng các lượt chat đang chạy.
+2. Giải nén nguyên ZIP ra thư mục mới, mở **CAI-DAT-9B.cmd**. Bộ cài tìm runtime trên máy này, cho chọn agent nếu cần, chờ 9B rảnh rồi cài 31 skill và tải công cụ ảnh/video. Internet cần cho lần tải đầu.
+3. Chỉ tiếp tục khi cửa sổ bộ cài báo hoàn tất kiểm tra. Mở **lượt/chat mới cùng agent** trong 9B và gõ **/caidat**. Dữ liệu doanh nghiệp đã có sẽ được dùng lại; chỉ hỏi phần còn thiếu.
 
-Nếu phiên 9B không cho đọc ZIP hoặc chạy bộ cài, 9B phải nói rõ quyền/năng lực còn thiếu. Có thể giải nén bằng chức năng thông thường trên máy rồi cung cấp thư mục đã giải nén cho 9B. Chính sách từ chối cài skill cần được quản trị viên của bạn xử lý; không đổi chính sách bảo mật tự động.
+Nếu bạn có bản cũ, bộ cài hỏi quyền nâng đúng gói đã được xác minh. Nếu tổ chức từ chối cài skill, giữ lỗi để quản trị viên xử lý theo chính sách của tổ chức.
+
+## Cài bằng chat 9B
+
+Đính kèm ZIP vào chat và dán CAI-DAT-9B.txt. 9B khởi chạy bộ cài nền, trả đường dẫn kết quả rồi kết thúc lượt ngay. Bộ cài chờ lượt chat kết thúc mới thay đổi skill/cấu hình. Ở lượt mới, yêu cầu kiểm tra job_file; chỉ khi completed mới dùng /caidat. Không gửi yêu cầu liên tục trong lúc cài. ZIP trong chat là tệp đầu vào, không phải tệp cho màn hình Skills Upload.
+
+Nếu 9B báo prepared model runtime plugin generation was superseded trước khi đọc gói, dùng CAI-DAT-9B.cmd. Lỗi đó thuộc lượt chạy của ứng dụng; mã trong Git chưa chạy nên không thể tự sửa lỗi này từ cùng lượt chat.
 
 ## Bạn nhận được gì
 
@@ -69,7 +75,7 @@ Reels/B-roll local xuất video dọc từ ảnh/clip, phụ đề trên từng 
 
 ## Mức kiểm chứng
 
-Trên Windows với 9bizclaw v3 / OpenClaw 2026.8.1, bản 1.0 đã cài native đủ 30 skill trên workspace trống, cài lại giữ dữ liệu và kiểm xuất ảnh/video bằng dependencies mới. Bản 1.1 đã kiểm cấu trúc 31 skill/30 lệnh, vượt qua 33 kiểm tra hồ sơ và 12 kiểm tra helper hệ thống. Chưa chạy lại toàn bộ lượt cài native 31 skill của bản 1.1; bộ cài sẽ kiểm danh sách skill và khả năng sử dụng trên máy học viên trước báo hoàn tất.
+Bản 1.1 đã cài native đủ 31 skill trên 9BizClaw v3 / OpenClaw 2026.8.1 và kiểm công cụ Chrome/FFmpeg. Bản 1.2 thay cơ chế khởi chạy cài đặt; kiểm bằng runtime mô phỏng độc lập, kiểm cài lại/nâng cấp/giữ dữ liệu, hồ sơ và helper. Chưa thực hiện lượt cài native mới toàn bộ bản 1.2 trên máy học viên khác. Mỗi máy vẫn phải đạt inventory 31 skill eligible và doctor trước khi báo cài hoàn tất.
 
 Tài khoản đăng bài, voice và ảnh AI được kiểm khi dùng bước tương ứng, không mặc định đã được cấu hình sẵn.
 
@@ -77,4 +83,4 @@ Trong gói không có `.env`, API key, cookie, account đăng bài, Brand DNA c�
 
 ## Thành phần dành cho 9B
 
-`bootstrap.cjs`: phát hiện runtime, lập kế hoạch, cài qua native installer và kiểm kết quả. `distribution-manifest.json`: danh sách 31 skill. `skills/freeup-content-system/`: hướng dẫn, defaults, mẫu và công cụ tự chứa. Các skill cùng cấp cung cấp 30 lệnh. Đọc `INSTALLER.md` khi cần chẩn đoán kỹ thuật.
+`CAI-DAT-9B.cmd`: khởi chạy trên Windows. `install-job.cjs`: cài nền/chờ 9B rảnh và lưu trạng thái. `bootstrap.cjs`: phát hiện runtime, lập kế hoạch, cài qua native installer và kiểm kết quả. `distribution-manifest.json`: danh sách 31 skill. `skills/freeup-content-system/`: hướng dẫn, defaults, mẫu và công cụ tự chứa. Các skill cùng cấp cung cấp 30 lệnh. Đọc `INSTALLER.md` khi cần chẩn đoán kỹ thuật.

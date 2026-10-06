@@ -35,7 +35,7 @@ function fixture(label) {
   fs.mkdirSync(workspace, { recursive: true });
   fs.mkdirSync(gift, { recursive: true });
   fs.copyFileSync(path.join(packageRoot, 'bootstrap.cjs'), path.join(gift, 'bootstrap.cjs'));
-  const names = ['freeup-content-system', 'setup', 'vietbai'];
+  const names = ['freeup-content-system', 'caidat', 'vietbai'];
   for (const name of names) {
     const dir = path.join(gift, 'skills', name);
     write(path.join(dir, 'SKILL.md'), `---\nname: ${name}\ndescription: Test fixture\n---\nFixture only.\n`);
@@ -64,6 +64,26 @@ function run(f, flags, expectOk = true) {
   else assert.notEqual(result.status, 0, `${result.stdout}\n${result.stderr}`);
   return `${result.stdout}\n${result.stderr}`;
 }
+function recoveryFixture(label, upgrade = false) {
+  const f = fixture('timeout-' + label);
+  const manifest = read(path.join(f.gift, 'distribution-manifest.json'));
+  const source = path.join(f.gift, 'skills/vietbai');
+  const files = bootstrap.treeFiles(source);
+  const skill = { name: 'vietbai', sourceHash: crypto.createHash('sha256').update(JSON.stringify(files)).digest('hex') };
+  const stage = path.join(f.root, 'stage');
+  copy(source, stage);
+  write(path.join(stage, 'freeup-gift-origin.json'), { schema_version: 1, package_id: manifest.package_id, version: manifest.version, skill_name: skill.name, source_hash: skill.sourceHash, installed_files: files, installed_at_utc: 'fixture' });
+  const target = path.join(f.workspace, 'skills/vietbai');
+  if (upgrade) {
+    write(path.join(target, 'SKILL.md'), 'Old managed version fixture.');
+    const oldFiles = bootstrap.treeFiles(target);
+    write(path.join(target, 'freeup-gift-origin.json'), { schema_version: 1, package_id: manifest.package_id, version: '0.9.0', skill_name: skill.name, source_hash: crypto.createHash('sha256').update(JSON.stringify(oldFiles)).digest('hex'), installed_files: oldFiles, installed_at_utc: 'older-fixture' });
+  }
+  return { ...f, manifest, skill, stage, target, options: { upgrade }, item: { skill, target, action: upgrade ? 'upgrade' : 'install' } };
+}
+function timeoutError(nativeOutput = '') { const error = new Error('Transient native timeout fixture'); error.code = 'ETIMEDOUT'; error.nativeOutput = nativeOutput; return error; }
+function nativeCopy(f) { fs.cpSync(f.stage, f.target, { recursive: true }); }
+function recover(f, callback) { return bootstrap.installNativeWithRecovery({}, ['skills', 'install', f.stage, '--agent', 'student', '--as', 'vietbai', ...(f.options.upgrade ? ['--force'] : [])], f.item, f.stage, f.manifest, f.options, callback); }
 try {
   test('argument/roster/allowlist rules', () => {
     assert.equal(bootstrap.parseArgs([]).apply, false);
@@ -87,7 +107,9 @@ try {
     assert.equal(fs.existsSync(path.join(normal.workspace, 'skills')), false);
   });
   test('apply fresh student machine; no legacy or owner assets', () => {
-    run(normal, ['--apply']);
+    const output = run(normal, ['--apply']);
+    assert.match(output, /dùng \/caidat để kiểm hồ sơ doanh nghiệp/);
+    assert.doesNotMatch(output, /dùng \/setup/);
     const config = read(path.join(normal.state, 'openclaw.json'));
     assert.deepEqual(config.agents.defaults.skills, ['existing-skill']);
     assert.deepEqual(config.agents.entries.other.skills, ['other-skill']);
@@ -111,12 +133,12 @@ try {
   });
   test('unrelated target and visible-source conflict rejected before installs', () => {
     const occupied = fixture('occupied');
-    write(path.join(occupied.workspace, 'skills/setup/SKILL.md'), 'Unrelated skill');
+    write(path.join(occupied.workspace, 'skills/caidat/SKILL.md'), 'Unrelated skill');
     const out = run(occupied, ['--apply'], false);
     assert.match(out, /không thuộc quà tặng/);
     assert.equal(read(path.join(occupied.state, 'mock-calls.json')).some(call => call[1] === 'install'), false);
     const visible = fixture('visible-conflict');
-    const config = read(path.join(visible.state, 'openclaw.json')); config.mockVisibleConflict = 'setup'; write(path.join(visible.state, 'openclaw.json'), config);
+    const config = read(path.join(visible.state, 'openclaw.json')); config.mockVisibleConflict = 'caidat'; write(path.join(visible.state, 'openclaw.json'), config);
     assert.match(run(visible, ['--apply'], false), /nguồn khác/);
   });
   test('student-edited skill is preserved', () => {
@@ -150,9 +172,90 @@ try {
     const damaged = fixture('checksums');
     const files = bootstrap.treeFiles(damaged.gift);
     write(path.join(damaged.gift, 'package-checksums.json'), { package_id: 'freeup-content-student-gift', version: '1.0.0', files });
-    fs.appendFileSync(path.join(damaged.gift, 'skills/setup/SKILL.md'), '\nCorrupted.');
+    fs.appendFileSync(path.join(damaged.gift, 'skills/caidat/SKILL.md'), '\nCorrupted.');
     assert.match(run(damaged, ['--apply'], false), /Payload không khớp/);
     assert.equal(fs.existsSync(path.join(damaged.state, 'mock-calls.json')), false);
+  });
+  test('process timeout retains actual code; policy refusals never recover', () => {
+    let actualTimeout;
+    try { bootstrap.runProcess(process.execPath, ['-e', 'setTimeout(()=>{},2000)'], { timeout: 50 }); } catch (error) { actualTimeout = error; }
+    assert.equal(actualTimeout?.code, 'ETIMEDOUT');
+    assert.equal(bootstrap.retryableNativeTimeout(actualTimeout), true);
+    assert.equal(bootstrap.retryableNativeTimeout(new Error('ETIMEDOUT text only')), false);
+    assert.equal(bootstrap.retryableNativeTimeout(timeoutError('security.installPolicy: block fixture')), false);
+    assert.equal(bootstrap.retryableNativeTimeout(timeoutError('permission denied\n' + 'other output\n'.repeat(1000))), false);
+    assert.equal(bootstrap.retryableNativeTimeout({ code: 'ENOENT' }), false);
+  });
+  test('timeout before copy retries exactly once through native with identical arguments', () => {
+    const f = recoveryFixture('retry'); let calls = 0; const argumentsSeen = [];
+    const result = recover(f, (_runtime, nativeArgs) => { calls++; argumentsSeen.push([...nativeArgs]); if (calls === 1) throw timeoutError(); nativeCopy(f); });
+    assert.equal(calls, 2);
+    assert.deepEqual(argumentsSeen[0], argumentsSeen[1]);
+    assert.equal(argumentsSeen[1].includes('--force'), false);
+    assert.deepEqual(result, { attempts: 2, recovered: 'native-retry' });
+    assert.equal(bootstrap.verifyManagedSkill(f.skill, f.target, f.manifest, f.options).action, 'keep');
+  });
+  test('timeout after complete native copy resumes from verified receipt without another install', () => {
+    const f = recoveryFixture('receipt'); let calls = 0;
+    const result = recover(f, () => { calls++; nativeCopy(f); throw timeoutError(); });
+    assert.equal(calls, 1);
+    assert.deepEqual(result, { attempts: 1, recovered: 'verified-receipt-after-timeout' });
+  });
+  test('second timeout is bounded; a completed second attempt may be verified', () => {
+    const absent = recoveryFixture('double-timeout'); let absentCalls = 0;
+    assert.throws(() => recover(absent, () => { absentCalls++; throw timeoutError(); }), /Transient native timeout/);
+    assert.equal(absentCalls, 2);
+    assert.equal(fs.existsSync(absent.target), false);
+    const completed = recoveryFixture('second-receipt'); let completedCalls = 0;
+    const result = recover(completed, () => { completedCalls++; if (completedCalls === 2) nativeCopy(completed); throw timeoutError(); });
+    assert.equal(completedCalls, 2);
+    assert.deepEqual(result, { attempts: 2, recovered: 'verified-receipt-after-timeout' });
+  });
+  test('native refusal and refusal followed by timeout are never retried', () => {
+    for (const [label, error] of [['policy-exit', new Error('security.installPolicy: block')], ['policy-timeout', timeoutError('security.installPolicy: block')]]) {
+      const f = recoveryFixture(label); let calls = 0;
+      assert.throws(() => recover(f, () => { calls++; throw error; }));
+      assert.equal(calls, 1);
+      assert.equal(fs.existsSync(f.target), false);
+    }
+  });
+  test('foreign, incomplete and privately edited timeout targets are preserved without retry', () => {
+    const foreign = recoveryFixture('foreign'); let foreignCalls = 0;
+    assert.throws(() => recover(foreign, () => { foreignCalls++; write(path.join(foreign.target, 'SKILL.md'), 'Foreign source'); throw timeoutError(); }), /không thuộc quà tặng/);
+    assert.equal(foreignCalls, 1);
+    assert.equal(fs.readFileSync(path.join(foreign.target, 'SKILL.md'), 'utf8'), 'Foreign source');
+    const partial = recoveryFixture('partial'); let partialCalls = 0;
+    assert.throws(() => recover(partial, () => { partialCalls++; write(path.join(partial.target, 'freeup-gift-origin.json'), read(path.join(partial.stage, 'freeup-gift-origin.json'))); throw timeoutError(); }), /đã được sửa/);
+    assert.equal(partialCalls, 1);
+    const edited = recoveryFixture('edited'); let editedCalls = 0;
+    assert.throws(() => recover(edited, () => { editedCalls++; nativeCopy(edited); write(path.join(edited.target, 'student-notes.txt'), 'Keep my note'); throw timeoutError(); }), /file riêng chưa được quản lý/);
+    assert.equal(editedCalls, 1);
+    assert.equal(fs.readFileSync(path.join(edited.target, 'student-notes.txt'), 'utf8'), 'Keep my note');
+  });
+  test('managed upgrade timeout retries only unchanged original owned target', () => {
+    const unchanged = recoveryFixture('upgrade-unchanged', true); let calls = 0; const argumentsSeen = [];
+    const result = recover(unchanged, (_runtime, nativeArgs) => { calls++; argumentsSeen.push([...nativeArgs]); if (calls === 1) throw timeoutError(); nativeCopy(unchanged); });
+    assert.equal(calls, 2);
+    assert.deepEqual(argumentsSeen[0], argumentsSeen[1]);
+    assert.equal(argumentsSeen[1].includes('--force'), true);
+    assert.equal(result.recovered, 'native-retry');
+    const changed = recoveryFixture('upgrade-changed', true); let changedCalls = 0;
+    assert.throws(() => recover(changed, () => {
+      changedCalls++; fs.appendFileSync(path.join(changed.target, 'SKILL.md'), '\nUpdated while CLI was running.');
+      const receipt = read(path.join(changed.target, 'freeup-gift-origin.json')); const files = bootstrap.treeFiles(changed.target); delete files['freeup-gift-origin.json']; receipt.installed_files = files;
+      write(path.join(changed.target, 'freeup-gift-origin.json'), receipt); throw timeoutError();
+    }), /thay đổi trong lúc native CLI hết thời gian/);
+    assert.equal(changedCalls, 1);
+    assert.match(fs.readFileSync(path.join(changed.target, 'SKILL.md'), 'utf8'), /Updated while CLI/);
+  });
+  test('timeout receipt must match prepared install map, not merely claimed ownership', () => {
+    const f = recoveryFixture('staged-map'); let calls = 0;
+    assert.throws(() => recover(f, () => {
+      calls++; nativeCopy(f); write(path.join(f.target, '.openclaw/source-origin.json'), '{}');
+      const receipt = read(path.join(f.target, 'freeup-gift-origin.json')); const files = bootstrap.treeFiles(f.target); delete files['freeup-gift-origin.json']; receipt.installed_files = files;
+      write(path.join(f.target, 'freeup-gift-origin.json'), receipt); throw timeoutError();
+    }), /chưa khớp đầy đủ source đã chuẩn bị/);
+    assert.equal(calls, 1);
   });
   const nativeCli = opt('--native-cli');
   if (nativeCli) {
