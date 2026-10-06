@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "timezone": "Asia/Saigon",
+  "default_mode": "produce",
+  "paths": {
+    "database": "database",
+    "media_input": "media-input",
+    "media_output": "media_output",
+    "personal_images": "media-input/personal_image",
+    "stock_images": "media-input/image_stock",
+    "celebrity_images": "media-input/celebrity_image",
+    "video": "media-input/background-video",
+    "music": "media-input/music",
+    "logo": "media-input/logo",
+    "mascot": "media-input/mascot"
+  },
+  "publishing": {
+    "provider": "native-connected-apps",
+    "default_target": null
+  },
+  "media": {
+    "preferred_renderer": "native-image-tools",
+    "local_renderer_fallback": true
+  },
+  "setup_complete": false
+}
+

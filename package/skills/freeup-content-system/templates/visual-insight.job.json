@@ -1,0 +1,13 @@
+{
+  "format": "visual-insight",
+  "kicker": "Một vấn đề · một góc nhìn",
+  "headline": "Nút thắt nằm ở cách quyết định",
+  "body": "Nhìn lại việc nào đang đi qua người sáng lập mỗi ngày.",
+  "panels": [
+    {"title": "Hiện tại", "body": "Mọi việc đều phải xin duyệt."},
+    {"title": "Nguyên nhân", "body": "Đội ngũ thiếu tiêu chí ra quyết định."},
+    {"title": "Thay đổi", "body": "Viết rõ phạm vi quyền hạn."},
+    {"title": "Bước đầu tiên", "body": "Chọn một việc để phân quyền hôm nay."}
+  ],
+  "cta": "Việc nào đang chờ bạn duyệt?"
+}

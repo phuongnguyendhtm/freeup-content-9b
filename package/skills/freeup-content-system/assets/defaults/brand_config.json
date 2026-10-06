@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "configured": false,
+  "brand_name": "",
+  "founder": "",
+  "target_audience": "",
+  "products": [],
+  "usp": "",
+  "content_goal": "",
+  "profile_provenance": {},
+  "tone_of_voice": {
+    "summary": "",
+    "traits": []
+  },
+  "pronouns": {
+    "self": "tôi",
+    "audience": "bạn"
+  },
+  "forbidden_words": [],
+  "brand_identity": {
+    "colors": {
+      "primary": "#202124",
+      "accent": "#2563EB",
+      "background": "#FAFAF8"
+    },
+    "fonts": {
+      "primary": "Arial",
+      "accent": "Georgia"
+    },
+    "watermark": {
+      "enabled": false,
+      "text": ""
+    }
+  },
+  "notes": "Màu/font trên là mặc định trung tính cho hệ thống, không phải nhận diện đã xác nhận của học viên."
+}
+

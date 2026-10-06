@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "configured": false,
+  "content_pillars": [],
+  "angle_types": [
+    "insight",
+    "story",
+    "system",
+    "result",
+    "reframe"
+  ],
+  "usage_note": "/caidat tạo ma trận riêng của học viên từ thông tin thật; không dùng ví dụ làm case đã xảy ra."
+}
+

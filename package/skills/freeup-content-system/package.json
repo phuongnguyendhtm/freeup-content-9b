@@ -1,0 +1,19 @@
+{
+  "name": "freeup-content-system",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Bộ quà tặng content tự chứa cho học viên trên 9bizclaw",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node scripts/content.cjs doctor",
+    "render": "node scripts/render-media.cjs",
+    "test": "node scripts/system-smoke.cjs"
+  },
+  "dependencies": {
+    "puppeteer": "24.40.0",
+    "ffmpeg-static": "5.3.0"
+  }
+}

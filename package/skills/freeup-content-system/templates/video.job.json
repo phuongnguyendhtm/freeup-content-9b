@@ -1,0 +1,7 @@
+{
+  "format": "broll",
+  "scenes": [
+    {"media": "media-input/image_stock/thay-bang-anh-cua-ban.jpg", "duration": 4, "kicker": "Góc nhìn vận hành", "headline": "Mọi việc đều phải chờ bạn?"},
+    {"media": "media-input/background-video/thay-bang-clip-cua-ban.mp4", "duration": 5, "headline": "Viết rõ tiêu chí, rồi trao quyền quyết định.", "body": "Bắt đầu từ một việc có rủi ro thấp."}
+  ]
+}

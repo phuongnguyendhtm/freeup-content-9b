@@ -1,0 +1,9 @@
+{
+  "format": "carousel",
+  "slides": [
+    {"kicker": "Gỡ nút thắt vận hành", "headline": "3 câu hỏi trước khi phân quyền", "body": "Một bộ tiêu chí đơn giản để đội ngũ quyết định rõ ràng hơn."},
+    {"kicker": "01 · Phạm vi", "headline": "Việc nào đội ngũ được tự quyết?", "body": "Chọn một nhóm quyết định có rủi ro thấp.\nViết rõ giới hạn và người chịu trách nhiệm."},
+    {"kicker": "02 · Tiêu chí", "headline": "Thế nào là quyết định đạt yêu cầu?", "body": "Nêu kết quả cần đạt, ngân sách và thời hạn.\nCho đội ngũ một ví dụ cụ thể."},
+    {"kicker": "03 · Phản hồi", "headline": "Khi nào cần báo lại?", "body": "Chọn thời điểm báo cáo và tình huống phải trao đổi ngay.", "cta": "Thử phân quyền một việc trong tuần này."}
+  ]
+}
