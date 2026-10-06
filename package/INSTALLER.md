@@ -1,4 +1,4 @@
-# Bộ cài content 1.2 cho 9B
+# Bộ cài content 1.2.1 cho 9B
 
 Đường đi: ZIP tải/đính kèm → kiểm hash và giải nén an toàn → install-job → chờ gateway rảnh → bootstrap → native skills install từng thư mục. Không cài/thay cấu hình ngay trong lượt model đang xử lý yêu cầu cài. Không đưa ZIP cho Skills Upload hoặc skills install.
 
@@ -6,13 +6,13 @@
 
 Chạy bằng Node của 9B: `node install-job.cjs launch --agent <id> --install-deps --upgrade`. launch kiểm checksum toàn bộ gói, runtime/agent và tạo job ngoài thư mục gói. Trả job_file/log_file rồi kết thúc lượt chat ngay, không poll/sleep/gọi /caidat trong cùng lượt. --upgrade cần quyền nâng cùng package đã xác minh, không vượt ownership hoặc policy.
 
-Worker có thời gian bàn giao, rồi kiểm gateway.restart.preflight hai lần liên tiếp. Chỉ bắt đầu khi safe=true, counts hợp lệ và không có công việc đang chạy. Busy chờ có giới hạn; gateway không truy cập được hoặc trả trạng thái không xác định thì dừng. Đây là kiểm tra trước khi cài, không phải khóa ngăn người dùng mở lượt khác; trong lúc cài hãy để 9B rảnh. Không dùng restart/skipDeferral/đổi policy.
+Worker có thời gian bàn giao, rồi kiểm gateway.restart.preflight hai lần liên tiếp. Chỉ bắt đầu khi safe=true, counts hợp lệ và không có công việc đang chạy. Busy hoặc Gateway tạm chưa phản hồi thì chờ có giới hạn; thiếu trạng thái an toàn, runtime không hỗ trợ preflight hoặc bị từ chối quyền truy cập thì dừng trước khi cài. Đây là kiểm tra trước khi cài, không phải khóa ngăn người dùng mở lượt khác; trong lúc cài hãy để 9B rảnh. Không dùng restart/skipDeferral/đổi policy.
 
 Lượt chat mới kiểm: `node install-job.cjs status --file <job_file>`. completed mới chứng minh cài xong; waiting/running chưa hoàn tất. Đọc log/report khi failed. Bộ cài giữ báo lỗi và không biến lỗi policy thành thành công.
 
 ## Cài từ cửa sổ ngoài chat
 
-Mở CAI-DAT-9B.cmd sau khi giải nén nguyên gói. Nó tìm Node của 9B qua môi trường/metadata cài đặt máy hiện tại và chạy `node install-job.cjs run --select-agent --install-deps`; chọn nâng bản cũ nếu có yêu cầu. Có thể chỉ định --install-root, --agent cho bản cài tùy chỉnh. Không hạ ExecutionPolicy. Root install-from-github.ps1 mặc định chỉ lập kế hoạch; -Apply dùng job run chờ gateway rảnh.
+Trên Windows mở CAI-DAT-9B.cmd; trên macOS mở CAI-DAT-MAC.command sau khi giải nén nguyên gói. Các tệp tìm Node/runtime của 9B trên máy học viên và chạy `node install-job.cjs run --select-agent --install-deps`; chọn nâng bản cũ nếu có yêu cầu. Bản Mac đọc install-root.json trong Application Support khi có; nếu không có Node hoặc runtime thì báo lỗi, không đoán đích. Có thể chỉ định --install-root, --agent cho bản cài tùy chỉnh. Không hạ ExecutionPolicy. Root install-from-github.ps1 dành cho Windows, mặc định chỉ lập kế hoạch; -Apply dùng job run chờ gateway rảnh.
 
 ## Native installer và dữ liệu
 

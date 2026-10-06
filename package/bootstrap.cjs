@@ -150,7 +150,11 @@ function resolveRuntime(options, env = process.env) {
     if (exists(path.join(candidate, 'vendor', 'node_modules', 'openclaw', 'openclaw.mjs'))) root = candidate;
   }
   if (!root && !options.cli) {
-    const appData = env.APPDATA || (process.platform === 'win32' ? path.join(os.homedir(), 'AppData', 'Roaming') : undefined);
+    const appData = env.APPDATA || (process.platform === 'win32'
+      ? path.join(os.homedir(), 'AppData', 'Roaming')
+      : process.platform === 'darwin'
+        ? path.join(os.homedir(), 'Library', 'Application Support')
+        : undefined);
     if (appData) {
       const metadata = path.join(appData, '9BizClaw-v3', 'install-root.json');
       if (exists(metadata)) {

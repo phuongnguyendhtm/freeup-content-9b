@@ -19,7 +19,7 @@ function preflight(active = 0) { return { safe: active === 0, summary: active ? 
 function unitJob(label) {
   const state = path.join(root, label, 'state'); const folder = path.join(state, 'freeup-content-install-jobs', 'fixture'); fs.mkdirSync(folder, { recursive: true });
   const file = path.join(folder, 'status.json'), log = path.join(folder, 'install.log'); write(log, '');
-  const job = { job_file: file, log_file: log, job_id: label, state: 'queued', package_id: 'freeup-content-student-gift', version: '1.2.0', agent_id: 'student', options: { agent: 'student', graceMs: 35000, pollMs: 3000, waitMs: 60000 }, history: [] };
+  const job = { job_file: file, log_file: log, job_id: label, state: 'queued', package_id: 'freeup-content-student-gift', version: '1.2.1', agent_id: 'student', options: { agent: 'student', graceMs: 35000, pollMs: 3000, waitMs: 60000 }, history: [] };
   write(file, job); return { job, runtime: { stateDir: state } };
 }
 function fixture(label, control) {
@@ -29,7 +29,7 @@ function fixture(label, control) {
   const names = ['freeup-content-system', 'vietbai'];
   for (const name of names) write(path.join(gift, 'skills', name, 'SKILL.md'), `---\nname: ${name}\ndescription: Mock install job fixture\n---\nFixture only.\n`);
   write(path.join(gift, 'skills/freeup-content-system/scripts/content.cjs'), "const fs=require('node:fs'),path=require('node:path'),a=process.argv.slice(2);const p=a[a.indexOf('--project')+1];fs.mkdirSync(path.join(p,'database'),{recursive:true});const f=path.join(p,'database','brand_config.json');if(!fs.existsSync(f))fs.writeFileSync(f,JSON.stringify({configured:false}));console.log('{}');");
-  write(path.join(gift, 'distribution-manifest.json'), { package_id: 'freeup-content-student-gift', version: '1.2.0', skills: names.map(name => ({ name, source: 'skills/' + name })) });
+  write(path.join(gift, 'distribution-manifest.json'), { package_id: 'freeup-content-student-gift', version: '1.2.1', skills: names.map(name => ({ name, source: 'skills/' + name })) });
   write(path.join(state, 'openclaw.json'), { agents: { defaults: { skills: ['old-skill'] }, entries: { student: { workspace }, other: { workspace: path.join(state, 'other'), skills: ['other-skill'] } } }, gateway: { mode: 'local', port: 19997 } });
   const cli = path.join(folder, 'mock cli.mjs'); const controlFile = path.join(state, 'control.json'); write(controlFile, control);
   write(cli, `import fs from 'node:fs';import path from 'node:path';
@@ -74,6 +74,28 @@ async function main() {
     await assert.rejects(jobs.runJob(job, runtime, { sleep: async () => {}, preflight: async () => ({ safe: true }), apply: async () => { applied++; } }), /preflight/);
     assert.equal(applied, 0); assert.equal(read(job.job_file).state, 'failed');
   });
+  await test('temporary native status failure retries and only installs after two idle checks', async () => {
+    const { job, runtime } = unitJob('temporary-unavailable'); let time = 0, checks = 0, applied = 0;
+    await jobs.runJob(job, runtime, { now: () => time, sleep: async ms => { time += ms; }, preflight: async () => {
+      checks++; if (checks === 1) { const error = new Error('Gateway chưa phản hồi'); error.code = 'NATIVE_STATUS_UNAVAILABLE'; throw error; }
+      return preflight();
+    }, manifest: () => ({ package_id: job.package_id, version: job.version, skills: ['one'] }), apply: async () => { applied++; assert.equal(checks, 3); return { verified_skill_count: 1 }; } });
+    assert.equal(applied, 1); assert.equal(read(job.job_file).preflight_failures, 1);
+  });
+  await test('persistent unreadable native status times out without installing', async () => {
+    const { job, runtime } = unitJob('persistent-unavailable'); let time = 0, applied = 0;
+    await assert.rejects(jobs.runJob(job, runtime, { now: () => time, sleep: async ms => { time += ms; }, preflight: async () => {
+      const error = new Error('Gateway chưa phản hồi'); error.code = 'NATIVE_STATUS_UNAVAILABLE'; throw error;
+    }, apply: async () => { applied++; } }), /Không đọc được trạng thái native 9B trong thời gian chờ/);
+    assert.equal(applied, 0); assert.equal(read(job.job_file).state, 'failed');
+  });
+  await test('native access denied stops with actionable Mac guidance', async () => {
+    const { job, runtime } = unitJob('access-denied'); let applied = 0;
+    await assert.rejects(jobs.runJob(job, runtime, { sleep: async () => {}, preflight: async () => {
+      const error = new Error('Dùng CAI-DAT-MAC.command ngoài chat'); error.code = 'NATIVE_STATUS_ACCESS_DENIED'; throw error;
+    }, apply: async () => { applied++; } }), /CAI-DAT-MAC\.command/);
+    assert.equal(applied, 0);
+  });
   await test('busy gateway has bounded wait and no apply', async () => {
     const { job, runtime } = unitJob('bounded'); let time = 0, applied = 0;
     await assert.rejects(jobs.runJob(job, runtime, { now: () => time, sleep: async ms => { time += ms; }, preflight: async () => preflight(1), apply: async () => { applied++; } }), /chưa rảnh/);
@@ -91,8 +113,8 @@ async function main() {
   await test('Windows launcher discovers local runtime without security override', () => {
     const cmd = fs.readFileSync(path.join(__dirname, 'CAI-DAT-9B.cmd'), 'utf8'); assert.match(cmd, /install-root\.json/); assert.match(cmd, /NINEBIZ_INSTALL_ROOT/); assert.match(cmd, /--select-agent/); assert.match(cmd, /--upgrade/); assert.match(cmd, /\& \$n @a/); assert.doesNotMatch(cmd, /ExecutionPolicy|Bypass|D:\\9Biz|Stop-Process|taskkill/i);
   });
-  const normal = fixture('native-detached', { busy: true }); const denied = fixture('native-policy', { busy: false, policy: true }); const unknown = fixture('native-unavailable', { unavailable: true });
-  const successJob = launchFixture(normal), deniedJob = launchFixture(denied), unknownJob = launchFixture(unknown);
+  const normal = fixture('native-detached', { busy: true }); const denied = fixture('native-policy', { busy: false, policy: true });
+  const successJob = launchFixture(normal), deniedJob = launchFixture(denied);
   await test('real detached launch returns while busy and leaves payload untouched', async () => {
     await delay(300);
     assert.equal(fs.existsSync(path.join(normal.workspace, 'skills')), false);
@@ -111,9 +133,6 @@ async function main() {
   });
   await test('real native policy refusal has one attempt and no direct-copy fallback', async () => {
     const result = await waitState(deniedJob.job_file, ['failed']); assert.equal(fs.existsSync(path.join(denied.workspace, 'skills/freeup-content-system')), false); assert.equal(read(path.join(denied.state, 'calls.json')).filter(call => call[1] === 'install').length, 1); assert.match(fs.readFileSync(result.log_file, 'utf8'), /security.installPolicy: block fixture/);
-  });
-  await test('unavailable gateway fails before native install', async () => {
-    const result = await waitState(unknownJob.job_file, ['failed']); assert.match(result.error, /trạng thái native/); assert.equal(read(path.join(unknown.state, 'calls.json')).some(call => call[1] === 'install'), false);
   });
   write(path.join(root, 'test-results.json'), { results, fixture_root: root }); console.log(JSON.stringify({ passed: results.length, fixture_root: root }));
 }

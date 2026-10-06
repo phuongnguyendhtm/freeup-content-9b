@@ -6,8 +6,8 @@ Tạo bài viết, ảnh minh họa, ảnh cá nhân kèm câu nói, carousel v�
 
 ## Cài trong 3 bước
 
-1. **[⬇️ TẢI BỘ CÀI CHO WINDOWS](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.zip)**
-2. Nhấp phải tệp ZIP → **Extract All / Giải nén tất cả**. Mở thư mục đã giải nén, nháy đúp **`CAI-DAT-9B.cmd`** và chờ báo **“Đã cài và xác minh”**. Chọn trợ lý/agent nếu bộ cài hỏi.
+1. **[⬇️ TẢI BỘ CÀI CHO WINDOWS VÀ MAC](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.1.zip)**
+2. Giải nén ZIP. Trên **Windows**, mở **`CAI-DAT-9B.cmd`**; trên **Mac**, mở **`CAI-DAT-MAC.command`** trong thư mục đã giải nén. Chờ báo **“Đã cài và xác minh”**. Chọn trợ lý/agent nếu bộ cài hỏi.
 3. Mở **chat mới với đúng trợ lý vừa cài** trong 9B và gửi:
 
    ```text
@@ -41,7 +41,8 @@ Bạn cung cấp ảnh và kết nối tài khoản của mình khi cần. Hệ 
 
 - Khi bộ cài hỏi nâng cấp: **cài lần đầu → nhấn Enter**; **nâng bản cũ → nhập CO**. Bộ cài chỉ nâng đúng gói đã được xác minh.
 - Giữ 9B mở và ngừng gửi chat trong lúc cài. Nếu chưa báo hoàn tất, chờ hoặc đọc thông báo trong cửa sổ cài.
-- Nếu chưa tìm thấy 9B, mở ứng dụng và hoàn tất khởi tạo rồi chạy lại tệp cài.
+- Nếu chưa tìm thấy 9B, mở ứng dụng và hoàn tất khởi tạo rồi chạy lại tệp cài. Trên Mac, nếu `.command` không mở, dùng Terminal tại thư mục đã giải nén để chạy `bash CAI-DAT-MAC.command`.
+- Nếu tác vụ cài bằng chat trước đây đã báo `failed`, tác vụ đó không tự chạy tiếp. Tải bản 1.2.1 và mở tệp cài đúng hệ điều hành để tạo lượt cài mới.
 - Nếu gặp lỗi, giữ thông báo/log để xử lý; chỉ dùng `/caidat` sau khi bộ cài báo thành công.
 
 [Cài bằng chat, PowerShell và xử lý lỗi chi tiết](./docs/CAI-DAT-NANG-CAO.md)
@@ -51,9 +52,9 @@ Bạn cung cấp ảnh và kết nối tài khoản của mình khi cần. Hệ 
 <details>
 <summary><strong>Google Sheet và mức hỗ trợ của bản tải này</strong></summary>
 
-Bản đang tải là **1.2**, có **30 lệnh và 1 skill điều phối**. Quy trình content lưu trên máy; cài đặt cơ bản không yêu cầu Google Sheet hoặc Apps Script.
+Bản đang tải là **1.2.1**, có **30 lệnh và 1 skill điều phối**. Quy trình content lưu trên máy; cài đặt cơ bản không yêu cầu Google Sheet hoặc Apps Script.
 
-Nhánh `/nghiencuu`, kết nối Google Sheet trực tiếp và tự xử lý quyết định duyệt trên Sheet đang ở bản thiết kế, **chưa có trong bản tải 1.2**. Kết nối ảnh AI, voice và đăng Facebook được kiểm tra khi dùng công cụ tương ứng của học viên.
+Nhánh `/nghiencuu`, kết nối Google Sheet trực tiếp và tự xử lý quyết định duyệt trên Sheet đang ở bản thiết kế, **chưa có trong bản tải 1.2.1**. Kết nối ảnh AI, voice và đăng Facebook được kiểm tra khi dùng công cụ tương ứng của học viên.
 
 [Chi tiết công cụ, kiểm chứng và giới hạn](./docs/CAI-DAT-NANG-CAO.md#kiểm-chứng-và-nội-dung-gói)
 

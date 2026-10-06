@@ -50,10 +50,26 @@ function parseArgs(argv) {
   if (result.selectAgent && command !== 'run') fail('--select-agent chỉ dùng khi cài bên ngoài chat bằng run.');
   return result;
 }
+function nativeStatusError(result) {
+  const detail = [result.error?.message, result.stderr, result.stdout].filter(Boolean).join(' ').slice(-1500);
+  const error = new Error(/\bEACCES\b|\bEPERM\b/i.test(detail)
+    ? '9B không cho tiến trình cài kết nối Gateway (EACCES/EPERM). Hãy cài từ cửa sổ Terminal/Finder ngoài chat bằng CAI-DAT-MAC.command; chưa cài skill.'
+    : /\bECONNREFUSED\b|\bETIMEDOUT\b|timeout|timed out/i.test(detail)
+      ? 'Chưa kết nối được Gateway 9B; đang chờ ứng dụng phản hồi.'
+      : /unknown method|method not found/i.test(detail)
+        ? 'Runtime 9B không hỗ trợ kiểm tra trạng thái an toàn gateway.restart.preflight; cần cập nhật 9B, chưa cài skill.'
+        : 'Không đọc được trạng thái native 9B; đang chờ 9B phản hồi.');
+  error.code = /\bEACCES\b|\bEPERM\b/i.test(detail) ? 'NATIVE_STATUS_ACCESS_DENIED'
+    : /unknown method|method not found/i.test(detail) ? 'NATIVE_STATUS_UNSUPPORTED' : 'NATIVE_STATUS_UNAVAILABLE';
+  return error;
+}
 function cliJson(runtime, args, timeout = 20000) {
   const result = cp.spawnSync(runtime.node, [runtime.cli, ...args], { cwd: PACKAGE_ROOT, env: runtime.env, shell: false, windowsHide: true, encoding: 'utf8', timeout, maxBuffer: 4 * 1024 * 1024 });
-  if (result.error || result.status !== 0) fail('Không đọc được trạng thái native 9B. Kiểm tra 9B đang mở và đúng runtime; bộ cài chưa được chạy.');
-  try { return JSON.parse(result.stdout.trim()); } catch { fail('Native 9B trả trạng thái không rõ ràng; dừng trước khi cài.'); }
+  if (result.error || result.status !== 0) throw nativeStatusError(result);
+  let value;
+  try { value = JSON.parse(result.stdout.trim()); } catch { fail('Native 9B trả trạng thái không rõ ràng; dừng trước khi cài.'); }
+  if (value && (value.ok === false || (value.error && typeof value.safe !== 'boolean'))) throw nativeStatusError({ stdout: JSON.stringify(value) });
+  return value;
 }
 function readAgents(runtime) {
   return typeof bootstrap.readAgents === 'function' ? bootstrap.readAgents(runtime) : (function () {
@@ -137,13 +153,28 @@ async function waitForIdle(job, runtime, dependencies = {}) {
   update(job, 'waiting_for_idle');
   const deadline = now() + job.options.waitMs;
   let consecutive = 0;
+  let lastUnavailable = false;
+  let unavailableCount = 0;
   while (now() <= deadline) {
-    const fact = validatePreflight(await preflight());
+    let fact;
+    try { fact = validatePreflight(await preflight()); }
+    catch (error) {
+      if (error.code !== 'NATIVE_STATUS_UNAVAILABLE') throw error;
+      consecutive = 0;
+      lastUnavailable = true;
+      unavailableCount++;
+      update(job, 'waiting_for_idle', { active_work: null, idle_samples: 0, preflight_failures: unavailableCount, message: error.message });
+      if (unavailableCount === 1 || unavailableCount % 10 === 0) log(job, 'Gateway preflight chưa đọc được; thử lại khi 9B phản hồi. Lần ' + unavailableCount + '.');
+      await sleep(job.options.pollMs);
+      continue;
+    }
+    lastUnavailable = false;
     consecutive = fact.idle ? consecutive + 1 : 0;
     update(job, 'waiting_for_idle', { active_work: fact.active, idle_samples: consecutive, message: fact.idle ? '9B đang rảnh; đang xác nhận lần tiếp theo.' : 'Đang chờ các công việc 9B kết thúc.' });
     if (consecutive >= 2) return;
     await sleep(job.options.pollMs);
   }
+  if (lastUnavailable) fail('Không đọc được trạng thái native 9B trong thời gian chờ. Kiểm tra 9B đang mở và đúng runtime; trên Mac hãy chạy CAI-DAT-MAC.command ngoài chat. Chưa cài skill.');
   fail('9B chưa rảnh sau thời gian chờ. Kết thúc lượt chat/công việc đang chạy, rồi chạy lại bộ cài. Chưa gọi bootstrap.');
 }
 function applyArgs(job) {

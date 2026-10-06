@@ -1,4 +1,4 @@
-# Quà tặng Hệ thống Content cho 9B — bản học viên 1.2
+# Quà tặng Hệ thống Content cho 9B — bản học viên 1.2.1
 
 Gói này tạo một hệ thống content riêng trên máy học viên. Máy chỉ cần có **9bizclaw v3 đang dùng được**; không cần bản Antigravity, thư mục của giảng viên, tài khoản giảng viên hay kho ảnh cũ.
 
@@ -10,11 +10,19 @@ Gói này tạo một hệ thống content riêng trên máy học viên. Máy c
 
 Nếu bạn có bản cũ, bộ cài hỏi quyền nâng đúng gói đã được xác minh. Nếu tổ chức từ chối cài skill, giữ lỗi để quản trị viên xử lý theo chính sách của tổ chức.
 
+## Cài trên Mac bằng cửa sổ riêng
+
+1. Mở và khởi tạo 9BizClaw v3. Kết thúc các lượt chat đang chạy, giữ 9B mở.
+2. Giải nén ZIP, mở **CAI-DAT-MAC.command** trong thư mục đã giải nén. Nếu macOS yêu cầu xác nhận tệp tải về, dùng **nhấp phải → Open / Mở**. Chỉ mở tệp từ đúng ZIP trên trang Git này.
+3. Cài lần đầu thì nhấn Enter ở câu hỏi nâng cấp; nếu đã có bộ quà tặng cũ, nhập **CO** để nâng. Chờ cửa sổ báo **“Da cai va xac minh”**. Sau đó mở chat mới cùng agent vừa cài và gõ **/caidat**.
+
+Nếu tệp `.command` không mở được, mở Terminal tại thư mục đã giải nén và chạy `bash CAI-DAT-MAC.command`. Cách này không cần quyền thực thi của tệp. Bộ cài cần Node 20 trở lên; nó ưu tiên Node đi kèm 9B. Nếu không tìm thấy runtime hoặc Node, giữ nguyên thông báo lỗi để hỗ trợ tìm đúng bản 9B trên máy bạn. Tác vụ cài cũ đã báo `failed` không thể tiếp tục; hãy chạy tệp của bản 1.2.1 để tạo lượt cài mới.
+
 ## Cài bằng chat 9B
 
 Đính kèm ZIP vào chat và dán CAI-DAT-9B.txt. 9B khởi chạy bộ cài nền, trả đường dẫn kết quả rồi kết thúc lượt ngay. Bộ cài chờ lượt chat kết thúc mới thay đổi skill/cấu hình. Ở lượt mới, yêu cầu kiểm tra job_file; chỉ khi completed mới dùng /caidat. Không gửi yêu cầu liên tục trong lúc cài. ZIP trong chat là tệp đầu vào, không phải tệp cho màn hình Skills Upload.
 
-Nếu 9B báo prepared model runtime plugin generation was superseded trước khi đọc gói, dùng CAI-DAT-9B.cmd. Lỗi đó thuộc lượt chạy của ứng dụng; mã trong Git chưa chạy nên không thể tự sửa lỗi này từ cùng lượt chat.
+Nếu 9B báo prepared model runtime plugin generation was superseded trước khi đọc gói, dùng CAI-DAT-9B.cmd trên Windows hoặc CAI-DAT-MAC.command trên Mac. Lỗi đó thuộc lượt chạy của ứng dụng; mã trong Git chưa chạy nên không thể tự sửa lỗi này từ cùng lượt chat.
 
 ## Bạn nhận được gì
 
@@ -83,4 +91,4 @@ Trong gói không có `.env`, API key, cookie, account đăng bài, Brand DNA c�
 
 ## Thành phần dành cho 9B
 
-`CAI-DAT-9B.cmd`: khởi chạy trên Windows. `install-job.cjs`: cài nền/chờ 9B rảnh và lưu trạng thái. `bootstrap.cjs`: phát hiện runtime, lập kế hoạch, cài qua native installer và kiểm kết quả. `distribution-manifest.json`: danh sách 31 skill. `skills/freeup-content-system/`: hướng dẫn, defaults, mẫu và công cụ tự chứa. Các skill cùng cấp cung cấp 30 lệnh. Đọc `INSTALLER.md` khi cần chẩn đoán kỹ thuật.
+`CAI-DAT-9B.cmd`: khởi chạy trên Windows. `CAI-DAT-MAC.command`: khởi chạy trên macOS. `install-job.cjs`: cài nền/chờ 9B rảnh và lưu trạng thái. `bootstrap.cjs`: phát hiện runtime, lập kế hoạch, cài qua native installer và kiểm kết quả. `distribution-manifest.json`: danh sách 31 skill. `skills/freeup-content-system/`: hướng dẫn, defaults, mẫu và công cụ tự chứa. Các skill cùng cấp cung cấp 30 lệnh. Đọc `INSTALLER.md` khi cần chẩn đoán kỹ thuật.

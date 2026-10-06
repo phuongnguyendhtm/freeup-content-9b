@@ -1,11 +1,11 @@
 # Cài hệ thống Content vào 9B
 
-Bạn cần máy Windows có **9BizClaw v3 đã khởi tạo** và Internet. Bản 1.2 có 31 skill, 30 lệnh tiếng Việt và kho nội dung riêng; không cần thư mục Antigravity của giảng viên.
+Bạn cần máy Windows hoặc Mac có **9BizClaw v3 đã khởi tạo** và Internet. Bản 1.2.1 có 31 skill, 30 lệnh tiếng Việt và kho nội dung riêng; không cần thư mục Antigravity của giảng viên.
 
 ## Cài trong 3 bước
 
 1. **Mở 9B.** Kết thúc các lượt chat đang chạy và giữ 9B mở trong lúc cài.
-2. **[Tải bộ cài Content 1.2](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.zip)** → nhấp phải ZIP, chọn **Extract All / Giải nén tất cả** → mở thư mục đã giải nén → nhấp đúp **CAI-DAT-9B.cmd**. Cài lần đầu thì nhấn Enter khi được hỏi nâng cấp. Nếu được hỏi agent, chọn agent bạn muốn dùng làm content. Chờ bộ cài tải công cụ ảnh/video và kiểm tra; lần đầu có thể mất vài phút.
+2. **[Tải bộ cài Content 1.2.1](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.1.zip)** → giải nén → trên Windows nhấp đúp **CAI-DAT-9B.cmd**, trên Mac mở **CAI-DAT-MAC.command**. Cài lần đầu thì nhấn Enter khi được hỏi nâng cấp. Nếu được hỏi agent, chọn agent bạn muốn dùng làm content. Chờ bộ cài tải công cụ ảnh/video và kiểm tra; lần đầu có thể mất vài phút.
 3. **Khi bộ cài báo “Đã cài và xác minh”** (`Da cai va xac minh`), mở **chat mới với đúng agent** trong 9B và gửi:
 
    ```text
@@ -13,6 +13,8 @@ Bạn cần máy Windows có **9BizClaw v3 đã khởi tạo** và Internet. B�
    ```
 
 Hệ thống dùng lại hồ sơ doanh nghiệp và tài liệu bạn đã cung cấp; chỉ hỏi phần bắt buộc còn thiếu hoặc mâu thuẫn. Hồ sơ đã đủ thì bạn có thể tạo content ngay.
+
+**Mac:** nếu `.command` không mở được, mở Terminal tại thư mục đã giải nén và chạy `bash CAI-DAT-MAC.command`. Hãy giữ cửa sổ cài mở cho tới khi có kết quả. Nếu lần cài qua chat trước đó báo `failed`, tải bản mới và chạy tệp này; đừng chờ tác vụ cũ tự tiếp tục.
 
 ## Dùng ngay sau khi cài
 
@@ -45,9 +47,9 @@ Nhập **CO** nếu bạn muốn nâng bản cũ của cùng bộ quà tặng n�
 </details>
 
 <details>
-<summary>Tôi không tìm thấy CAI-DAT-9B.cmd.</summary>
+<summary>Tôi không tìm thấy tệp cài.</summary>
 
-Bạn cần mở **thư mục đã giải nén**, không mở trực tiếp tệp trong ZIP. Tải đúng bộ cài bằng link ở bước 2; không dùng **Code → Download ZIP** của GitHub. Máy có thể ẩn phần mở rộng; tệp sẽ hiện là **CAI-DAT-9B**, loại **Windows Command Script**.
+Bạn cần mở **thư mục đã giải nén**, không mở trực tiếp tệp trong ZIP. Tải đúng bộ cài bằng link ở bước 2; không dùng **Code → Download ZIP** của GitHub. Windows dùng **CAI-DAT-9B.cmd**; Mac dùng **CAI-DAT-MAC.command**.
 
 </details>
 
