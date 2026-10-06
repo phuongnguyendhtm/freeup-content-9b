@@ -1,6 +1,6 @@
 ---
 name: vietlai
-description: Phân tích bài mẫu và viết bản gốc theo thương hiệu học viên. Dùng khi học viên gọi /vietlai hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Phân tích bài mẫu và viết bản gốc theo thương hiệu học viên. Dùng khi học viên gọi /vietlai hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

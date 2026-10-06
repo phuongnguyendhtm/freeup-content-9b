@@ -1,6 +1,6 @@
 ---
 name: kenh
-description: Hướng dẫn kết nối và kiểm tra kênh đăng của học viên. Dùng khi học viên gọi /kenh hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Hướng dẫn kết nối và kiểm tra kênh đăng của học viên. Dùng khi học viên gọi /kenh hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

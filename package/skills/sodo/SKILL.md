@@ -1,6 +1,6 @@
 ---
 name: sodo
-description: Tạo infographic hoặc sơ đồ từ dữ liệu có nguồn. Dùng khi học viên gọi /sodo hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tạo infographic hoặc sơ đồ từ dữ liệu có nguồn. Dùng khi học viên gọi /sodo hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

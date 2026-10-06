@@ -1,6 +1,6 @@
 ---
 name: boanh
-description: Tạo bộ ảnh nhiều trang từ bài hoặc chủ đề mới. Dùng khi học viên gọi /boanh hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tạo bộ ảnh nhiều trang từ bài hoặc chủ đề mới. Dùng khi học viên gọi /boanh hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

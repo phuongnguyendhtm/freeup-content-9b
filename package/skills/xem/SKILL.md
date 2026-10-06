@@ -1,6 +1,6 @@
 ---
 name: xem
-description: Xem bài, caption, ảnh hoặc video thật đã tạo. Dùng khi học viên gọi /xem hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Xem bài, caption, ảnh hoặc video thật đã tạo. Dùng khi học viên gọi /xem hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

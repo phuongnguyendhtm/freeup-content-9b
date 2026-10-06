@@ -1,6 +1,6 @@
 ---
 name: binhluan
-description: Viết bài ngắn và chuỗi bình luận theo thứ tự. Dùng khi học viên gọi /binhluan hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Viết bài ngắn và chuỗi bình luận theo thứ tự. Dùng khi học viên gọi /binhluan hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

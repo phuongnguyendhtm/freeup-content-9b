@@ -1,6 +1,6 @@
 ---
 name: trang
-description: Tạo bộ trang nội dung, tương đương /boanh. Dùng khi học viên gọi /trang hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tạo bộ trang nội dung, tương đương /boanh. Dùng khi học viên gọi /trang hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

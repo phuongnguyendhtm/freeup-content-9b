@@ -1,6 +1,6 @@
 ---
 name: bang
-description: Đồng bộ kho content với Google Sheets khi học viên đã kết nối. Dùng khi học viên gọi /bang hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Đồng bộ kho content với Google Sheets khi học viên đã kết nối. Dùng khi học viên gọi /bang hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

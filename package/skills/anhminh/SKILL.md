@@ -1,6 +1,6 @@
 ---
 name: anhminh
-description: Nhập và chọn ảnh cá nhân học viên cho content. Dùng khi học viên gọi /anhminh hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Nhập và chọn ảnh cá nhân học viên cho content. Dùng khi học viên gọi /anhminh hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

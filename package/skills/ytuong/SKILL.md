@@ -1,6 +1,6 @@
 ---
 name: ytuong
-description: Xem ngân hàng ý tưởng và chọn ý tưởng tiếp tục. Dùng khi học viên gọi /ytuong hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Xem ngân hàng ý tưởng và chọn ý tưởng tiếp tục. Dùng khi học viên gọi /ytuong hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

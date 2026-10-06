@@ -1,6 +1,6 @@
 ---
 name: duyetchu
-description: Ghi duyệt phần chữ đúng phiên bản theo chỉ dẫn học viên. Dùng khi học viên gọi /duyetchu hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Ghi duyệt phần chữ đúng phiên bản theo chỉ dẫn học viên. Dùng khi học viên gọi /duyetchu hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

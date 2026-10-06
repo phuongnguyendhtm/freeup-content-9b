@@ -1,6 +1,6 @@
 ---
 name: nhanvat
-description: Tìm ảnh tham khảo nhân vật với nguồn và quyền dùng. Dùng khi học viên gọi /nhanvat hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tìm ảnh tham khảo nhân vật với nguồn và quyền dùng. Dùng khi học viên gọi /nhanvat hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

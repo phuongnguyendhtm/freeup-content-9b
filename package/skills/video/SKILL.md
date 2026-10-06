@@ -1,6 +1,6 @@
 ---
 name: video
-description: Tạo video có lời thoại, kịch bản, timeline và phụ đề. Dùng khi học viên gọi /video hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tạo video có lời thoại, kịch bản, timeline và phụ đề. Dùng khi học viên gọi /video hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

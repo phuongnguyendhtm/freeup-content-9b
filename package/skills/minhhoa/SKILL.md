@@ -1,6 +1,6 @@
 ---
 name: minhhoa
-description: Tạo ảnh minh họa một ý tưởng, ba concept và headline ngắn. Dùng khi học viên gọi /minhhoa hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tạo ảnh minh họa một ý tưởng, ba concept và headline ngắn. Dùng khi học viên gọi /minhhoa hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

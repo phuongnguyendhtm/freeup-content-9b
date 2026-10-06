@@ -1,6 +1,6 @@
 ---
 name: duyetdang
-description: Ghi duyệt đăng đúng bài, phiên bản, kênh và thời gian. Dùng khi học viên gọi /duyetdang hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Ghi duyệt đăng đúng bài, phiên bản, kênh và thời gian. Dùng khi học viên gọi /duyetdang hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

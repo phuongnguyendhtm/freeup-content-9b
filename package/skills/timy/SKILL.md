@@ -1,6 +1,6 @@
 ---
 name: timy
-description: Nghiên cứu và lưu ý tưởng content có nguồn. Dùng khi học viên gọi /timy hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Nghiên cứu và lưu ý tưởng content có nguồn. Dùng khi học viên gọi /timy hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

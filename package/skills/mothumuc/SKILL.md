@@ -1,6 +1,6 @@
 ---
 name: mothumuc
-description: Mở thư mục chứa thành phẩm trên máy đang chạy 9B. Dùng khi học viên gọi /mothumuc hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Mở thư mục chứa thành phẩm trên máy đang chạy 9B. Dùng khi học viên gọi /mothumuc hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

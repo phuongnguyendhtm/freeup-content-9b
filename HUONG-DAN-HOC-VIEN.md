@@ -1,11 +1,11 @@
 # Cài hệ thống Content vào 9B
 
-Bạn cần máy Windows hoặc Mac có **9BizClaw v3 đã khởi tạo** và Internet. Bản 1.2.2 có 31 skill, 30 lệnh tiếng Việt và kho nội dung riêng; không cần thư mục Antigravity của giảng viên.
+Bạn cần máy Windows hoặc Mac có **9BizClaw v3 đã khởi tạo** và Internet. Bản 1.3.0 có 34 skill, 33 lệnh tiếng Việt và kho nội dung riêng; không cần thư mục Antigravity của giảng viên.
 
 ## Cài trong 3 bước
 
 1. **Mở 9B.** Kết thúc các lượt chat đang chạy và giữ 9B mở trong lúc cài.
-2. **[Tải bộ cài Content 1.2.2](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.2.zip)** → **nhấp phải ZIP và chọn Extract All / Giải nén tất cả** → mở thư mục mới được giải nén. Trên Windows nhấp đúp **CAI-DAT-9B.cmd**, trên Mac mở **CAI-DAT-MAC.command**. Không mở tệp cài ngay trong cửa sổ xem ZIP. Cài lần đầu thì nhấn Enter khi được hỏi nâng cấp. Nếu được hỏi agent, chọn agent bạn muốn dùng làm content. Chờ bộ cài tải công cụ ảnh/video và kiểm tra; lần đầu có thể mất vài phút.
+2. **[Tải bộ cài Content 1.3.0](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.0.zip)** → **nhấp phải ZIP và chọn Extract All / Giải nén tất cả** → mở thư mục mới được giải nén. Trên Windows nhấp đúp **CAI-DAT-9B.cmd**, trên Mac mở **CAI-DAT-MAC.command**. Không mở tệp cài ngay trong cửa sổ xem ZIP. Cài lần đầu thì nhấn Enter khi được hỏi nâng cấp. Nếu được hỏi agent, chọn agent bạn muốn dùng làm content. Chờ bộ cài tải công cụ ảnh/video và kiểm tra; lần đầu có thể mất vài phút.
 3. **Khi bộ cài báo “Đã cài và xác minh”** (`Da cai va xac minh`), mở **chat mới với đúng agent** trong 9B và gửi:
 
    ```text
@@ -82,3 +82,47 @@ Việc cài hệ thống không cấp quyền đăng bài. Bạn cần kết n�
 </details>
 
 [Cách cài khác và thông tin kỹ thuật](./docs/CAI-DAT-NANG-CAO.md)
+
+## Nguồn chuyên gia và tự sản xuất sau duyệt lịch
+
+Bản 1.3.0 thêm ba lệnh: **/nguon**, **/duyetlich**, **/theodoi**. Có **33 lệnh tiếng Việt và 1 skill điều phối**. Thông tin doanh nghiệp, nguồn, giọng văn, câu chuyện và ảnh của mỗi học viên được lưu riêng; không cần thư mục Antigravity của giảng viên.
+
+Luồng sử dụng: chọn nguồn → đọc bài/video truy cập được → chọn insight phù hợp khách hàng → đề xuất lịch → bạn duyệt lịch → tự tạo bài và ảnh theo skill hiện có → bạn duyệt thành phẩm → đăng qua kênh đã kết nối → xem số liệu để cải tiến.
+
+Nguồn khởi đầu cho ngành marketing: **Alex Hormozi, Russell Brunson và Dan Koe**. Bạn đổi nguồn/ngành bằng chat. Hệ thống xây bài mới theo góc nhìn riêng, dùng câu chuyện/ảnh bạn cung cấp; nếu chưa có câu chuyện thật thì dùng nhận định hoặc ví dụ giả định được ghi rõ. Có lưu URL và lý do chọn ý tưởng.
+
+**Duyệt lịch cho phép sản xuất bài và ảnh. Thành phẩm vẫn chờ bạn duyệt trước khi đăng.** Sửa lịch sẽ tạo bản mới; chạy lại tiếp tục bài đang làm và giữ bài cũ. Không có quyền đọc một nguồn thì báo nguồn đó chưa đọc được và tiếp tục các nguồn khác.
+
+Gửi lần lượt trong 9B sau khi cài:
+
+```text
+/nguon Dùng Alex Hormozi, Russell Brunson và Dan Koe để tìm ý tưởng marketing.
+```
+
+```text
+/timy Tìm 10 ý tưởng từ các nguồn đã chọn, ưu tiên phù hợp khách hàng của tôi.
+```
+
+```text
+/lich Đề xuất lịch 7 ngày, gồm bài viết, Visual Insight và Founder Quote khi có ảnh phù hợp.
+Tạo lịch có nguồn, Big Idea và giờ dự kiến. Dùng giọng văn, câu chuyện và màu thương hiệu đã lưu.
+```
+
+Sau khi xem lịch, thay ID/bản bằng thông tin 9B vừa trả:
+
+```text
+/duyetlich [ID lịch] bản [số bản]. Tự làm bài và ảnh, cho tôi xem thành phẩm trước khi đăng.
+```
+
+Muốn duy trì định kỳ:
+
+```text
+/theodoi Bật quét nguồn mỗi ngày lúc 7h, gửi lịch tuần mới vào thứ Sáu lúc 16h.
+Tiếp tục các bài của lịch tôi đã duyệt. Thành phẩm chờ tôi duyệt rồi mới đăng.
+Kiểm tra lịch chạy thật và báo rõ phần nào chưa kết nối được.
+```
+
+Đổi giờ, tắt theo dõi hoặc thay màu/ảnh bằng lời nói trong chat. /theodoi dùng lịch native của 9B; máy chạy 9B cần bật, Gateway hoạt động và không ngủ. Đường dẫn lưu lịch: freeup-content-data/content-calendar/index.html; bài/ảnh vẫn trong media_output/ngày/ID-bài/. Điện thoại xem/duyệt qua kênh chat đã kết nối và gửi tệp được xác minh.
+
+Các script điều phối đã được kiểm bằng dữ liệu mô phỏng: duyệt đúng bản, chống trùng, khôi phục công việc, chặn thiếu tài nguyên và không tự đăng. Quét nguồn thực, lịch nền/headless, ảnh AI và tài khoản đăng cần kiểm trên máy học viên; cài gói không đồng nghĩa các kết nối đó đã hoạt động.
+

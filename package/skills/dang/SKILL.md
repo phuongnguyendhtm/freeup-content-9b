@@ -1,6 +1,6 @@
 ---
 name: dang
-description: Đăng bài đã được yêu cầu và duyệt qua công cụ thực đã kết nối. Dùng khi học viên gọi /dang hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Đăng bài đã được yêu cầu và duyệt qua công cụ thực đã kết nối. Dùng khi học viên gọi /dang hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

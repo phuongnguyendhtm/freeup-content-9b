@@ -1,6 +1,6 @@
 ---
 name: anh
-description: Tạo ảnh đơn hoặc ảnh minh họa ý tưởng hoặc ảnh cá nhân kèm câu chữ. Dùng khi học viên gọi /anh hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tạo ảnh đơn hoặc ảnh minh họa ý tưởng hoặc ảnh cá nhân kèm câu chữ. Dùng khi học viên gọi /anh hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

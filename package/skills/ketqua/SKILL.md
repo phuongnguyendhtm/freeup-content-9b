@@ -1,6 +1,6 @@
 ---
 name: ketqua
-description: Phân tích số liệu content thật và lưu bài học. Dùng khi học viên gọi /ketqua hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Phân tích số liệu content thật và lưu bài học. Dùng khi học viên gọi /ketqua hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

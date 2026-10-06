@@ -1,5 +1,9 @@
 # Quy trình content hoàn chỉnh cho một máy mới
 
+## Luồng nguồn chuyên gia và lịch được duyệt
+
+Với yêu cầu xây hệ thống theo dõi chuyên gia, đọc **automation.md**: chọn nguồn công khai → đọc bài thật → chấm ý tưởng theo khách hàng/mục tiêu → xây góc nhìn riêng với câu chuyện/ảnh đã xác nhận → `/lich` trình lịch có ID/bản → `/duyetlich` tự sản xuất và QA → `/xem` chờ duyệt thành phẩm → `/duyetdang` và `/dang` → số liệu thật cho vòng tiếp theo. Dùng `campaign.cjs` để quản lý lịch/queue. Native `/theodoi` chỉ bật khi học viên yêu cầu theo dõi định kỳ và phải có job/receipt/run history thật.
+
 Gói skill có đủ hướng dẫn biên tập, mẫu và công cụ lưu quy trình để khởi tạo trên máy học viên. Mỗi học viên tạo Brand DNA, nguồn tri thức, tài nguyên và tài khoản riêng. Các script của gói chạy từ `{baseDir}` và dùng thư mục làm việc lâu dài đã lưu trong cấu hình; không cần bản Antigravity hay thư mục máy người tặng.
 
 ## 1. Thiết lập một lần

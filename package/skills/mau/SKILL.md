@@ -1,6 +1,6 @@
 ---
 name: mau
-description: Xem mẫu thiết kế sẵn có và mẫu riêng. Dùng khi học viên gọi /mau hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Xem mẫu thiết kế sẵn có và mẫu riêng. Dùng khi học viên gọi /mau hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

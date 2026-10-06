@@ -1,6 +1,6 @@
 ---
 name: anhchu
-description: Tạo ảnh cá nhân kèm câu quan điểm ngắn theo bố cục P01–P06. Dùng khi học viên gọi /anhchu hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tạo ảnh cá nhân kèm câu quan điểm ngắn theo bố cục P01–P06. Dùng khi học viên gọi /anhchu hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

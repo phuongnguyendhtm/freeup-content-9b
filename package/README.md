@@ -1,11 +1,11 @@
-# Quà tặng Hệ thống Content cho 9B — bản học viên 1.2.2
+# Quà tặng Hệ thống Content cho 9B — bản học viên 1.3.0
 
 Gói này tạo một hệ thống content riêng trên máy học viên. Máy chỉ cần có **9bizclaw v3 đang dùng được**; không cần bản Antigravity, thư mục của giảng viên, tài khoản giảng viên hay kho ảnh cũ.
 
 ## Cài trên Windows bằng một lần mở tệp
 
 1. Mở và khởi tạo 9BizClaw v3 trên máy của bạn; giữ 9B đang mở và dừng các lượt chat đang chạy.
-2. Nhấp phải ZIP → **Extract All / Giải nén tất cả**. Mở **thư mục mới được giải nén**, rồi mở **CAI-DAT-9B.cmd** ở trong đó; không mở tệp cài trực tiếp trong cửa sổ xem ZIP. Bộ cài tìm runtime trên máy này, cho chọn agent nếu cần, chờ 9B rảnh rồi cài 31 skill và tải công cụ ảnh/video. Internet cần cho lần tải đầu.
+2. Nhấp phải ZIP → **Extract All / Giải nén tất cả**. Mở **thư mục mới được giải nén**, rồi mở **CAI-DAT-9B.cmd** ở trong đó; không mở tệp cài trực tiếp trong cửa sổ xem ZIP. Bộ cài tìm runtime trên máy này, cho chọn agent nếu cần, chờ 9B rảnh rồi cài 34 skill và tải công cụ ảnh/video. Internet cần cho lần tải đầu.
 3. Chỉ tiếp tục khi cửa sổ bộ cài báo hoàn tất kiểm tra. Mở **lượt/chat mới cùng agent** trong 9B và gõ **/caidat**. Dữ liệu doanh nghiệp đã có sẽ được dùng lại; chỉ hỏi phần còn thiếu.
 
 Nếu bạn có bản cũ, bộ cài hỏi quyền nâng đúng gói đã được xác minh. Nếu tổ chức từ chối cài skill, giữ lỗi để quản trị viên xử lý theo chính sách của tổ chức.
@@ -16,7 +16,7 @@ Nếu bạn có bản cũ, bộ cài hỏi quyền nâng đúng gói đã đư�
 2. Giải nén ZIP, mở **CAI-DAT-MAC.command** trong thư mục đã giải nén. Nếu macOS yêu cầu xác nhận tệp tải về, dùng **nhấp phải → Open / Mở**. Chỉ mở tệp từ đúng ZIP trên trang Git này.
 3. Cài lần đầu thì nhấn Enter ở câu hỏi nâng cấp; nếu đã có bộ quà tặng cũ, nhập **CO** để nâng. Chờ cửa sổ báo **“Da cai va xac minh”**. Sau đó mở chat mới cùng agent vừa cài và gõ **/caidat**.
 
-Nếu tệp `.command` không mở được, mở Terminal tại thư mục đã giải nén và chạy `bash CAI-DAT-MAC.command`. Cách này không cần quyền thực thi của tệp. Bộ cài cần Node 20 trở lên; nó ưu tiên Node đi kèm 9B. Nếu không tìm thấy runtime hoặc Node, giữ nguyên thông báo lỗi để hỗ trợ tìm đúng bản 9B trên máy bạn. Tác vụ cài cũ đã báo `failed` không thể tiếp tục; hãy chạy tệp của bản 1.2.2 để tạo lượt cài mới.
+Nếu tệp `.command` không mở được, mở Terminal tại thư mục đã giải nén và chạy `bash CAI-DAT-MAC.command`. Cách này không cần quyền thực thi của tệp. Bộ cài cần Node 20 trở lên; nó ưu tiên Node đi kèm 9B. Nếu không tìm thấy runtime hoặc Node, giữ nguyên thông báo lỗi để hỗ trợ tìm đúng bản 9B trên máy bạn. Tác vụ cài cũ đã báo `failed` không thể tiếp tục; hãy chạy tệp của bản 1.3.0 để tạo lượt cài mới.
 
 ## Cài bằng chat 9B
 
@@ -26,7 +26,7 @@ Nếu 9B báo prepared model runtime plugin generation was superseded trước k
 
 ## Bạn nhận được gì
 
-- 30 lệnh chat bằng tên tiếng Việt ngắn, một skill điều phối và kho dữ liệu riêng theo thương hiệu.
+- 33 lệnh chat bằng tên tiếng Việt ngắn, một skill điều phối và kho dữ liệu riêng theo thương hiệu.
 - Quy trình: thiết lập → chiến lược 5 trụ cột × 5 góc độ → nghiên cứu/ý tưởng → viết → ảnh/carousel/infographic/comment chain/Reels/B-roll → QA → duyệt → đăng qua công cụ đã kết nối → KPI và cải tiến.
 - Hai kiểu mới: **Visual Insight** (một insight, ba concept, hình A–F) và **Founder Quote** (ảnh cá nhân thật, quote ngắn, bố cục P01–P06).
 - 18 mẫu nội dung/bố cục cơ sở và cách lưu mẫu riêng của bạn.
@@ -83,7 +83,7 @@ Reels/B-roll local xuất video dọc từ ảnh/clip, phụ đề trên từng 
 
 ## Mức kiểm chứng
 
-Bản 1.1 đã cài native đủ 31 skill trên 9BizClaw v3 / OpenClaw 2026.8.1 và kiểm công cụ Chrome/FFmpeg. Bản 1.2 thay cơ chế khởi chạy cài đặt; kiểm bằng runtime mô phỏng độc lập, kiểm cài lại/nâng cấp/giữ dữ liệu, hồ sơ và helper. Chưa thực hiện lượt cài native mới toàn bộ bản 1.2 trên máy học viên khác. Mỗi máy vẫn phải đạt inventory 31 skill eligible và doctor trước khi báo cài hoàn tất.
+Bản 1.1 đã cài native đủ 31 skill trên 9BizClaw v3 / OpenClaw 2026.8.1 và kiểm công cụ Chrome/FFmpeg. Bản 1.2 thay cơ chế khởi chạy cài đặt; kiểm bằng runtime mô phỏng độc lập, kiểm cài lại/nâng cấp/giữ dữ liệu, hồ sơ và helper. Chưa thực hiện lượt cài native mới toàn bộ bản 1.2 trên máy học viên khác. Mỗi máy vẫn phải đạt inventory 34 skill eligible và doctor trước khi báo cài hoàn tất.
 
 Tài khoản đăng bài, voice và ảnh AI được kiểm khi dùng bước tương ứng, không mặc định đã được cấu hình sẵn.
 
@@ -91,4 +91,48 @@ Trong gói không có `.env`, API key, cookie, account đăng bài, Brand DNA c�
 
 ## Thành phần dành cho 9B
 
-`CAI-DAT-9B.cmd`: khởi chạy trên Windows. `CAI-DAT-MAC.command`: khởi chạy trên macOS. `install-job.cjs`: cài nền/chờ 9B rảnh và lưu trạng thái. `bootstrap.cjs`: phát hiện runtime, lập kế hoạch, cài qua native installer và kiểm kết quả. `distribution-manifest.json`: danh sách 31 skill. `skills/freeup-content-system/`: hướng dẫn, defaults, mẫu và công cụ tự chứa. Các skill cùng cấp cung cấp 30 lệnh. Đọc `INSTALLER.md` khi cần chẩn đoán kỹ thuật.
+`CAI-DAT-9B.cmd`: khởi chạy trên Windows. `CAI-DAT-MAC.command`: khởi chạy trên macOS. `install-job.cjs`: cài nền/chờ 9B rảnh và lưu trạng thái. `bootstrap.cjs`: phát hiện runtime, lập kế hoạch, cài qua native installer và kiểm kết quả. `distribution-manifest.json`: danh sách 34 skill. `skills/freeup-content-system/`: hướng dẫn, defaults, mẫu và công cụ tự chứa. Các skill cùng cấp cung cấp 33 lệnh. Đọc `INSTALLER.md` khi cần chẩn đoán kỹ thuật.
+
+## Nguồn chuyên gia và tự sản xuất sau duyệt lịch
+
+Bản 1.3.0 thêm ba lệnh: **/nguon**, **/duyetlich**, **/theodoi**. Có **33 lệnh tiếng Việt và 1 skill điều phối**. Thông tin doanh nghiệp, nguồn, giọng văn, câu chuyện và ảnh của mỗi học viên được lưu riêng; không cần thư mục Antigravity của giảng viên.
+
+Luồng sử dụng: chọn nguồn → đọc bài/video truy cập được → chọn insight phù hợp khách hàng → đề xuất lịch → bạn duyệt lịch → tự tạo bài và ảnh theo skill hiện có → bạn duyệt thành phẩm → đăng qua kênh đã kết nối → xem số liệu để cải tiến.
+
+Nguồn khởi đầu cho ngành marketing: **Alex Hormozi, Russell Brunson và Dan Koe**. Bạn đổi nguồn/ngành bằng chat. Hệ thống xây bài mới theo góc nhìn riêng, dùng câu chuyện/ảnh bạn cung cấp; nếu chưa có câu chuyện thật thì dùng nhận định hoặc ví dụ giả định được ghi rõ. Có lưu URL và lý do chọn ý tưởng.
+
+**Duyệt lịch cho phép sản xuất bài và ảnh. Thành phẩm vẫn chờ bạn duyệt trước khi đăng.** Sửa lịch sẽ tạo bản mới; chạy lại tiếp tục bài đang làm và giữ bài cũ. Không có quyền đọc một nguồn thì báo nguồn đó chưa đọc được và tiếp tục các nguồn khác.
+
+Gửi lần lượt trong 9B sau khi cài:
+
+```text
+/nguon Dùng Alex Hormozi, Russell Brunson và Dan Koe để tìm ý tưởng marketing.
+```
+
+```text
+/timy Tìm 10 ý tưởng từ các nguồn đã chọn, ưu tiên phù hợp khách hàng của tôi.
+```
+
+```text
+/lich Đề xuất lịch 7 ngày, gồm bài viết, Visual Insight và Founder Quote khi có ảnh phù hợp.
+Tạo lịch có nguồn, Big Idea và giờ dự kiến. Dùng giọng văn, câu chuyện và màu thương hiệu đã lưu.
+```
+
+Sau khi xem lịch, thay ID/bản bằng thông tin 9B vừa trả:
+
+```text
+/duyetlich [ID lịch] bản [số bản]. Tự làm bài và ảnh, cho tôi xem thành phẩm trước khi đăng.
+```
+
+Muốn duy trì định kỳ:
+
+```text
+/theodoi Bật quét nguồn mỗi ngày lúc 7h, gửi lịch tuần mới vào thứ Sáu lúc 16h.
+Tiếp tục các bài của lịch tôi đã duyệt. Thành phẩm chờ tôi duyệt rồi mới đăng.
+Kiểm tra lịch chạy thật và báo rõ phần nào chưa kết nối được.
+```
+
+Đổi giờ, tắt theo dõi hoặc thay màu/ảnh bằng lời nói trong chat. /theodoi dùng lịch native của 9B; máy chạy 9B cần bật, Gateway hoạt động và không ngủ. Đường dẫn lưu lịch: freeup-content-data/content-calendar/index.html; bài/ảnh vẫn trong media_output/ngày/ID-bài/. Điện thoại xem/duyệt qua kênh chat đã kết nối và gửi tệp được xác minh.
+
+Các script điều phối đã được kiểm bằng dữ liệu mô phỏng: duyệt đúng bản, chống trùng, khôi phục công việc, chặn thiếu tài nguyên và không tự đăng. Quét nguồn thực, lịch nền/headless, ảnh AI và tài khoản đăng cần kiểm trên máy học viên; cài gói không đồng nghĩa các kết nối đó đã hoạt động.
+

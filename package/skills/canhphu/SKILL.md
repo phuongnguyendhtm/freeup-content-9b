@@ -1,6 +1,6 @@
 ---
 name: canhphu
-description: Tạo video cảnh phụ không thoại từ clip hoặc ảnh học viên. Dùng khi học viên gọi /canhphu hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tạo video cảnh phụ không thoại từ clip hoặc ảnh học viên. Dùng khi học viên gọi /canhphu hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

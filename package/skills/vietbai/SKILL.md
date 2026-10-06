@@ -1,6 +1,6 @@
 ---
 name: vietbai
-description: Viết bài content, caption và nội dung gốc để chuyển định dạng. Dùng khi học viên gọi /vietbai hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Viết bài content, caption và nội dung gốc để chuyển định dạng. Dùng khi học viên gọi /vietbai hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

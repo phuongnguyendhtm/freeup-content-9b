@@ -1,6 +1,6 @@
 ---
 name: luumau
-description: Phân tích và lưu mẫu bố cục riêng của học viên. Dùng khi học viên gọi /luumau hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Phân tích và lưu mẫu bố cục riêng của học viên. Dùng khi học viên gọi /luumau hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

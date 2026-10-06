@@ -1,5 +1,5 @@
 {
-  "version": "1.2.2",
+  "version": "1.3.0",
   "commands": [
     {
       "skill": "caidat",
@@ -180,6 +180,24 @@
       "alias": "/mothumuc",
       "intent": "open-output-folder",
       "description": "Mở thư mục chứa thành phẩm trên máy đang chạy 9B"
+    },
+    {
+      "skill": "nguon",
+      "alias": "/nguon",
+      "intent": "expert-sources",
+      "description": "Chọn nguồn chuyên gia và câu chuyện thật cho hệ thống content"
+    },
+    {
+      "skill": "duyetlich",
+      "alias": "/duyetlich",
+      "intent": "approve-editorial-plan",
+      "description": "Duyệt đúng phiên bản lịch và bắt đầu tự tạo bài, ảnh; chờ duyệt thành phẩm trước đăng"
+    },
+    {
+      "skill": "theodoi",
+      "alias": "/theodoi",
+      "intent": "monitor-content-workflow",
+      "description": "Bật hoặc kiểm tra lịch quét nguồn, đề xuất content và tiếp tục sản xuất trong 9B"
     }
   ]
 }

@@ -1,6 +1,6 @@
 ---
 name: tudong
-description: Chạy toàn quy trình content từ ý tưởng tới sản xuất và bàn giao. Dùng khi học viên gọi /tudong hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Chạy toàn quy trình content từ ý tưởng tới sản xuất và bàn giao. Dùng khi học viên gọi /tudong hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

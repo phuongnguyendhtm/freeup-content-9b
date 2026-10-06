@@ -1,6 +1,6 @@
 ---
 name: duyetanh
-description: Ghi duyệt ảnh hoặc video thật đúng phiên bản. Dùng khi học viên gọi /duyetanh hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Ghi duyệt ảnh hoặc video thật đúng phiên bản. Dùng khi học viên gọi /duyetanh hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

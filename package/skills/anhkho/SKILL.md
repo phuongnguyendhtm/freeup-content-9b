@@ -1,6 +1,6 @@
 ---
 name: anhkho
-description: Tìm và ghi nguồn ảnh minh họa được phép dùng. Dùng khi học viên gọi /anhkho hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Tìm và ghi nguồn ảnh minh họa được phép dùng. Dùng khi học viên gọi /anhkho hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

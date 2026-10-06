@@ -1,6 +1,6 @@
 ---
 name: caidat
-description: Kiểm tra hồ sơ doanh nghiệp đã có và chỉ hỏi phần còn thiếu. Dùng khi học viên gọi /caidat hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Kiểm tra hồ sơ doanh nghiệp đã có và chỉ hỏi phần còn thiếu. Dùng khi học viên gọi /caidat hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 

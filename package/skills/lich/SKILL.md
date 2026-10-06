@@ -1,6 +1,6 @@
 ---
 name: lich
-description: Lập kế hoạch content theo mục tiêu, trụ cột và nguồn lực. Dùng khi học viên gọi /lich hoặc yêu cầu tương đương trong hệ thống content FREEUP.
+description: "Lập kế hoạch content theo mục tiêu, trụ cột và nguồn lực. Dùng khi học viên gọi /lich hoặc yêu cầu tương đương trong hệ thống content FREEUP."
 user-invocable: true
 ---
 
