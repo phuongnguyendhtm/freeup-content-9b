@@ -1,4 +1,4 @@
-Hãy tải bộ quà tặng content học viên 1.2 từ:
+Hãy tải bộ quà tặng content học viên 1.2.1 từ:
 https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.1.zip
 
 SHA-256 phải đúng ED093A78AD54517E1F3FFBC84BA14B7DE775F5821BF93EFE4B1C878A8143E037. Nếu khác, dừng. Tải đúng rồi làm theo yêu cầu dưới đây:
