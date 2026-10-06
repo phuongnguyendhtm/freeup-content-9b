@@ -89,6 +89,16 @@ Thành phẩm nằm trong `freeup-content-data/media_output/ngày/ID-bài/` bên
 
 
 
+## Nếu 9B báo lỗi khi chuẩn bị model
+
+Nếu thấy `prepared model runtime plugin generation was superseded`, lượt chat đã dừng trước khi model chạy công cụ. Lỗi có thể xuất hiện khi cấu hình model vừa thay đổi hoặc 9B đang nạp lại cấu hình.
+
+1. Chờ thao tác đổi model hoặc cài đặt đang chạy hoàn tất.
+2. Gửi lại câu lệnh trong một tin nhắn mới.
+3. Nếu lỗi tiếp tục lặp lại, thoát hẳn 9B, mở lại rồi gửi câu lệnh cài.
+
+Nếu chat chưa hoạt động, có thể dùng bộ cài PowerShell ở trên để cài qua công cụ native. Khi bộ cài báo kiểm tra thành công, mở chat 9B và chạy `/caidat`.
+
 ## Thành phần và mức kiểm chứng
 
 - [package/](./package/): 101 tệp nguyên bản, gồm manifest, checksum và bộ cài native. Giữ nguyên thư mục này khi dùng mã nguồn; các tài liệu tải từ GitHub nằm bên ngoài gói.
