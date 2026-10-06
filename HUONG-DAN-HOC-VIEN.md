@@ -1,11 +1,11 @@
 # Cài hệ thống Content vào 9B
 
-Bạn cần máy Windows hoặc Mac có **9BizClaw v3 đã khởi tạo** và Internet. Bản 1.2.1 có 31 skill, 30 lệnh tiếng Việt và kho nội dung riêng; không cần thư mục Antigravity của giảng viên.
+Bạn cần máy Windows hoặc Mac có **9BizClaw v3 đã khởi tạo** và Internet. Bản 1.2.2 có 31 skill, 30 lệnh tiếng Việt và kho nội dung riêng; không cần thư mục Antigravity của giảng viên.
 
 ## Cài trong 3 bước
 
 1. **Mở 9B.** Kết thúc các lượt chat đang chạy và giữ 9B mở trong lúc cài.
-2. **[Tải bộ cài Content 1.2.1](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.1.zip)** → giải nén → trên Windows nhấp đúp **CAI-DAT-9B.cmd**, trên Mac mở **CAI-DAT-MAC.command**. Cài lần đầu thì nhấn Enter khi được hỏi nâng cấp. Nếu được hỏi agent, chọn agent bạn muốn dùng làm content. Chờ bộ cài tải công cụ ảnh/video và kiểm tra; lần đầu có thể mất vài phút.
+2. **[Tải bộ cài Content 1.2.2](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.2.2.zip)** → **nhấp phải ZIP và chọn Extract All / Giải nén tất cả** → mở thư mục mới được giải nén. Trên Windows nhấp đúp **CAI-DAT-9B.cmd**, trên Mac mở **CAI-DAT-MAC.command**. Không mở tệp cài ngay trong cửa sổ xem ZIP. Cài lần đầu thì nhấn Enter khi được hỏi nâng cấp. Nếu được hỏi agent, chọn agent bạn muốn dùng làm content. Chờ bộ cài tải công cụ ảnh/video và kiểm tra; lần đầu có thể mất vài phút.
 3. **Khi bộ cài báo “Đã cài và xác minh”** (`Da cai va xac minh`), mở **chat mới với đúng agent** trong 9B và gửi:
 
    ```text

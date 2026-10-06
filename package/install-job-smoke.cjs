@@ -19,7 +19,7 @@ function preflight(active = 0) { return { safe: active === 0, summary: active ? 
 function unitJob(label) {
   const state = path.join(root, label, 'state'); const folder = path.join(state, 'freeup-content-install-jobs', 'fixture'); fs.mkdirSync(folder, { recursive: true });
   const file = path.join(folder, 'status.json'), log = path.join(folder, 'install.log'); write(log, '');
-  const job = { job_file: file, log_file: log, job_id: label, state: 'queued', package_id: 'freeup-content-student-gift', version: '1.2.1', agent_id: 'student', options: { agent: 'student', graceMs: 35000, pollMs: 3000, waitMs: 60000 }, history: [] };
+  const job = { job_file: file, log_file: log, job_id: label, state: 'queued', package_id: 'freeup-content-student-gift', version: '1.2.2', agent_id: 'student', options: { agent: 'student', graceMs: 35000, pollMs: 3000, waitMs: 60000 }, history: [] };
   write(file, job); return { job, runtime: { stateDir: state } };
 }
 function fixture(label, control) {
@@ -29,7 +29,7 @@ function fixture(label, control) {
   const names = ['freeup-content-system', 'vietbai'];
   for (const name of names) write(path.join(gift, 'skills', name, 'SKILL.md'), `---\nname: ${name}\ndescription: Mock install job fixture\n---\nFixture only.\n`);
   write(path.join(gift, 'skills/freeup-content-system/scripts/content.cjs'), "const fs=require('node:fs'),path=require('node:path'),a=process.argv.slice(2);const p=a[a.indexOf('--project')+1];fs.mkdirSync(path.join(p,'database'),{recursive:true});const f=path.join(p,'database','brand_config.json');if(!fs.existsSync(f))fs.writeFileSync(f,JSON.stringify({configured:false}));console.log('{}');");
-  write(path.join(gift, 'distribution-manifest.json'), { package_id: 'freeup-content-student-gift', version: '1.2.1', skills: names.map(name => ({ name, source: 'skills/' + name })) });
+  write(path.join(gift, 'distribution-manifest.json'), { package_id: 'freeup-content-student-gift', version: '1.2.2', skills: names.map(name => ({ name, source: 'skills/' + name })) });
   write(path.join(state, 'openclaw.json'), { agents: { defaults: { skills: ['old-skill'] }, entries: { student: { workspace }, other: { workspace: path.join(state, 'other'), skills: ['other-skill'] } } }, gateway: { mode: 'local', port: 19997 } });
   const cli = path.join(folder, 'mock cli.mjs'); const controlFile = path.join(state, 'control.json'); write(controlFile, control);
   write(cli, `import fs from 'node:fs';import path from 'node:path';

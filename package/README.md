@@ -1,11 +1,11 @@
-# Quà tặng Hệ thống Content cho 9B — bản học viên 1.2.1
+# Quà tặng Hệ thống Content cho 9B — bản học viên 1.2.2
 
 Gói này tạo một hệ thống content riêng trên máy học viên. Máy chỉ cần có **9bizclaw v3 đang dùng được**; không cần bản Antigravity, thư mục của giảng viên, tài khoản giảng viên hay kho ảnh cũ.
 
 ## Cài trên Windows bằng một lần mở tệp
 
 1. Mở và khởi tạo 9BizClaw v3 trên máy của bạn; giữ 9B đang mở và dừng các lượt chat đang chạy.
-2. Giải nén nguyên ZIP ra thư mục mới, mở **CAI-DAT-9B.cmd**. Bộ cài tìm runtime trên máy này, cho chọn agent nếu cần, chờ 9B rảnh rồi cài 31 skill và tải công cụ ảnh/video. Internet cần cho lần tải đầu.
+2. Nhấp phải ZIP → **Extract All / Giải nén tất cả**. Mở **thư mục mới được giải nén**, rồi mở **CAI-DAT-9B.cmd** ở trong đó; không mở tệp cài trực tiếp trong cửa sổ xem ZIP. Bộ cài tìm runtime trên máy này, cho chọn agent nếu cần, chờ 9B rảnh rồi cài 31 skill và tải công cụ ảnh/video. Internet cần cho lần tải đầu.
 3. Chỉ tiếp tục khi cửa sổ bộ cài báo hoàn tất kiểm tra. Mở **lượt/chat mới cùng agent** trong 9B và gõ **/caidat**. Dữ liệu doanh nghiệp đã có sẽ được dùng lại; chỉ hỏi phần còn thiếu.
 
 Nếu bạn có bản cũ, bộ cài hỏi quyền nâng đúng gói đã được xác minh. Nếu tổ chức từ chối cài skill, giữ lỗi để quản trị viên xử lý theo chính sách của tổ chức.
@@ -16,7 +16,7 @@ Nếu bạn có bản cũ, bộ cài hỏi quyền nâng đúng gói đã đư�
 2. Giải nén ZIP, mở **CAI-DAT-MAC.command** trong thư mục đã giải nén. Nếu macOS yêu cầu xác nhận tệp tải về, dùng **nhấp phải → Open / Mở**. Chỉ mở tệp từ đúng ZIP trên trang Git này.
 3. Cài lần đầu thì nhấn Enter ở câu hỏi nâng cấp; nếu đã có bộ quà tặng cũ, nhập **CO** để nâng. Chờ cửa sổ báo **“Da cai va xac minh”**. Sau đó mở chat mới cùng agent vừa cài và gõ **/caidat**.
 
-Nếu tệp `.command` không mở được, mở Terminal tại thư mục đã giải nén và chạy `bash CAI-DAT-MAC.command`. Cách này không cần quyền thực thi của tệp. Bộ cài cần Node 20 trở lên; nó ưu tiên Node đi kèm 9B. Nếu không tìm thấy runtime hoặc Node, giữ nguyên thông báo lỗi để hỗ trợ tìm đúng bản 9B trên máy bạn. Tác vụ cài cũ đã báo `failed` không thể tiếp tục; hãy chạy tệp của bản 1.2.1 để tạo lượt cài mới.
+Nếu tệp `.command` không mở được, mở Terminal tại thư mục đã giải nén và chạy `bash CAI-DAT-MAC.command`. Cách này không cần quyền thực thi của tệp. Bộ cài cần Node 20 trở lên; nó ưu tiên Node đi kèm 9B. Nếu không tìm thấy runtime hoặc Node, giữ nguyên thông báo lỗi để hỗ trợ tìm đúng bản 9B trên máy bạn. Tác vụ cài cũ đã báo `failed` không thể tiếp tục; hãy chạy tệp của bản 1.2.2 để tạo lượt cài mới.
 
 ## Cài bằng chat 9B
 

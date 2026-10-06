@@ -1,4 +1,4 @@
-Hãy cài bộ quà tặng hệ thống content 1.2.1 trong ZIP tôi vừa đính kèm cho agent 9B đang dùng. Tôi cho phép tạo thư mục riêng, cài skill qua bộ cài native và tải công cụ ảnh/video của gói. Máy tôi không có bản Antigravity hay thư mục của giảng viên.
+Hãy cài bộ quà tặng hệ thống content 1.2.2 trong ZIP tôi vừa đính kèm cho agent 9B đang dùng. Tôi cho phép tạo thư mục riêng, cài skill qua bộ cài native và tải công cụ ảnh/video của gói. Máy tôi không có bản Antigravity hay thư mục của giảng viên.
 
 Tôi cho phép nâng phiên bản cũ của đúng package_id freeup-content-student-gift khi bộ cài xác minh receipt và quyền sở hữu/hash. Giữ toàn bộ hồ sơ doanh nghiệp, bài, ảnh, ý tưởng và dữ liệu riêng. Không ghi đè skill khác hoặc file đã sửa riêng chưa được quản lý; không dùng --upgrade để thử vượt lỗi policy.
 
