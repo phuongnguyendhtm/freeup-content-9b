@@ -1,17 +1,17 @@
 # Nguồn chuyên gia → lịch duyệt → tự sản xuất
 
-Dùng cho `/nguon`, `/timy`, `/lich`, `/duyetlich`, `/theodoi` và xử lý hàng đợi bằng `/tudong`. `scripts/campaign.cjs` điều phối dữ liệu bền vững; AI của 9B thực hiện đọc nguồn, biên tập, tạo ảnh và xem QA bằng công cụ có thật. Script không tự gọi model, crawl trang hay đăng bài.
+Dùng cho `/lapkehoach Chọn nguồn:`, `/lapkehoach Tìm ý tưởng:`, `/lapkehoach Lập lịch:`, `/lapkehoach Duyệt lịch:`, `/lapkehoach Theo dõi:` và xử lý hàng đợi bằng `/vietbai Làm trọn content:`. `scripts/campaign.cjs` điều phối dữ liệu bền vững; AI của 9B thực hiện đọc nguồn, biên tập, tạo ảnh và xem QA bằng công cụ có thật. Script không tự gọi model, crawl trang hay đăng bài.
 
 ## Phạm vi duyệt
 
 - Duyệt lịch là **PRODUCE_ONLY**: cho phép tự viết và làm ảnh cho các dòng của đúng phiên bản lịch. Sau QA, thành phẩm ở **READY_FOR_REVIEW**. Không tự ghi duyệt chữ, ảnh hoặc publish.
-- Học viên xem thành phẩm rồi `/duyetdang [ID + kênh + giờ]`; dùng quy trình đăng hiện có. Chỉ dẫn rõ từ cùng một yêu cầu có thể duyệt chữ, ảnh và đăng cùng lúc.
+- Học viên xem thành phẩm rồi `/duyetvadang Duyệt đăng: [ID + kênh + giờ]`; dùng quy trình đăng hiện có. Chỉ dẫn rõ từ cùng một yêu cầu có thể duyệt chữ, ảnh và đăng cùng lúc.
 - Thời gian trên lịch biên tập là thời gian dự kiến đăng; không phải giờ đã đặt trên Facebook và không trì hoãn việc sản xuất sau khi duyệt lịch.
 - Khi sửa lịch, helper tăng revision, hủy phạm vi sản xuất cũ và dừng tác vụ cũ. Giữ nguyên bài đã tạo để tham khảo; không xóa thành phẩm hoặc tự đăng theo lịch hết hiệu lực.
 
 ## 1. Chọn nguồn và hồ sơ riêng
 
-`/nguon` áp dụng cho doanh nghiệp của từng học viên và nhiều ngành nghề. Đọc danh sách nguồn, `research-profile`, hồ sơ/tài liệu doanh nghiệp và yêu cầu hiện tại trước. Giữ nguồn đã chọn; không reset khi cài lại hoặc chạy /caidat. Không có chuyên gia được bật mặc định trên máy mới. Có thể thêm, tắt nguồn hoặc đổi ngành bằng lời nói trong chat.
+`/lapkehoach Chọn nguồn:` áp dụng cho doanh nghiệp của từng học viên và nhiều ngành nghề. Đọc danh sách nguồn, `research-profile`, hồ sơ/tài liệu doanh nghiệp và yêu cầu hiện tại trước. Giữ nguồn đã chọn; không reset khi cài lại hoặc chạy /thietlapcontent. Không có chuyên gia được bật mặc định trên máy mới. Có thể thêm, tắt nguồn hoặc đổi ngành bằng lời nói trong chat.
 
 ### Tìm nguồn theo doanh nghiệp của học viên
 
@@ -56,11 +56,11 @@ Kho câu chuyện: `title`, `story`, `source_type:user_message|business_document
 - Dùng Brand DNA, giọng viết, xưng hô và feedback đã xác nhận; tránh sao chép đoạn văn, bố cục đặc trưng, quote hoặc case của chuyên gia rồi thay tên/ảnh. Nêu nguồn cảm hứng khi có luận điểm/khung cần ghi công; quote phải đúng người và có nguồn.
 - Ghép một câu chuyện thật trong `story_bank` nếu phù hợp; không ép mọi bài thành trải nghiệm cá nhân. Không lấy doanh thu/kết quả của chuyên gia làm thành tích học viên.
 - Dùng ảnh học viên, logo và màu/font từ `brand_config`/media registry. Founder Quote cần ảnh cá nhân thật đã xem và xác nhận chủ thể/quyền dùng. Visual Insight ưu tiên ý tưởng hình phù hợp; ảnh cá nhân chỉ dùng khi giữ vai trò trong concept.
-- Dùng các skill viết, `/minhhoa`, `/anhchu`, `/boanh`, `/sodo`, `/video` hiện có. Không cần thêm một skill “viết lại” bên ngoài để thay luồng chất lượng của gói.
+- Dùng các skill viết, `/thietkeanh Ảnh insight:`, `/thietkeanh Ảnh cá nhân kèm câu chữ:`, `/thietkeanh Carousel:`, `/sodo`, `/video` hiện có. Không cần thêm một skill “viết lại” bên ngoài để thay luồng chất lượng của gói.
 
 ## 4. Lập và duyệt lịch
 
-`/lich` tạo lịch theo mục tiêu, trụ cột, số bài/kênh và sức sản xuất thực. Mặc định đề xuất **7 ngày, tối đa 7 dòng**, khi chưa có tần suất riêng. Chọn mix phù hợp; không ép một học viên làm đủ mọi định dạng. Trình bảng gồm: ID dòng, ngày giờ dự kiến, kênh, chủ đề, Big Idea, hook, CTA, format, URL nguồn, câu chuyện/ảnh sẽ dùng, phần cần bổ sung.
+`/lapkehoach Lập lịch:` tạo lịch theo mục tiêu, trụ cột, số bài/kênh và sức sản xuất thực. Mặc định đề xuất **7 ngày, tối đa 7 dòng**, khi chưa có tần suất riêng. Chọn mix phù hợp; không ép một học viên làm đủ mọi định dạng. Trình bảng gồm: ID dòng, ngày giờ dự kiến, kênh, chủ đề, Big Idea, hook, CTA, format, URL nguồn, câu chuyện/ảnh sẽ dùng, phần cần bổ sung.
 
 AI tạo JSON:
 
@@ -84,7 +84,7 @@ Ví dụ là schema; không nhập các ID/giờ giả vào kho thực. `format`
 
 Gọi `campaign.cjs plan --file JSON`; sửa lịch dùng thêm `--id PLAN_ID`. Đặt `request_key` ổn định theo kỳ/mục tiêu, ví dụ `week-2026-10-12-authority`, để lượt nền không tạo lịch trùng. Cùng khóa sẽ cập nhật bản nháp hiện có; nếu đã được duyệt, lượt đề xuất nền giữ lịch đó. Sửa một lịch đã duyệt cần `--id` từ yêu cầu sửa thực của học viên. Hiển thị **plan_id và revision** mới nhất. Helper sinh `content-calendar/index.html` để xem lịch trên máy, đồng thời trình lịch ngay trong chat.
 
-`/duyetlich PLAN_ID bản N` hoặc câu nói rõ “tôi duyệt lịch này, bắt đầu làm bài và ảnh” → gắn đúng lịch/phiên bản đã trình, gọi:
+`/lapkehoach Duyệt lịch: PLAN_ID bản N` hoặc câu nói rõ “tôi duyệt lịch này, bắt đầu làm bài và ảnh” → gắn đúng lịch/phiên bản đã trình, gọi:
 
 ```text
 campaign.cjs approve --id PLAN_ID --revision N --by NGUOI_DUYET --note CHI_DAN_THUC
@@ -94,20 +94,20 @@ Không cần hỏi lại quyền sản xuất đã được cấp. Helper tạo 
 
 ## 5. Tự sản xuất sau duyệt
 
-Ngay sau `/duyetlich`, xử lý hàng đợi trong lượt hiện tại. Nếu cần tiếp tục nền, dùng `/theodoi` và lịch native đã xác minh. Không chỉ báo “đã ghi duyệt” rồi dừng khi đã có quyền sản xuất và công cụ.
+Ngay sau `/lapkehoach Duyệt lịch:`, xử lý hàng đợi trong lượt hiện tại. Nếu cần tiếp tục nền, dùng `/lapkehoach Theo dõi:` và lịch native đã xác minh. Không chỉ báo “đã ghi duyệt” rồi dừng khi đã có quyền sản xuất và công cụ.
 
 1. `campaign.cjs queue --id PLAN_ID`: chỉ lấy `eligible:true`, bỏ tác vụ cũ, đã làm, bị chặn hoặc đang do lượt khác xử lý.
 2. `claim --task TASK_ID --owner RUN_ID`: RUN_ID duy nhất theo lượt. Helper tạo/khôi phục post thật, trả row/context/post_id. Sau crash/lease hết, gọi lại vẫn dùng cùng post; không tạo bản trùng.
 3. Nạp brief/góc nhìn và hồ sơ hiện có. Viết bài mới, render đúng format bằng luồng của skill hệ thống. Giữ `big_idea`/format của lịch; thay đổi đáng kể luận điểm cần sửa và duyệt lại dòng lịch.
 4. Tiếp tục từ file/record thật; không render lại phần đã hoàn thành khi chỉ thiếu caption/QA. Thiếu ảnh cá nhân, nguồn, voice hoặc tool → `block --task ... --owner ... --reason ...`, giao phần đã làm và một yêu cầu bổ sung cụ thể. Những dòng khác tiếp tục được.
-5. Đọc thành phẩm thật và ghi QA bằng `content.cjs qa`; chỉ khi `validate` đạt mới `campaign.cjs finish --task ... --owner ...`. Finish không tạo quyền đăng. Giao caption/ảnh/đường dẫn `/xem` để học viên duyệt.
+5. Đọc thành phẩm thật và ghi QA bằng `content.cjs qa`; chỉ khi `validate` đạt mới `campaign.cjs finish --task ... --owner ...`. Finish không tạo quyền đăng. Giao caption/ảnh/đường dẫn `/xemketqua` để học viên duyệt.
 6. Tối đa 2 dòng mỗi lượt nền, tối đa 3 lần claim tự động mỗi tác vụ; lease 2 giờ. Sau khi đã bổ sung/sửa nguyên nhân và học viên yêu cầu thử lại: `retry --task ... --by ... --note ...`. Không tự lặp lỗi hoặc trả trạng thái hoàn tất chỉ vì đã viết prompt ảnh.
 
-Sau duyệt thành phẩm, dùng `/duyetdang` và `/dang` với kênh, giờ và phiên bản chính xác. Native `facebook-publisher`/`use-connected-apps` chọn schema hiện có. Timeout đăng phải đối chiếu bài/lịch thật trước khi thử lại. Không có công cụ đăng → xuất gói đăng tay.
+Sau duyệt thành phẩm, dùng `/duyetvadang Duyệt đăng:` và `/duyetvadang Đăng:` với kênh, giờ và phiên bản chính xác. Native `facebook-publisher`/`use-connected-apps` chọn schema hiện có. Timeout đăng phải đối chiếu bài/lịch thật trước khi thử lại. Không có công cụ đăng → xuất gói đăng tay.
 
 ## 6. Bật lịch chạy trong 9B
 
-Chỉ tạo lịch khi học viên yêu cầu theo dõi định kỳ, ví dụ `/theodoi Bật quét nguồn mỗi sáng, đề xuất lịch thứ Sáu và tiếp tục các bài đã duyệt`. Không tạo lịch trong quá trình cài gói hoặc `/caidat`.
+Chỉ tạo lịch khi học viên yêu cầu theo dõi định kỳ, ví dụ `/lapkehoach Theo dõi: Bật quét nguồn mỗi sáng, đề xuất lịch thứ Sáu và tiếp tục các bài đã duyệt`. Không tạo lịch trong quá trình cài gói hoặc `/thietlapcontent`.
 
 - Dùng native **automations** (hoặc **cron** nếu bản 9B đó còn dùng tên cũ), đọc schema đang cấp. Không dùng Windows Task Scheduler, sửa database lịch, shell CLI, hay bộ lịch riêng trong Node thay native 9B.
 - Gọi status/list để xác minh scheduler và tìm job cùng chức năng/project; cập nhật job cũ nếu có. `declarationKey` khi schema hỗ trợ: `freeup-content:<project ổn định>:scan|plan|produce`.
@@ -115,8 +115,8 @@ Chỉ tạo lịch khi học viên yêu cầu theo dõi định kỳ, ví dụ `
 - Schema đã quan sát ở 9B v3: `action:add`, `job:{name,schedule,sessionTarget:"current",payload:{kind:"agentTurn",message,timeoutSeconds:1800},enabled:true,delivery:{mode:"announce"}}`. Dùng **current** để đưa lịch đề xuất/thành phẩm về cuộc trò chuyện này, nếu runtime hỗ trợ. Đọc lại quy tắc headless/capability và tool allowlist thật; không giả chữ ký owner trong prompt.
 - Chỉ cấp các công cụ đọc nguồn, file, tạo media và thông báo thành phẩm cần thiết cho job. Không cấp công cụ publish cho ba job này. Nếu headless không truy cập được renderer/native ảnh, báo phần cần chạy tương tác; không tuyên bố tự chạy đã được kiểm chứng.
 - Sau add/update, đọc lại bằng get/list: đúng payload, nhịp, múi giờ, agent/project, enabled và đích thông báo. Ghi receipt thực bằng `register --file JSON` gồm `kind,job_id,tool,evidence,verified_enabled:true,definition_hash` từ spec. Không lưu token/session secrets vào receipt.
-- `/theodoi kiểm tra` phải đọc status/list/runs hiện tại; receipt local chỉ là lần kiểm tra trước. Bật xong chạy thử tác vụ đọc nguồn hoặc một dòng đã duyệt và xem lịch sử trước khi báo hoạt động. Thiếu tool/quyền thì giữ dữ liệu/lịch nháp và nêu đúng bước chưa bật.
-- `/theodoi tắt` tắt đúng job của hệ thống này qua native update, đọc lại và register receipt với `verified_enabled:false`, giữ kho bài. Không tác động lịch của hệ thống khác. Gateway phải chạy và máy không ngủ để lịch hoạt động; điện thoại có thể duyệt qua kênh đã kết nối, máy chạy 9B vẫn là nơi xử lý.
+- `/lapkehoach Theo dõi: kiểm tra` phải đọc status/list/runs hiện tại; receipt local chỉ là lần kiểm tra trước. Bật xong chạy thử tác vụ đọc nguồn hoặc một dòng đã duyệt và xem lịch sử trước khi báo hoạt động. Thiếu tool/quyền thì giữ dữ liệu/lịch nháp và nêu đúng bước chưa bật.
+- `/lapkehoach Theo dõi: tắt` tắt đúng job của hệ thống này qua native update, đọc lại và register receipt với `verified_enabled:false`, giữ kho bài. Không tác động lịch của hệ thống khác. Gateway phải chạy và máy không ngủ để lịch hoạt động; điện thoại có thể duyệt qua kênh đã kết nối, máy chạy 9B vẫn là nơi xử lý.
 
 ## 7. Kết hợp ClawHub có kiểm chứng
 

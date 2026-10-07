@@ -1,208 +1,52 @@
 {
   "package_id": "freeup-content-student-gift",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "skills": [
     {
       "name": "freeup-content-system",
       "source": "skills/freeup-content-system"
     },
     {
-      "name": "caidat",
-      "source": "skills/caidat",
-      "command_alias": "/caidat",
-      "intent": "setup"
+      "name": "thietlapcontent",
+      "source": "skills/thietlapcontent",
+      "command_alias": "/thietlapcontent",
+      "intent": "grouped-workflow"
     },
     {
-      "name": "timy",
-      "source": "skills/timy",
-      "command_alias": "/timy",
-      "intent": "research-ideas"
-    },
-    {
-      "name": "vietlai",
-      "source": "skills/vietlai",
-      "command_alias": "/vietlai",
-      "intent": "clone-post"
+      "name": "lapkehoach",
+      "source": "skills/lapkehoach",
+      "command_alias": "/lapkehoach",
+      "intent": "grouped-workflow"
     },
     {
       "name": "vietbai",
       "source": "skills/vietbai",
       "command_alias": "/vietbai",
-      "intent": "vietbai"
+      "intent": "grouped-workflow"
     },
     {
-      "name": "anh",
-      "source": "skills/anh",
-      "command_alias": "/anh",
-      "intent": "tao-anh"
+      "name": "thietkeanh",
+      "source": "skills/thietkeanh",
+      "command_alias": "/thietkeanh",
+      "intent": "grouped-workflow"
     },
     {
-      "name": "trang",
-      "source": "skills/trang",
-      "command_alias": "/trang",
-      "intent": "tao-slide"
+      "name": "taovideo",
+      "source": "skills/taovideo",
+      "command_alias": "/taovideo",
+      "intent": "grouped-workflow"
     },
     {
-      "name": "boanh",
-      "source": "skills/boanh",
-      "command_alias": "/boanh",
-      "intent": "tao-carousel"
+      "name": "duyetvadang",
+      "source": "skills/duyetvadang",
+      "command_alias": "/duyetvadang",
+      "intent": "grouped-workflow"
     },
     {
-      "name": "sodo",
-      "source": "skills/sodo",
-      "command_alias": "/sodo",
-      "intent": "tao-infographic"
-    },
-    {
-      "name": "binhluan",
-      "source": "skills/binhluan",
-      "command_alias": "/binhluan",
-      "intent": "tao-comment-xau-chuoi"
-    },
-    {
-      "name": "video",
-      "source": "skills/video",
-      "command_alias": "/video",
-      "intent": "tao-video"
-    },
-    {
-      "name": "canhphu",
-      "source": "skills/canhphu",
-      "command_alias": "/canhphu",
-      "intent": "tao-video-broll"
-    },
-    {
-      "name": "anhminh",
-      "source": "skills/anhminh",
-      "command_alias": "/anhminh",
-      "intent": "anh-ca-nhan"
-    },
-    {
-      "name": "anhkho",
-      "source": "skills/anhkho",
-      "command_alias": "/anhkho",
-      "intent": "anh-stock"
-    },
-    {
-      "name": "nhanvat",
-      "source": "skills/nhanvat",
-      "command_alias": "/nhanvat",
-      "intent": "anh-nguoi-noi-tieng"
-    },
-    {
-      "name": "luumau",
-      "source": "skills/luumau",
-      "command_alias": "/luumau",
-      "intent": "add-template"
-    },
-    {
-      "name": "mau",
-      "source": "skills/mau",
-      "command_alias": "/mau",
-      "intent": "show-templates"
-    },
-    {
-      "name": "xem",
-      "source": "skills/xem",
-      "command_alias": "/xem",
-      "intent": "xem-output"
-    },
-    {
-      "name": "duyetchu",
-      "source": "skills/duyetchu",
-      "command_alias": "/duyetchu",
-      "intent": "duyet-content"
-    },
-    {
-      "name": "duyetanh",
-      "source": "skills/duyetanh",
-      "command_alias": "/duyetanh",
-      "intent": "duyet-media"
-    },
-    {
-      "name": "duyetdang",
-      "source": "skills/duyetdang",
-      "command_alias": "/duyetdang",
-      "intent": "duyet-dang"
-    },
-    {
-      "name": "dang",
-      "source": "skills/dang",
-      "command_alias": "/dang",
-      "intent": "publish"
-    },
-    {
-      "name": "tudong",
-      "source": "skills/tudong",
-      "command_alias": "/tudong",
-      "intent": "auto-mode"
-    },
-    {
-      "name": "ketqua",
-      "source": "skills/ketqua",
-      "command_alias": "/ketqua",
-      "intent": "analyze-kpi"
-    },
-    {
-      "name": "ytuong",
-      "source": "skills/ytuong",
-      "command_alias": "/ytuong",
-      "intent": "danh-sach-y-tuong"
-    },
-    {
-      "name": "bang",
-      "source": "skills/bang",
-      "command_alias": "/bang",
-      "intent": "sheets-action"
-    },
-    {
-      "name": "minhhoa",
-      "source": "skills/minhhoa",
-      "command_alias": "/minhhoa",
-      "intent": "visual-insight"
-    },
-    {
-      "name": "anhchu",
-      "source": "skills/anhchu",
-      "command_alias": "/anhchu",
-      "intent": "founder-quote"
-    },
-    {
-      "name": "kenh",
-      "source": "skills/kenh",
-      "command_alias": "/kenh",
-      "intent": "lien-ket-kenh"
-    },
-    {
-      "name": "lich",
-      "source": "skills/lich",
-      "command_alias": "/lich",
-      "intent": "ke-hoach-content"
-    },
-    {
-      "name": "mothumuc",
-      "source": "skills/mothumuc",
-      "command_alias": "/mothumuc",
-      "intent": "open-output-folder"
-    },
-    {
-      "name": "nguon",
-      "source": "skills/nguon",
-      "command_alias": "/nguon",
-      "intent": "expert-sources"
-    },
-    {
-      "name": "duyetlich",
-      "source": "skills/duyetlich",
-      "command_alias": "/duyetlich",
-      "intent": "approve-editorial-plan"
-    },
-    {
-      "name": "theodoi",
-      "source": "skills/theodoi",
-      "command_alias": "/theodoi",
-      "intent": "monitor-content-workflow"
+      "name": "xemketqua",
+      "source": "skills/xemketqua",
+      "command_alias": "/xemketqua",
+      "intent": "grouped-workflow"
     }
   ]
 }

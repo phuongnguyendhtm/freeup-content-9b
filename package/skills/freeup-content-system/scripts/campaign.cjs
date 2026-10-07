@@ -30,7 +30,7 @@ function iso(value) { return typeof value === 'string' && /T.*(?:Z|[+-]\d{2}:\d{
 function arrayInput(value) { return Array.isArray(value) ? value : [value]; }
 const keyPattern = /^[a-zA-Z0-9_-]{1,100}$/;
 function initialize(project) {
-  need(fs.existsSync(path.join(project, 'project_config.json')), 'Chạy /caidat trước.');
+  need(fs.existsSync(path.join(project, 'project_config.json')), 'Chạy /thietlapcontent trước.');
   for (const name of files) {
     const file = path.join(project, 'database', name + '.json');
     if (!fs.existsSync(file)) lib.write(file, []);
@@ -117,7 +117,7 @@ function dashboard(project, c) {
   const cards = c.get('campaigns').map(plan => `<section><h2>${escape(plan.title)}</h2><p>${escape(plan.id)} · Bản ${plan.revision} · ${escape(labels[plan.status] || plan.status)}</p><table><thead><tr><th>Dự kiến đăng</th><th>Chủ đề</th><th>Dạng</th><th>Kênh</th><th>Tiến độ</th></tr></thead><tbody>${plan.rows.map(row => {const task = queue.find(t => t.plan_id === plan.id && t.revision === plan.revision && t.row_id === row.id); return `<tr><td>${escape(row.planned_at)}</td><td>${escape(row.topic)}<small>${escape(row.big_idea)}</small></td><td>${escape(row.format)}</td><td>${escape(row.channel)}</td><td>${escape(labels[task?.status || plan.status] || task?.status || plan.status)}${task?.blocker ? '<small>' + escape(task.blocker) + '</small>' : ''}</td></tr>`;}).join('')}</tbody></table></section>`).join('');
   const folder = path.join(project, 'content-calendar'); fs.mkdirSync(folder, {recursive: true});
   const preview = path.join(folder, 'index.html');
-  fs.writeFileSync(preview, `<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lịch content</title><style>body{font:16px/1.5 Arial,sans-serif;max-width:1200px;margin:32px auto;padding:0 20px;background:#f5f5f2;color:#202124}section{background:white;padding:24px;margin:24px 0;border-radius:12px;overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:12px;border-bottom:1px solid #ddd;text-align:left}small{display:block;color:#666}a{color:#1457ba}</style><body><h1>Lịch content</h1><p>Duyệt lịch cho phép tạo bài và ảnh. Thành phẩm chờ bạn duyệt trước khi đăng.</p><p><a href="../media_output/index.html">Mở kho thành phẩm</a></p>${cards || '<p>Chưa có lịch. Dùng /lich trong 9B.</p>'}</body></html>`);
+  fs.writeFileSync(preview, `<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lịch content</title><style>body{font:16px/1.5 Arial,sans-serif;max-width:1200px;margin:32px auto;padding:0 20px;background:#f5f5f2;color:#202124}section{background:white;padding:24px;margin:24px 0;border-radius:12px;overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:12px;border-bottom:1px solid #ddd;text-align:left}small{display:block;color:#666}a{color:#1457ba}</style><body><h1>Lịch content</h1><p>Duyệt lịch cho phép tạo bài và ảnh. Thành phẩm chờ bạn duyệt trước khi đăng.</p><p><a href="../media_output/index.html">Mở kho thành phẩm</a></p>${cards || '<p>Chưa có lịch. Dùng /lapkehoach Lập lịch: trong 9B.</p>'}</body></html>`);
   return {folder, preview};
 }
 function schedulerSpec(project, kind) {
@@ -157,7 +157,7 @@ function execute(project, command, o) {
     const limit = o.limit === undefined ? 5 : Number(o.limit);
     need(Number.isInteger(limit) && limit >= 1 && limit <= 20, 'Mỗi lượt lấy 1–20 nguồn; danh sách tổng không bị giới hạn ở số này.');
     const sources = c.get('expert_sources').filter(v => v.enabled);
-    if (!sources.length) return {sources:[], total_active:0, research_profile:c.get('research_preferences')[0] || {}, note:'Chưa có nguồn được chọn cho doanh nghiệp này. Dùng /nguon theo hồ sơ riêng; không tự nhập nguồn marketing.'};
+    if (!sources.length) return {sources:[], total_active:0, research_profile:c.get('research_preferences')[0] || {}, note:'Chưa có nguồn được chọn cho doanh nghiệp này. Dùng /lapkehoach Chọn nguồn: theo hồ sơ riêng; không tự nhập nguồn marketing.'};
     const state = c.get('source_scan_state')[0] || {offset:0};
     const start = Number.isSafeInteger(state.offset) && state.offset >= 0 ? state.offset % sources.length : 0;
     const count = Math.min(limit, sources.length);
@@ -236,7 +236,7 @@ function execute(project, command, o) {
     if (command === 'claim') {
       need(text(o.owner), 'Cần --owner duy nhất của lượt chạy.');
       need(task.status === 'QUEUED' || task.status === 'RUNNING' && Date.parse(task.lease_until) <= Date.now(), 'Tác vụ đã hoàn tất, bị chặn hoặc đang có lượt khác xử lý.');
-      need(task.attempts < 3, 'Đã thử 3 lần. Sửa nguyên nhân rồi yêu cầu /tudong thử lại.');
+      need(task.attempts < 3, 'Đã thử 3 lần. Sửa nguyên nhân rồi yêu cầu /vietbai Làm trọn content: thử lại.');
       const post = content(project, ['new', '--topic', row.topic, '--format', row.format, '--idea', row.idea_id, '--goal', row.goal, '--task', task.id]);
       task.post_id = post.id; task.status = 'RUNNING'; task.owner = o.owner; task.lease_until = new Date(Date.now() + 2 * 3600000).toISOString(); task.attempts++; task.updated_at = stamp(); c.put('production_queue', queue);
       return {task, row, post, context: {...selected, brand: c.get('brand_config'), preferences: c.get('preferences')}, instruction: 'Tạo bản gốc mới, dùng câu chuyện/ảnh thật được chọn; thiếu thì dùng nhận định hoặc ví dụ giả định. Chạy QA rồi finish. Chờ học viên duyệt thành phẩm trước khi đăng.', publication_authorized: false};
@@ -280,7 +280,7 @@ function main(args = process.argv.slice(2)) {
   const {options, positional} = lib.parse(args), command = positional.shift() || 'help';
   if (command === 'help') return {commands: 'research-profile [--file JSON] | sources [--preset marketing | --file JSON] | scan-next [--limit N] | collect [--file JSON] | stories [--file JSON] | plan [--file JSON --id PLAN] | approve --id PLAN --revision N --by USER --note INSTRUCTION | queue [--id PLAN] | claim --task TASK --owner RUN | finish --task TASK --owner RUN | block --task TASK --owner RUN --reason TEXT | retry --task TASK --by USER --note INSTRUCTION | spec [--kind scan|plan|produce | --file SETTINGS] | register --file RECEIPT | status', project_option: '--project PATH', scope: 'Plan approval permits production only, never publication.'};
   const project = lib.root(options.project);
-  need(fs.existsSync(path.join(project, 'database')), 'Chạy /caidat trước.');
+  need(fs.existsSync(path.join(project, 'database')), 'Chạy /thietlapcontent trước.');
   return withLock(project, () => execute(project, command, options));
 }
 if (require.main === module) { try { process.stdout.write(JSON.stringify(main(), null, 2) + '\n'); } catch (e) { process.stderr.write(e.message + '\n'); process.exitCode = 1; } }

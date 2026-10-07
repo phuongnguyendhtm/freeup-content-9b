@@ -12,7 +12,7 @@ const stamp=()=>new Date().toISOString();
 const print=x=>process.stdout.write((typeof x==='string'?x:JSON.stringify(x,null,2))+'\n');
 const fail=x=>{throw Error(x);};
 const formats=['story','founder-quote','visual-insight','image','carousel','infographic','comment-chain','reels','broll'];
-function requireProject(){if(!fs.existsSync(path.join(project,'project_config.json')))fail('Chưa có project. Chạy init hoặc /caidat.');}
+function requireProject(){if(!fs.existsSync(path.join(project,'project_config.json')))fail('Chưa có project. Chạy init hoặc /thietlapcontent.');}
 function localDate(){const tz=read(path.join(project,'project_config.json')).timezone;return new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());}
 function jobs(){const dir=path.join(project,'media_output');if(!fs.existsSync(dir))return [];return fs.readdirSync(dir,{withFileTypes:true}).filter(d=>d.isDirectory()&&/^\d{4}-\d{2}-\d{2}$/.test(d.name)).flatMap(d=>fs.readdirSync(path.join(dir,d.name),{withFileTypes:true}).filter(j=>j.isDirectory()).map(j=>path.join(dir,d.name,j.name,'record.json')).filter(f=>fs.existsSync(f)));}
 function locate(id){if(!/^post_[a-z0-9_]+$/.test(id||''))fail('ID bài không hợp lệ.');const found=jobs().filter(f=>read(f).id===id);if(found.length!==1)fail('Không tìm thấy duy nhất một bài '+id);return found[0];}

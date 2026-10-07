@@ -40,7 +40,7 @@ if [ "$upgrade" = 'CO' ]; then args+=(--upgrade); fi
 "$node_bin" "${args[@]}"
 result=$?
 if [ "$result" -eq 0 ]; then
-  printf '%s\n' 'Da cai va xac minh. Mo chat moi trong 9B, go /caidat.'
+  printf '%s\n' 'Da cai va xac minh. Mo chat moi trong 9B, go /thietlapcontent.'
 else
   printf '%s\n' 'CHUA CAI XONG. Giu thong bao va duong dan install.log o tren de nguoi ho tro kiem tra.'
 fi

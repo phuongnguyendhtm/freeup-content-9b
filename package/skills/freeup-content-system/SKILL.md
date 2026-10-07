@@ -1,10 +1,14 @@
 ---
 name: freeup-content-system
-description: "Hệ thống content tự chứa cho học viên: kiểm tra hồ sơ doanh nghiệp, nghiên cứu, viết bài, tạo ảnh và video, xem thành phẩm, duyệt và đăng qua 9bizclaw. Kích hoạt khi dùng \"bộ quà tặng content\", /caidat, /setup, /vietbai, /minhhoa, /anhchu, /boanh, /tudong, /xem, /mothumuc hoặc các lệnh trong bộ."
+description: "Điều phối hệ thống content cho doanh nghiệp học viên: đọc hồ sơ, chọn nguồn, lập lịch, tạo nhiều dạng bài/ảnh/video và chờ duyệt trước khi đăng. Dùng khi yêu cầu làm content tự động, làm content tuần/tháng, hoặc một trong 7 nhóm lệnh tiếng Việt."
 user-invocable: true
 ---
 
 # Hệ thống Content — Quà tặng FREEUP
+
+## Điều phối tự động và 7 nhóm chức năng
+Chỉ có 7 lệnh nhóm đăng ký native cùng skill điều phối này. Đọc references/commands.md để chọn nhóm và intent nội bộ. Câu bình thường và lệnh / dùng cùng dữ liệu/quy trình. Học viên không phải gọi mọi skill nối tiếp.
+Đọc references/automatic-workflow.md khi yêu cầu tự làm content nhiều định dạng hoặc làm theo lịch đã duyệt. Giữ lựa chọn format/nguồn/giọng/màu riêng của doanh nghiệp; chỉ đọc tài liệu nhánh cần dùng. Các tên ngắn cũ trong phần kỹ thuật dưới đây là intent/bí danh trong nội dung chat, không phải 33 skill phải cài.
 
 ## Runtime của học viên
 Đây là hệ thống tự chứa; không đọc thư mục Antigravity hoặc dữ liệu của người tạo.

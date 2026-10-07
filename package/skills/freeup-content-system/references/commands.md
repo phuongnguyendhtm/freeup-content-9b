@@ -1,10 +1,25 @@
-# Bộ lệnh điều khiển bằng chat
+# 7 lệnh nhóm và cách nhắn bình thường
 
-Sau khi chạy bộ cài của gói, hệ thống cài skill chính và 33 skill lệnh riêng qua cơ chế native của 9B. Tên lệnh là tiếng Việt ngắn, không dấu, không có gạch nối hoặc gạch dưới. Giữ `/vietbai` để rõ chức năng viết bài. Tải lại danh sách skill/lệnh theo hướng dẫn bộ cài nếu giao diện chưa hiển thị. Có thể dùng ngay `/skill freeup-content-system` rồi nêu yêu cầu, hoặc viết `Dùng skill freeup-content-system. Thực hiện /vietbai ...`. Câu tiếng Việt tương đương vẫn dùng cùng quy trình.
+Gói 1.4.0 có **8 skill**: một skill điều phối và 7 nhóm chức năng. Có 7 lệnh native trong bảng dưới. Mỗi nhóm có nhiều nhánh chuyên biệt; bộ hướng dẫn và các định dạng vẫn giữ đủ. Học viên có thể nhắn câu thường, không cần nhớ lệnh hoặc gọi từng skill.
 
-Mọi lệnh dùng hồ sơ thương hiệu và kho bài của **học viên hiện tại**. Không lấy thông tin, tài khoản, ảnh cá nhân, đường dẫn hay thành tích của người tặng làm dữ liệu của học viên. `{baseDir}` là thư mục skill do 9B cấp; thư mục làm việc lâu dài được bootstrap và lưu trong cấu hình riêng. Xem `SKILL.md` trước khi chạy công cụ.
+| Lệnh | Chức năng | Ví dụ câu thường |
+|---|---|---|
+| `/thietlapcontent` | Thiết lập content | Kiểm tra hồ sơ doanh nghiệp tôi đã cung cấp và thiết lập hệ thống content. Chỉ hỏi phần còn thiếu. |
+| `/lapkehoach` | Lập kế hoạch content | Tìm nguồn phù hợp doanh nghiệp tôi và đề xuất lịch content 7 ngày với nhiều định dạng. Chờ tôi duyệt lịch. |
+| `/vietbai` | Viết bài và sản xuất content | Làm trọn content cho lịch tôi đã duyệt: viết bài, tạo ảnh/video theo định dạng từng dòng và cho tôi xem để duyệt trước khi đăng. |
+| `/thietkeanh` | Thiết kế ảnh content | Thiết kế ảnh cho bài này. Tự chọn kiểu phù hợp, dùng màu nhận diện và ảnh của tôi đã lưu. |
+| `/taovideo` | Tạo video content | Tạo video ngắn có lời thoại từ bài này, dùng giọng và tài nguyên của tôi. |
+| `/duyetvadang` | Duyệt và đăng content | Tôi duyệt chữ và ảnh của bài [ID], bản [số bản]. Đăng lên [kênh] lúc [thời gian]. |
+| `/xemketqua` | Xem thành phẩm và kết quả | Cho tôi xem các bài vừa làm, ảnh thật, trạng thái duyệt và thư mục lưu. |
 
-## Lệnh và hành vi
+## Chọn nhánh
+Đọc command-map.json: commands là 7 nhóm, modes là chức năng nội bộ, legacy_commands là ánh xạ 33 tên cũ. Dựa vào yêu cầu, chọn intent cụ thể và thực hiện theo bảng chi tiết. Không lấy default_intent làm lý do bỏ qua lời nhắn rõ ràng: ví dụ /lapkehoach Tôi duyệt lịch là approve-editorial-plan, không phải tìm nguồn. /duyetvadang Cho tôi xem bản trước khi duyệt chưa cấp quyền duyệt/đăng.
+Nếu câu đã đủ rõ thì thực hiện; chỉ hỏi thiếu sót làm thay đổi nội dung hoặc quyền đăng. Yêu cầu sản xuất nhiều định dạng đọc automatic-workflow.md, không hỏi học viên lần lượt gọi 7 nhóm.
+
+## Máy cài mới và tên cũ
+Cài mới chỉ đăng ký 7 lệnh nhóm và điều phối. Tên cũ được nhận biết khi model đã nạp hệ thống; không hứa mọi tên cũ hiện trong menu lệnh native. Nâng máy từng cài bản cũ giữ các shortcut cũ và dữ liệu để tương thích; không tự xóa skill hoặc bản sửa riêng. Lệnh nhóm là giao diện được hướng dẫn từ bản này.
+
+## Các nhánh nội bộ và tên cũ
 
 | Lệnh trong chat | Câu nói tương đương | Kết quả cần tạo |
 |---|---|---|
@@ -57,9 +72,9 @@ Mọi lệnh dùng hồ sơ thương hiệu và kho bài của **học viên hi�
 
 ## Tương thích tên cũ trong chat
 
-Gói 1.2 đăng ký các tên ngắn ở bảng trên. Khi học viên dùng câu lệnh cũ trong nội dung chat, định tuyến về chức năng mới tương ứng; không yêu cầu họ bắt đầu lại. Các tên cũ không phải skill native được cài mới. Nếu đã nâng cấp từ 1.0 và còn skill cũ trong máy, chúng vẫn cần đọc skill hệ thống hiện tại và áp dụng quy trình mới.
+Gói 1.4 đăng ký 7 lệnh nhóm. Các tên ngắn ở bảng là bí danh trong nội dung chat; chúng không đăng ký native trên máy cài mới. Khi học viên dùng câu lệnh cũ trong nội dung chat, định tuyến về chức năng mới tương ứng; không yêu cầu họ bắt đầu lại. Các tên cũ không phải skill native được cài mới. Nếu đã nâng cấp từ 1.0 và còn skill cũ trong máy, chúng vẫn cần đọc skill hệ thống hiện tại và áp dụng quy trình mới.
 
-| Tên cũ nhận biết trong chat | Lệnh ngắn dùng từ nay |
+| Tên cũ nhận biết trong chat | Bí danh nội bộ vẫn nhận biết |
 |---|---|
 | `/setup` | `/caidat` |
 | `/research_ideas`, `/research-ideas` | `/timy` |
@@ -174,3 +189,4 @@ Học viên không cần gõ lệnh kỹ thuật. AI dùng `scripts/content.cjs`
 ```
 
 Đọc automation.md để gọi helper, xác minh lịch native và xử lý công việc đang làm.
+

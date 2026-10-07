@@ -1,104 +1,52 @@
-# FREEUP Content 9B — Quà tặng cho học viên
+# FREEUP Content 9B — bản học viên 1.4.0
 
-Tạo bài viết, ảnh minh họa, ảnh cá nhân kèm câu nói, carousel và video theo thương hiệu của bạn. Hệ thống lưu nội dung và thành phẩm trong kho riêng trên máy chạy 9B.
+Tự tạo bài viết, ảnh và video theo hồ sơ doanh nghiệp của bạn. Có **8 skill: 1 điều phối + 7 nhóm chức năng**, cùng các nhánh nội dung/thiết kế bên trong. Bạn dùng lệnh hoặc nhắn câu bình thường; AI phối hợp các nhóm, không cần bạn gọi từng bước.
 
-**Trước khi cài:** mở 9BizClaw v3 đã khởi tạo, kết thúc các lượt chat đang chạy và giữ ứng dụng mở. Máy cần Internet trong lần cài đầu.
+## Cài trên Windows hoặc Mac
+1. [Tải ZIP 1.4.0](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.4.0.zip). Nhấp phải ZIP, chọn **Extract All / Giải nén tất cả**, mở thư mục đã giải nén.
+2. Giữ 9BizClaw v3 đã khởi tạo đang mở, kết thúc các lượt chat đang chạy. Windows mở **CAI-DAT-9B.cmd**; Mac mở **CAI-DAT-MAC.command**. Không mở tệp cài trong cửa sổ xem ZIP. Nhấn Enter nếu cài mới, nhập CO nếu nâng bản đã cài. Chờ báo **Đã cài và xác minh**.
+3. Mở chat mới với đúng trợ lý vừa cài, gửi **/thietlapcontent** hoặc “Kiểm tra hồ sơ doanh nghiệp tôi đã cung cấp và thiết lập content. Chỉ hỏi phần còn thiếu.”
 
-## Cài trong 3 bước
+Máy học viên không cần bản Antigravity/thư mục giảng viên. Bộ cài tìm runtime trên máy; mỗi doanh nghiệp giữ hồ sơ/nguồn/ảnh/giọng/màu/tài khoản riêng. Internet cần cho tải gói và công cụ lần đầu.
 
-1. **[⬇️ TẢI BỘ CÀI CHO WINDOWS VÀ MAC](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.1.zip)**
-2. **Nhấp phải tệp ZIP → Extract All / Giải nén tất cả**, rồi mở **thư mục mới được giải nén**. Trên **Windows**, mở **`CAI-DAT-9B.cmd`**; trên **Mac**, mở **`CAI-DAT-MAC.command`** trong thư mục đó. **Không mở tệp cài ngay trong cửa sổ xem ZIP.** Chờ báo **“Đã cài và xác minh”**. Chọn trợ lý/agent nếu bộ cài hỏi.
-3. Mở **chat mới với đúng trợ lý vừa cài** trong 9B và gửi:
-
-   ```text
-   /caidat
-   ```
-
-Hệ thống dùng lại hồ sơ doanh nghiệp đã có; chỉ hỏi thông tin còn thiếu. Khi sẵn sàng, thử:
-
-```text
-/vietbai Viết một bài Facebook về [chủ đề] theo thương hiệu của tôi.
-```
-
-**[Hướng dẫn dùng cho học viên](./HUONG-DAN-HOC-VIEN.md)**
-
-## Nguồn chuyên gia và tự sản xuất sau duyệt lịch
-
-Bản 1.3.1 có ba lệnh điều khiển nguồn/lịch: **/nguon**, **/duyetlich**, **/theodoi**. Có **33 lệnh tiếng Việt và 1 skill điều phối**. Thông tin doanh nghiệp, nguồn, giọng văn, câu chuyện và ảnh của mỗi học viên được lưu riêng; không cần thư mục Antigravity của giảng viên.
-
-Luồng sử dụng: chọn nguồn → đọc bài/video truy cập được → chọn insight phù hợp khách hàng → đề xuất lịch → bạn duyệt lịch → tự tạo bài và ảnh theo skill hiện có → bạn duyệt thành phẩm → đăng qua kênh đã kết nối → xem số liệu để cải tiến.
-
-**Mỗi học viên chọn nguồn theo doanh nghiệp và ngành nghề của mình.** 9B đọc hồ sơ đã có, chỉ hỏi tiêu chí còn thiếu; học viên có thể gửi nhiều tên/link chuyên gia hoặc giao 9B tìm nguồn phù hợp ngành, thị trường, khách hàng và mục tiêu. Danh sách có thể gồm chuyên gia Việt Nam/quốc tế, thương hiệu, website, hiệp hội và bản tin. Không giới hạn ở ba chuyên gia hay ngành marketing; máy mới chưa bật sẵn nguồn nào. Hệ thống xây bài mới theo giọng văn, màu thương hiệu, ảnh và câu chuyện của học viên; có lưu URL và lý do chọn ý tưởng. Chưa có câu chuyện thật thì dùng nhận định hoặc ví dụ giả định được ghi rõ.
-
-**Duyệt lịch cho phép sản xuất bài và ảnh. Thành phẩm vẫn chờ bạn duyệt trước khi đăng.** Sửa lịch sẽ tạo bản mới; chạy lại tiếp tục bài đang làm và giữ bài cũ. Không có quyền đọc một nguồn thì báo nguồn đó chưa đọc được và tiếp tục các nguồn khác.
-
-Gửi lần lượt trong 9B sau khi cài:
-
-```text
-/nguon Đọc hồ sơ doanh nghiệp tôi đã cung cấp. Tìm chuyên gia và nguồn ý tưởng phù hợp ngành, khách hàng, thị trường và mục tiêu của tôi. Cho tôi xem danh sách đề xuất; chỉ hỏi thông tin còn thiếu.
-```
-
-```text
-/timy Tìm 10 ý tưởng từ các nguồn đã chọn, ưu tiên phù hợp khách hàng của tôi.
-```
-
-```text
-/lich Đề xuất lịch 7 ngày, gồm bài viết, Visual Insight và Founder Quote khi có ảnh phù hợp.
-Tạo lịch có nguồn, Big Idea và giờ dự kiến. Dùng giọng văn, câu chuyện và màu thương hiệu đã lưu.
-```
-
-Sau khi xem lịch, thay ID/bản bằng thông tin 9B vừa trả:
-
-```text
-/duyetlich [ID lịch] bản [số bản]. Tự làm bài và ảnh, cho tôi xem thành phẩm trước khi đăng.
-```
-
-Muốn duy trì định kỳ:
-
-```text
-/theodoi Bật quét nguồn mỗi ngày lúc 7h, gửi lịch tuần mới vào thứ Sáu lúc 16h.
-Tiếp tục các bài của lịch tôi đã duyệt. Thành phẩm chờ tôi duyệt rồi mới đăng.
-Kiểm tra lịch chạy thật và báo rõ phần nào chưa kết nối được.
-```
-
-Đổi giờ, tắt theo dõi hoặc thay màu/ảnh bằng lời nói trong chat. /theodoi dùng lịch native của 9B; máy chạy 9B cần bật, Gateway hoạt động và không ngủ. Đường dẫn lưu lịch: freeup-content-data/content-calendar/index.html; bài/ảnh vẫn trong media_output/ngày/ID-bài/. Điện thoại xem/duyệt qua kênh chat đã kết nối và gửi tệp được xác minh.
-
-Các script điều phối đã được kiểm bằng dữ liệu mô phỏng: duyệt đúng bản, chống trùng, khôi phục công việc, chặn thiếu tài nguyên và không tự đăng. Quét nguồn thực, lịch nền/headless, ảnh AI và tài khoản đăng cần kiểm trên máy học viên; cài gói không đồng nghĩa các kết nối đó đã hoạt động.
-
-## Các lệnh thường dùng
-
+## 7 nhóm lệnh
 | Lệnh | Bạn muốn làm gì? |
 |---|---|
-| `/vietbai` | Viết bài theo thương hiệu |
-| `/minhhoa` | Làm ảnh minh họa một insight |
-| `/anhchu` | Làm ảnh cá nhân kèm câu quan điểm |
-| `/boanh` | Tạo carousel |
-| `/tudong` | Làm chuỗi bước tạo content theo yêu cầu |
-| `/xem` | Xem thành phẩm |
-| `/mothumuc` | Mở thư mục chứa bài và ảnh/video |
+| `/thietlapcontent` | Đọc hồ sơ doanh nghiệp đã có, bổ sung phần thiếu, quản lý thương hiệu, ảnh và kết nối kênh. |
+| `/lapkehoach` | Chọn nhiều nguồn chuyên gia theo ngành, tìm ý tưởng, lập và duyệt lịch sản xuất, thiết lập theo dõi định kỳ. |
+| `/vietbai` | Viết bài, viết từ ý tưởng/bài mẫu, làm chuỗi bình luận hoặc điều phối tạo đầy đủ chữ và media khi được yêu cầu. |
+| `/thietkeanh` | Tạo ảnh đơn, ảnh minh họa insight, ảnh cá nhân kèm câu quan điểm, carousel, infographic và quản lý mẫu thiết kế. |
+| `/taovideo` | Tạo video có lời thoại, Reels hoặc video cảnh minh họa không thoại, kèm kịch bản, phụ đề và tệp video khi có công cụ. |
+| `/duyetvadang` | Ghi duyệt đúng bản chữ/ảnh/video, phạm vi kênh và thời gian; đăng hoặc hẹn đăng bằng kết nối thật. |
+| `/xemketqua` | Xem bài/ảnh/video, mở thư mục, đọc số liệu hiệu quả và đồng bộ bảng khi được yêu cầu. |
 
-Bạn cung cấp ảnh và kết nối tài khoản của mình khi cần. Hệ thống giữ hồ sơ và thành phẩm khi cài lại hoặc nâng đúng gói đã được xác minh. Máy học viên không cần Antigravity hoặc thư mục của giảng viên.
+Một nhóm có nhiều nhánh. Ví dụ /thietkeanh hiểu “ảnh minh họa insight”, “ảnh tôi kèm câu quan điểm”, “carousel” hoặc “infographic”. Các kiểu ảnh không bị gộp thành một kiểu; mỗi nhánh vẫn có hướng dẫn và tiêu chí kiểm riêng. /vietbai được giữ nguyên.
 
-<details>
-<summary><strong>Cài lần đầu, nâng bản cũ hoặc chưa cài được?</strong></summary>
+## Quy trình làm việc tự động
+**Thiết lập → tìm ý tưởng → đề xuất lịch → bạn duyệt lịch → AI tạo chữ và ảnh/video → bạn duyệt thành phẩm → đăng → xem kết quả.**
 
-- Khi bộ cài hỏi nâng cấp: **cài lần đầu → nhấn Enter**; **nâng bản cũ → nhập CO**. Bộ cài chỉ nâng đúng gói đã được xác minh.
-- Giữ 9B mở và ngừng gửi chat trong lúc cài. Nếu chưa báo hoàn tất, chờ hoặc đọc thông báo trong cửa sổ cài.
-- Nếu chưa tìm thấy 9B, mở ứng dụng và hoàn tất khởi tạo rồi chạy lại tệp cài. Trên Mac, nếu `.command` không mở, dùng Terminal tại thư mục đã giải nén để chạy `bash CAI-DAT-MAC.command`.
-- Nếu tác vụ cài bằng chat trước đây đã báo `failed`, tác vụ đó không tự chạy tiếp. Tải bản 1.3.1 và mở tệp cài đúng hệ điều hành để tạo lượt cài mới.
-- Nếu gặp lỗi, giữ thông báo/log để xử lý; chỉ dùng `/caidat` sau khi bộ cài báo thành công.
+Để bắt đầu, nhắn:
 
-[Cài bằng chat, PowerShell và xử lý lỗi chi tiết](./docs/CAI-DAT-NANG-CAO.md)
+> Làm content 7 ngày cho doanh nghiệp tôi. Dùng hồ sơ đã có, chọn nhiều nguồn chuyên gia phù hợp ngành và đề xuất định dạng cho từng bài. Cho tôi duyệt lịch trước; sau khi tôi duyệt, tự làm chữ và ảnh/video rồi chờ tôi duyệt thành phẩm trước khi đăng.
 
-</details>
+Hoặc dùng /lapkehoach với cùng yêu cầu. Khi lịch có ID/bản, nhắn “Tôi duyệt lịch [ID] bản [số bản]. Tự làm bài và ảnh/video, cho tôi xem để duyệt trước khi đăng.” 9B lưu hàng đợi và thực hiện sản xuất đã được phép; không cần gọi từng skill.
 
-<details>
-<summary><strong>Google Sheet và mức hỗ trợ của bản tải này</strong></summary>
+Duyệt lịch chỉ cho phép sản xuất. Duyệt thành phẩm/phạm vi kênh và giờ mới cho phép đăng. Khi bạn đã duyệt đúng bản và yêu cầu đủ rõ, hệ thống tiếp tục trong quyền đó; không hỏi lại cùng việc.
 
-Bản đang tải là **1.3.1**, có **33 lệnh và 1 skill điều phối**. Quy trình content lưu trên máy; cài đặt cơ bản không yêu cầu Google Sheet hoặc Apps Script.
+## Chạy định kỳ và nhiều nguồn
+Bạn đưa nhiều tên/link chuyên gia hoặc giao 9B tìm và chọn theo ngành, khách hàng, thị trường và mục tiêu doanh nghiệp. Nguồn có bật/tắt và được quét luân phiên. Gói cài mới chưa chọn sẵn ngành hay chuyên gia. Nghiên cứu để xây góc nhìn riêng có nguồn; câu chuyện, ảnh và thành tích phải thuộc doanh nghiệp bạn hoặc được ghi đúng là ví dụ.
 
-Theo dõi nguồn, duyệt lịch và hàng đợi sản xuất đã có trong gói 1.3.1. Quét nguồn và lịch nền dùng công cụ thật của 9B, cần kiểm trên máy học viên. Kết nối Google Sheet trực tiếp và tự xử lý ô duyệt trên Sheet vẫn chưa có trong bản tải này. Ảnh AI, voice và đăng bài dùng kết nối riêng của học viên.
+Nhắn “Mỗi ngày lúc 7h tìm ý tưởng; thứ Sáu lúc 16h đề xuất lịch tuần sau. Tiếp tục các bài của lịch đã duyệt, chờ tôi duyệt thành phẩm rồi đăng.” /lapkehoach với cùng câu cũng được. 9B phải tạo lịch native thật và kiểm job/run history; máy/Gateway cần hoạt động, không ngủ. Thiếu kết nối thì báo phần chưa bật.
 
-[Chi tiết công cụ, kiểm chứng và giới hạn](./docs/CAI-DAT-NANG-CAO.md#kiểm-chứng-và-nội-dung-gói)
+## Xem thành phẩm, sửa màu hoặc kiểu ảnh
+Bài/ảnh/video lưu vào **freeup-content-data/media_output/ngày/ID-bài/** trên máy chạy 9B. Nhắn “Cho tôi xem các bài vừa làm” hoặc /xemketqua. Nhắn “Mở thư mục bài [ID]” hoặc /xemketqua Mở thư mục bài [ID]. Điện thoại xem qua kênh chat đã kết nối hỗ trợ gửi tệp.
 
-</details>
+Nhắn “Dùng màu xanh #123456 và màu vàng #FFD700 cho thương hiệu tôi” hoặc “Ưu tiên carousel khi hướng dẫn nhiều bước”. Hệ thống lưu cấu hình riêng, không sửa skill chung. Sửa một bài chỉ ảnh hưởng bài đó; yêu cầu “từ nay” mới lưu ưu tiên lâu dài.
+
+## Cài qua chat và nâng bản
+[Đọc câu lệnh cài vào chat](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/CAI-DAT-9B.txt) · [Hướng dẫn cài nâng cao](docs/CAI-DAT-NANG-CAO.md). Nếu chat bị chặn công cụ quản trị, cài từ tệp ngoài chat là luồng thủ công của gói, vẫn tuân theo native policy. Gộp skill chưa giải quyết chính sách từ chối cài.
+
+Cài mới có 8 skill. Nâng máy từng cài bản cũ giữ dữ liệu và shortcut cũ để tương thích, nên máy đó có thể còn nhiều tên cũ trong danh sách; gói mới không cài thêm 33 shortcut. Không tự xóa skill hoặc sửa riêng của học viên. Dùng 7 lệnh nhóm từ bản này hoặc câu bình thường.
+
+## Kiểm chứng
+Gói và các quy trình lưu/duyệt/hàng đợi được kiểm bằng fixture độc lập. Chưa xác nhận cài bản này trực tiếp trên máy học viên hoặc Mac. Nguồn thực, lịch nền, tạo ảnh/video AI và tài khoản đăng cần công cụ/kết nối thật trên máy; cài skill chưa tự bật các kết nối đó. Chỉ báo cài xong khi native inventory đủ 8 skill của gói eligible, kho và công cụ media đã được xác minh.

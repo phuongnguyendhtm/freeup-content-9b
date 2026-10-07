@@ -1,20 +1,276 @@
 {
-  "version": "1.3.1",
+  "version": "1.4.0",
   "commands": [
     {
-      "skill": "caidat",
+      "skill": "thietlapcontent",
+      "alias": "/thietlapcontent",
+      "description": "Đọc hồ sơ doanh nghiệp đã có, bổ sung phần thiếu, quản lý thương hiệu, ảnh và kết nối kênh.",
+      "default_intent": "setup",
+      "modes": [
+        {
+          "skill": "thietlapcontent",
+          "alias": "/caidat",
+          "intent": "setup",
+          "description": "Kiểm tra hồ sơ doanh nghiệp đã có và chỉ hỏi phần còn thiếu"
+        },
+        {
+          "skill": "thietlapcontent",
+          "alias": "/kenh",
+          "intent": "lien-ket-kenh",
+          "description": "Hướng dẫn kết nối và kiểm tra kênh đăng của học viên"
+        },
+        {
+          "skill": "thietlapcontent",
+          "alias": "/anhminh",
+          "intent": "anh-ca-nhan",
+          "description": "Nhập và chọn ảnh cá nhân học viên cho content"
+        },
+        {
+          "skill": "thietlapcontent",
+          "alias": "/anhkho",
+          "intent": "anh-stock",
+          "description": "Tìm và ghi nguồn ảnh minh họa được phép dùng"
+        },
+        {
+          "skill": "thietlapcontent",
+          "alias": "/nhanvat",
+          "intent": "anh-nguoi-noi-tieng",
+          "description": "Tìm ảnh tham khảo nhân vật với nguồn và quyền dùng"
+        }
+      ]
+    },
+    {
+      "skill": "lapkehoach",
+      "alias": "/lapkehoach",
+      "description": "Chọn nhiều nguồn chuyên gia theo ngành, tìm ý tưởng, lập và duyệt lịch sản xuất, thiết lập theo dõi định kỳ.",
+      "default_intent": "expert-sources",
+      "modes": [
+        {
+          "skill": "lapkehoach",
+          "alias": "/nguon",
+          "intent": "expert-sources",
+          "description": "Chọn hoặc tìm nhiều chuyên gia và nguồn ý tưởng theo ngành, khách hàng và mục tiêu của học viên"
+        },
+        {
+          "skill": "lapkehoach",
+          "alias": "/timy",
+          "intent": "research-ideas",
+          "description": "Nghiên cứu và lưu ý tưởng content có nguồn"
+        },
+        {
+          "skill": "lapkehoach",
+          "alias": "/ytuong",
+          "intent": "danh-sach-y-tuong",
+          "description": "Xem ngân hàng ý tưởng và chọn ý tưởng tiếp tục"
+        },
+        {
+          "skill": "lapkehoach",
+          "alias": "/lich",
+          "intent": "ke-hoach-content",
+          "description": "Lập kế hoạch content theo mục tiêu, trụ cột và nguồn lực"
+        },
+        {
+          "skill": "lapkehoach",
+          "alias": "/duyetlich",
+          "intent": "approve-editorial-plan",
+          "description": "Duyệt đúng phiên bản lịch và bắt đầu tự tạo bài, ảnh; chờ duyệt thành phẩm trước đăng"
+        },
+        {
+          "skill": "lapkehoach",
+          "alias": "/theodoi",
+          "intent": "monitor-content-workflow",
+          "description": "Bật hoặc kiểm tra lịch quét nguồn, đề xuất content và tiếp tục sản xuất trong 9B"
+        }
+      ]
+    },
+    {
+      "skill": "vietbai",
+      "alias": "/vietbai",
+      "description": "Viết bài, viết từ ý tưởng/bài mẫu, làm chuỗi bình luận hoặc điều phối tạo đầy đủ chữ và media khi được yêu cầu.",
+      "default_intent": "vietbai",
+      "modes": [
+        {
+          "skill": "vietbai",
+          "alias": "/vietbai",
+          "intent": "vietbai",
+          "description": "Viết bài content, caption và nội dung gốc để chuyển định dạng"
+        },
+        {
+          "skill": "vietbai",
+          "alias": "/vietlai",
+          "intent": "clone-post",
+          "description": "Phân tích bài mẫu và viết bản gốc theo thương hiệu học viên"
+        },
+        {
+          "skill": "vietbai",
+          "alias": "/binhluan",
+          "intent": "tao-comment-xau-chuoi",
+          "description": "Viết bài ngắn và chuỗi bình luận theo thứ tự"
+        },
+        {
+          "skill": "vietbai",
+          "alias": "/tudong",
+          "intent": "auto-mode",
+          "description": "Chạy toàn quy trình content từ ý tưởng tới sản xuất và bàn giao"
+        }
+      ]
+    },
+    {
+      "skill": "thietkeanh",
+      "alias": "/thietkeanh",
+      "description": "Tạo ảnh đơn, ảnh minh họa insight, ảnh cá nhân kèm câu quan điểm, carousel, infographic và quản lý mẫu thiết kế.",
+      "default_intent": "tao-anh",
+      "modes": [
+        {
+          "skill": "thietkeanh",
+          "alias": "/anh",
+          "intent": "tao-anh",
+          "description": "Tạo ảnh đơn hoặc ảnh minh họa ý tưởng hoặc ảnh cá nhân kèm câu chữ"
+        },
+        {
+          "skill": "thietkeanh",
+          "alias": "/minhhoa",
+          "intent": "visual-insight",
+          "description": "Tạo ảnh minh họa một ý tưởng, ba concept và headline ngắn"
+        },
+        {
+          "skill": "thietkeanh",
+          "alias": "/anhchu",
+          "intent": "founder-quote",
+          "description": "Tạo ảnh cá nhân kèm câu quan điểm ngắn theo bố cục P01–P06"
+        },
+        {
+          "skill": "thietkeanh",
+          "alias": "/trang",
+          "intent": "tao-slide",
+          "description": "Tạo bộ trang nội dung, tương đương /boanh"
+        },
+        {
+          "skill": "thietkeanh",
+          "alias": "/boanh",
+          "intent": "tao-carousel",
+          "description": "Tạo bộ ảnh nhiều trang từ bài hoặc chủ đề mới"
+        },
+        {
+          "skill": "thietkeanh",
+          "alias": "/sodo",
+          "intent": "tao-infographic",
+          "description": "Tạo infographic hoặc sơ đồ từ dữ liệu có nguồn"
+        },
+        {
+          "skill": "thietkeanh",
+          "alias": "/luumau",
+          "intent": "add-template",
+          "description": "Phân tích và lưu mẫu bố cục riêng của học viên"
+        },
+        {
+          "skill": "thietkeanh",
+          "alias": "/mau",
+          "intent": "show-templates",
+          "description": "Xem mẫu thiết kế sẵn có và mẫu riêng"
+        }
+      ]
+    },
+    {
+      "skill": "taovideo",
+      "alias": "/taovideo",
+      "description": "Tạo video có lời thoại, Reels hoặc video cảnh minh họa không thoại, kèm kịch bản, phụ đề và tệp video khi có công cụ.",
+      "default_intent": "tao-video",
+      "modes": [
+        {
+          "skill": "taovideo",
+          "alias": "/video",
+          "intent": "tao-video",
+          "description": "Tạo video có lời thoại, kịch bản, timeline và phụ đề"
+        },
+        {
+          "skill": "taovideo",
+          "alias": "/canhphu",
+          "intent": "tao-video-broll",
+          "description": "Tạo video cảnh phụ không thoại từ clip hoặc ảnh học viên"
+        }
+      ]
+    },
+    {
+      "skill": "duyetvadang",
+      "alias": "/duyetvadang",
+      "description": "Ghi duyệt đúng bản chữ/ảnh/video, phạm vi kênh và thời gian; đăng hoặc hẹn đăng bằng kết nối thật.",
+      "default_intent": "duyet-content",
+      "modes": [
+        {
+          "skill": "duyetvadang",
+          "alias": "/duyetchu",
+          "intent": "duyet-content",
+          "description": "Ghi duyệt phần chữ đúng phiên bản theo chỉ dẫn học viên"
+        },
+        {
+          "skill": "duyetvadang",
+          "alias": "/duyetanh",
+          "intent": "duyet-media",
+          "description": "Ghi duyệt ảnh hoặc video thật đúng phiên bản"
+        },
+        {
+          "skill": "duyetvadang",
+          "alias": "/duyetdang",
+          "intent": "duyet-dang",
+          "description": "Ghi duyệt đăng đúng bài, phiên bản, kênh và thời gian"
+        },
+        {
+          "skill": "duyetvadang",
+          "alias": "/dang",
+          "intent": "publish",
+          "description": "Đăng bài đã được yêu cầu và duyệt qua công cụ thực đã kết nối"
+        }
+      ]
+    },
+    {
+      "skill": "xemketqua",
+      "alias": "/xemketqua",
+      "description": "Xem bài/ảnh/video, mở thư mục, đọc số liệu hiệu quả và đồng bộ bảng khi được yêu cầu.",
+      "default_intent": "xem-output",
+      "modes": [
+        {
+          "skill": "xemketqua",
+          "alias": "/xem",
+          "intent": "xem-output",
+          "description": "Xem bài, caption, ảnh hoặc video thật đã tạo"
+        },
+        {
+          "skill": "xemketqua",
+          "alias": "/mothumuc",
+          "intent": "open-output-folder",
+          "description": "Mở thư mục chứa thành phẩm trên máy đang chạy 9B"
+        },
+        {
+          "skill": "xemketqua",
+          "alias": "/ketqua",
+          "intent": "analyze-kpi",
+          "description": "Phân tích số liệu content thật và lưu bài học"
+        },
+        {
+          "skill": "xemketqua",
+          "alias": "/bang",
+          "intent": "sheets-action",
+          "description": "Đồng bộ kho content với Google Sheets khi học viên đã kết nối"
+        }
+      ]
+    }
+  ],
+  "legacy_commands": [
+    {
+      "skill": "thietlapcontent",
       "alias": "/caidat",
       "intent": "setup",
       "description": "Kiểm tra hồ sơ doanh nghiệp đã có và chỉ hỏi phần còn thiếu"
     },
     {
-      "skill": "timy",
+      "skill": "lapkehoach",
       "alias": "/timy",
       "intent": "research-ideas",
       "description": "Nghiên cứu và lưu ý tưởng content có nguồn"
     },
     {
-      "skill": "vietlai",
+      "skill": "vietbai",
       "alias": "/vietlai",
       "intent": "clone-post",
       "description": "Phân tích bài mẫu và viết bản gốc theo thương hiệu học viên"
@@ -26,175 +282,175 @@
       "description": "Viết bài content, caption và nội dung gốc để chuyển định dạng"
     },
     {
-      "skill": "anh",
+      "skill": "thietkeanh",
       "alias": "/anh",
       "intent": "tao-anh",
       "description": "Tạo ảnh đơn hoặc ảnh minh họa ý tưởng hoặc ảnh cá nhân kèm câu chữ"
     },
     {
-      "skill": "trang",
+      "skill": "thietkeanh",
       "alias": "/trang",
       "intent": "tao-slide",
       "description": "Tạo bộ trang nội dung, tương đương /boanh"
     },
     {
-      "skill": "boanh",
+      "skill": "thietkeanh",
       "alias": "/boanh",
       "intent": "tao-carousel",
       "description": "Tạo bộ ảnh nhiều trang từ bài hoặc chủ đề mới"
     },
     {
-      "skill": "sodo",
+      "skill": "thietkeanh",
       "alias": "/sodo",
       "intent": "tao-infographic",
       "description": "Tạo infographic hoặc sơ đồ từ dữ liệu có nguồn"
     },
     {
-      "skill": "binhluan",
+      "skill": "vietbai",
       "alias": "/binhluan",
       "intent": "tao-comment-xau-chuoi",
       "description": "Viết bài ngắn và chuỗi bình luận theo thứ tự"
     },
     {
-      "skill": "video",
+      "skill": "taovideo",
       "alias": "/video",
       "intent": "tao-video",
       "description": "Tạo video có lời thoại, kịch bản, timeline và phụ đề"
     },
     {
-      "skill": "canhphu",
+      "skill": "taovideo",
       "alias": "/canhphu",
       "intent": "tao-video-broll",
       "description": "Tạo video cảnh phụ không thoại từ clip hoặc ảnh học viên"
     },
     {
-      "skill": "anhminh",
+      "skill": "thietlapcontent",
       "alias": "/anhminh",
       "intent": "anh-ca-nhan",
       "description": "Nhập và chọn ảnh cá nhân học viên cho content"
     },
     {
-      "skill": "anhkho",
+      "skill": "thietlapcontent",
       "alias": "/anhkho",
       "intent": "anh-stock",
       "description": "Tìm và ghi nguồn ảnh minh họa được phép dùng"
     },
     {
-      "skill": "nhanvat",
+      "skill": "thietlapcontent",
       "alias": "/nhanvat",
       "intent": "anh-nguoi-noi-tieng",
       "description": "Tìm ảnh tham khảo nhân vật với nguồn và quyền dùng"
     },
     {
-      "skill": "luumau",
+      "skill": "thietkeanh",
       "alias": "/luumau",
       "intent": "add-template",
       "description": "Phân tích và lưu mẫu bố cục riêng của học viên"
     },
     {
-      "skill": "mau",
+      "skill": "thietkeanh",
       "alias": "/mau",
       "intent": "show-templates",
       "description": "Xem mẫu thiết kế sẵn có và mẫu riêng"
     },
     {
-      "skill": "xem",
+      "skill": "xemketqua",
       "alias": "/xem",
       "intent": "xem-output",
       "description": "Xem bài, caption, ảnh hoặc video thật đã tạo"
     },
     {
-      "skill": "duyetchu",
+      "skill": "duyetvadang",
       "alias": "/duyetchu",
       "intent": "duyet-content",
       "description": "Ghi duyệt phần chữ đúng phiên bản theo chỉ dẫn học viên"
     },
     {
-      "skill": "duyetanh",
+      "skill": "duyetvadang",
       "alias": "/duyetanh",
       "intent": "duyet-media",
       "description": "Ghi duyệt ảnh hoặc video thật đúng phiên bản"
     },
     {
-      "skill": "duyetdang",
+      "skill": "duyetvadang",
       "alias": "/duyetdang",
       "intent": "duyet-dang",
       "description": "Ghi duyệt đăng đúng bài, phiên bản, kênh và thời gian"
     },
     {
-      "skill": "dang",
+      "skill": "duyetvadang",
       "alias": "/dang",
       "intent": "publish",
       "description": "Đăng bài đã được yêu cầu và duyệt qua công cụ thực đã kết nối"
     },
     {
-      "skill": "tudong",
+      "skill": "vietbai",
       "alias": "/tudong",
       "intent": "auto-mode",
       "description": "Chạy toàn quy trình content từ ý tưởng tới sản xuất và bàn giao"
     },
     {
-      "skill": "ketqua",
+      "skill": "xemketqua",
       "alias": "/ketqua",
       "intent": "analyze-kpi",
       "description": "Phân tích số liệu content thật và lưu bài học"
     },
     {
-      "skill": "ytuong",
+      "skill": "lapkehoach",
       "alias": "/ytuong",
       "intent": "danh-sach-y-tuong",
       "description": "Xem ngân hàng ý tưởng và chọn ý tưởng tiếp tục"
     },
     {
-      "skill": "bang",
+      "skill": "xemketqua",
       "alias": "/bang",
       "intent": "sheets-action",
       "description": "Đồng bộ kho content với Google Sheets khi học viên đã kết nối"
     },
     {
-      "skill": "minhhoa",
+      "skill": "thietkeanh",
       "alias": "/minhhoa",
       "intent": "visual-insight",
       "description": "Tạo ảnh minh họa một ý tưởng, ba concept và headline ngắn"
     },
     {
-      "skill": "anhchu",
+      "skill": "thietkeanh",
       "alias": "/anhchu",
       "intent": "founder-quote",
       "description": "Tạo ảnh cá nhân kèm câu quan điểm ngắn theo bố cục P01–P06"
     },
     {
-      "skill": "kenh",
+      "skill": "thietlapcontent",
       "alias": "/kenh",
       "intent": "lien-ket-kenh",
       "description": "Hướng dẫn kết nối và kiểm tra kênh đăng của học viên"
     },
     {
-      "skill": "lich",
+      "skill": "lapkehoach",
       "alias": "/lich",
       "intent": "ke-hoach-content",
       "description": "Lập kế hoạch content theo mục tiêu, trụ cột và nguồn lực"
     },
     {
-      "skill": "mothumuc",
+      "skill": "xemketqua",
       "alias": "/mothumuc",
       "intent": "open-output-folder",
       "description": "Mở thư mục chứa thành phẩm trên máy đang chạy 9B"
     },
     {
-      "skill": "nguon",
+      "skill": "lapkehoach",
       "alias": "/nguon",
       "intent": "expert-sources",
       "description": "Chọn hoặc tìm nhiều chuyên gia và nguồn ý tưởng theo ngành, khách hàng và mục tiêu của học viên"
     },
     {
-      "skill": "duyetlich",
+      "skill": "lapkehoach",
       "alias": "/duyetlich",
       "intent": "approve-editorial-plan",
       "description": "Duyệt đúng phiên bản lịch và bắt đầu tự tạo bài, ảnh; chờ duyệt thành phẩm trước đăng"
     },
     {
-      "skill": "theodoi",
+      "skill": "lapkehoach",
       "alias": "/theodoi",
       "intent": "monitor-content-workflow",
       "description": "Bật hoặc kiểm tra lịch quét nguồn, đề xuất content và tiếp tục sản xuất trong 9B"
