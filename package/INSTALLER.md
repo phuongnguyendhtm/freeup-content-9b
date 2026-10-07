@@ -1,4 +1,4 @@
-# Bộ cài content 1.3.0 cho 9B
+# Bộ cài content 1.3.1 cho 9B
 
 Đường đi: ZIP tải/đính kèm → kiểm hash và giải nén an toàn → install-job → chờ gateway rảnh → bootstrap → native skills install từng thư mục. Không cài/thay cấu hình ngay trong lượt model đang xử lý yêu cầu cài. Không đưa ZIP cho Skills Upload hoặc skills install.
 

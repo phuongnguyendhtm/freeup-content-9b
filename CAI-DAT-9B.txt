@@ -1,9 +1,9 @@
-Hãy tải bộ quà tặng content học viên 1.3.0 từ:
-https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.0.zip
+Hãy tải bộ quà tặng content học viên 1.3.1 từ:
+https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.1.zip
 
-SHA-256 phải đúng 0DD1EF8CEA7EB2F672BC9706E2B7C66D68DCB68D461462EF7BF97FD66EFE2B09. Nếu khác, dừng. Tải đúng rồi làm theo yêu cầu dưới đây:
+SHA-256 phải đúng DA972285481EBE2590E236D7BDC6896D60F66D1321EBB030D508D4EF65B6EB10. Nếu khác, dừng. Tải đúng rồi làm theo yêu cầu dưới đây:
 
-Hãy cài bộ quà tặng hệ thống content 1.3.0 trong ZIP vừa tải cho agent 9B đang dùng. Tôi cho phép tạo thư mục riêng, cài skill qua bộ cài native và tải công cụ ảnh/video của gói. Máy tôi không có bản Antigravity hay thư mục của giảng viên.
+Hãy cài bộ quà tặng hệ thống content 1.3.1 trong ZIP vừa tải cho agent 9B đang dùng. Tôi cho phép tạo thư mục riêng, cài skill qua bộ cài native và tải công cụ ảnh/video của gói. Máy tôi không có bản Antigravity hay thư mục của giảng viên.
 
 Tôi cho phép nâng phiên bản cũ của đúng package_id freeup-content-student-gift khi bộ cài xác minh receipt và quyền sở hữu/hash. Giữ toàn bộ hồ sơ doanh nghiệp, bài, ảnh, ý tưởng và dữ liệu riêng. Không ghi đè skill khác hoặc file đã sửa riêng chưa được quản lý; không dùng --upgrade để thử vượt lỗi policy.
 

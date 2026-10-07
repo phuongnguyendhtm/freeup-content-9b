@@ -37,8 +37,39 @@ async function main() {
   let item, idea, plan, task, post;
   test('Fresh project retains existing data and sources are opt-in', () => {
     content(['init']); const r = run(['status']); assert.equal(r.sources.length, 0); assert.equal(r.publication_authorized, false);
+    assert.deepEqual(run(['research-profile']), {}); assert.equal(run(['scan-next']).total_active,0); assert.equal(run(['sources']).length,0);
     run(['sources', '--preset', 'marketing']); run(['sources', '--preset', 'marketing']); assert.equal(run(['sources']).length, 3);
     assert.equal(lib.read(db('brand_config')).configured, false);
+  });
+  test('Businesses select their own industry and sources without cross-project leakage', () => {
+    const otherProject=path.join(folder,'other-student');
+    function other(args,target=cli){const r=spawnSync(process.execPath,[target,...args,'--project',otherProject],{encoding:'utf8',windowsHide:true});assert.equal(r.status,0,r.stderr);return JSON.parse(r.stdout);}
+    other(['init'],contentCli);
+    assert.equal(other(['sources']).length,0);
+    other(['research-profile','--file',json('retail-preferences',{industry:'Fixture retail',market:'Fixture local',topics:['customer service'],source_selection_mode:'provided',basis:'Fixture student business document'})]);
+    other(['sources','--file',json('retail-sources',[{id:'retail_expert',name:'Fixture retail educator',url:'https://example.com/retail',topics:['retail']}])]);
+    run(['research-profile','--file',json('fitness-preferences',{industry:'Fixture fitness',content_language:'vi',source_selection_mode:'automatic',basis:'Fixture student request'})]);
+    run(['research-profile','--file',json('fitness-market',{market:'Fixture national'})]);
+    assert.equal(run(['research-profile']).industry,'Fixture fitness');
+    assert.equal(other(['research-profile']).industry,'Fixture retail');
+    assert.equal(other(['sources']).length,1); assert.equal(run(['sources']).length,3);
+    assert(!other(['sources']).some(v=>v.id==='alex_hormozi'));
+    assert.equal(other(['scan-next']).sources[0].id,'retail_expert');
+    run(['research-profile','--file',json('invalid-research',{industry:'Changed',source_selection_mode:'unsupported'})],1);
+    assert.equal(run(['research-profile']).industry,'Fixture fitness');
+  });
+  test('Many custom experts are scanned in rotating groups, with disabled sources skipped', () => {
+    const manyProject=path.join(folder,'many-experts');
+    function many(args,target=cli){const r=spawnSync(process.execPath,[target,...args,'--project',manyProject],{encoding:'utf8',windowsHide:true});assert.equal(r.status,0,r.stderr);return JSON.parse(r.stdout);}
+    many(['init'],contentCli);
+    const sources=Array.from({length:12},(_,i)=>({id:'expert_'+i,name:'Fixture expert '+i,url:'https://example.com/expert-'+i,enabled:i!==11}));
+    many(['sources','--file',json('many-sources',sources)]);
+    assert.equal(many(['sources']).length,12);
+    const first=many(['scan-next','--limit','5']),second=many(['scan-next','--limit','5']),third=many(['scan-next','--limit','5']);
+    assert.equal(first.total_active,11); assert.equal(first.sources[0].id,'expert_0'); assert.equal(second.sources[0].id,'expert_5'); assert.equal(third.sources[0].id,'expert_10');
+    const seen=[...first.sources,...second.sources,...third.sources].map(v=>v.id);
+    assert.equal(new Set(seen).size,11); assert(!seen.includes('expert_11'));
+    assert.equal(many(['sources']).length,12);
   });
   test('READ needs real access evidence; failed batch is atomic', () => {
     const bad = {source_id:'alex_hormozi', url:'https://example.com/fixture', title:'Fixture source', status:'READ', accessed_at:'2026-10-07T00:00:00Z'};

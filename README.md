@@ -6,7 +6,7 @@ Tạo bài viết, ảnh minh họa, ảnh cá nhân kèm câu nói, carousel v�
 
 ## Cài trong 3 bước
 
-1. **[⬇️ TẢI BỘ CÀI CHO WINDOWS VÀ MAC](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.0.zip)**
+1. **[⬇️ TẢI BỘ CÀI CHO WINDOWS VÀ MAC](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.1.zip)**
 2. **Nhấp phải tệp ZIP → Extract All / Giải nén tất cả**, rồi mở **thư mục mới được giải nén**. Trên **Windows**, mở **`CAI-DAT-9B.cmd`**; trên **Mac**, mở **`CAI-DAT-MAC.command`** trong thư mục đó. **Không mở tệp cài ngay trong cửa sổ xem ZIP.** Chờ báo **“Đã cài và xác minh”**. Chọn trợ lý/agent nếu bộ cài hỏi.
 3. Mở **chat mới với đúng trợ lý vừa cài** trong 9B và gửi:
 
@@ -24,18 +24,18 @@ Hệ thống dùng lại hồ sơ doanh nghiệp đã có; chỉ hỏi thông ti
 
 ## Nguồn chuyên gia và tự sản xuất sau duyệt lịch
 
-Bản 1.3.0 thêm ba lệnh: **/nguon**, **/duyetlich**, **/theodoi**. Có **33 lệnh tiếng Việt và 1 skill điều phối**. Thông tin doanh nghiệp, nguồn, giọng văn, câu chuyện và ảnh của mỗi học viên được lưu riêng; không cần thư mục Antigravity của giảng viên.
+Bản 1.3.1 có ba lệnh điều khiển nguồn/lịch: **/nguon**, **/duyetlich**, **/theodoi**. Có **33 lệnh tiếng Việt và 1 skill điều phối**. Thông tin doanh nghiệp, nguồn, giọng văn, câu chuyện và ảnh của mỗi học viên được lưu riêng; không cần thư mục Antigravity của giảng viên.
 
 Luồng sử dụng: chọn nguồn → đọc bài/video truy cập được → chọn insight phù hợp khách hàng → đề xuất lịch → bạn duyệt lịch → tự tạo bài và ảnh theo skill hiện có → bạn duyệt thành phẩm → đăng qua kênh đã kết nối → xem số liệu để cải tiến.
 
-Nguồn khởi đầu cho ngành marketing: **Alex Hormozi, Russell Brunson và Dan Koe**. Bạn đổi nguồn/ngành bằng chat. Hệ thống xây bài mới theo góc nhìn riêng, dùng câu chuyện/ảnh bạn cung cấp; nếu chưa có câu chuyện thật thì dùng nhận định hoặc ví dụ giả định được ghi rõ. Có lưu URL và lý do chọn ý tưởng.
+**Mỗi học viên chọn nguồn theo doanh nghiệp và ngành nghề của mình.** 9B đọc hồ sơ đã có, chỉ hỏi tiêu chí còn thiếu; học viên có thể gửi nhiều tên/link chuyên gia hoặc giao 9B tìm nguồn phù hợp ngành, thị trường, khách hàng và mục tiêu. Danh sách có thể gồm chuyên gia Việt Nam/quốc tế, thương hiệu, website, hiệp hội và bản tin. Không giới hạn ở ba chuyên gia hay ngành marketing; máy mới chưa bật sẵn nguồn nào. Hệ thống xây bài mới theo giọng văn, màu thương hiệu, ảnh và câu chuyện của học viên; có lưu URL và lý do chọn ý tưởng. Chưa có câu chuyện thật thì dùng nhận định hoặc ví dụ giả định được ghi rõ.
 
 **Duyệt lịch cho phép sản xuất bài và ảnh. Thành phẩm vẫn chờ bạn duyệt trước khi đăng.** Sửa lịch sẽ tạo bản mới; chạy lại tiếp tục bài đang làm và giữ bài cũ. Không có quyền đọc một nguồn thì báo nguồn đó chưa đọc được và tiếp tục các nguồn khác.
 
 Gửi lần lượt trong 9B sau khi cài:
 
 ```text
-/nguon Dùng Alex Hormozi, Russell Brunson và Dan Koe để tìm ý tưởng marketing.
+/nguon Đọc hồ sơ doanh nghiệp tôi đã cung cấp. Tìm chuyên gia và nguồn ý tưởng phù hợp ngành, khách hàng, thị trường và mục tiêu của tôi. Cho tôi xem danh sách đề xuất; chỉ hỏi thông tin còn thiếu.
 ```
 
 ```text
@@ -85,7 +85,7 @@ Bạn cung cấp ảnh và kết nối tài khoản của mình khi cần. Hệ 
 - Khi bộ cài hỏi nâng cấp: **cài lần đầu → nhấn Enter**; **nâng bản cũ → nhập CO**. Bộ cài chỉ nâng đúng gói đã được xác minh.
 - Giữ 9B mở và ngừng gửi chat trong lúc cài. Nếu chưa báo hoàn tất, chờ hoặc đọc thông báo trong cửa sổ cài.
 - Nếu chưa tìm thấy 9B, mở ứng dụng và hoàn tất khởi tạo rồi chạy lại tệp cài. Trên Mac, nếu `.command` không mở, dùng Terminal tại thư mục đã giải nén để chạy `bash CAI-DAT-MAC.command`.
-- Nếu tác vụ cài bằng chat trước đây đã báo `failed`, tác vụ đó không tự chạy tiếp. Tải bản 1.3.0 và mở tệp cài đúng hệ điều hành để tạo lượt cài mới.
+- Nếu tác vụ cài bằng chat trước đây đã báo `failed`, tác vụ đó không tự chạy tiếp. Tải bản 1.3.1 và mở tệp cài đúng hệ điều hành để tạo lượt cài mới.
 - Nếu gặp lỗi, giữ thông báo/log để xử lý; chỉ dùng `/caidat` sau khi bộ cài báo thành công.
 
 [Cài bằng chat, PowerShell và xử lý lỗi chi tiết](./docs/CAI-DAT-NANG-CAO.md)
@@ -95,9 +95,9 @@ Bạn cung cấp ảnh và kết nối tài khoản của mình khi cần. Hệ 
 <details>
 <summary><strong>Google Sheet và mức hỗ trợ của bản tải này</strong></summary>
 
-Bản đang tải là **1.3.0**, có **33 lệnh và 1 skill điều phối**. Quy trình content lưu trên máy; cài đặt cơ bản không yêu cầu Google Sheet hoặc Apps Script.
+Bản đang tải là **1.3.1**, có **33 lệnh và 1 skill điều phối**. Quy trình content lưu trên máy; cài đặt cơ bản không yêu cầu Google Sheet hoặc Apps Script.
 
-Theo dõi nguồn, duyệt lịch và hàng đợi sản xuất đã có trong gói 1.3.0. Quét nguồn và lịch nền dùng công cụ thật của 9B, cần kiểm trên máy học viên. Kết nối Google Sheet trực tiếp và tự xử lý ô duyệt trên Sheet vẫn chưa có trong bản tải này. Ảnh AI, voice và đăng bài dùng kết nối riêng của học viên.
+Theo dõi nguồn, duyệt lịch và hàng đợi sản xuất đã có trong gói 1.3.1. Quét nguồn và lịch nền dùng công cụ thật của 9B, cần kiểm trên máy học viên. Kết nối Google Sheet trực tiếp và tự xử lý ô duyệt trên Sheet vẫn chưa có trong bản tải này. Ảnh AI, voice và đăng bài dùng kết nối riêng của học viên.
 
 [Chi tiết công cụ, kiểm chứng và giới hạn](./docs/CAI-DAT-NANG-CAO.md#kiểm-chứng-và-nội-dung-gói)
 

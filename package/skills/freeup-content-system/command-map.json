@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.3.1",
   "commands": [
     {
       "skill": "caidat",
@@ -185,7 +185,7 @@
       "skill": "nguon",
       "alias": "/nguon",
       "intent": "expert-sources",
-      "description": "Chọn nguồn chuyên gia và câu chuyện thật cho hệ thống content"
+      "description": "Chọn hoặc tìm nhiều chuyên gia và nguồn ý tưởng theo ngành, khách hàng và mục tiêu của học viên"
     },
     {
       "skill": "duyetlich",

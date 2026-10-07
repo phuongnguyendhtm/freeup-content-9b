@@ -7,7 +7,7 @@ Mặc định chỉ lập kế hoạch. Thêm -Apply để cài; -InstallDepende
 param(
     [string] $Repository = 'phuongnguyendhtm/freeup-content-9b',
     [Alias('Commit')] [string] $Ref = 'main',
-    [string] $ArtifactPath = 'distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.0.zip',
+    [string] $ArtifactPath = 'distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.1.zip',
     [string] $Destination,
     [string] $Agent,
     [string] $InstallRoot,
@@ -18,8 +18,8 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$GiftArchiveName = 'FREEUP-CONTENT-9B-HOC-VIEN-v1.3.0.zip'
-$GiftArchiveSha256 = '0DD1EF8CEA7EB2F672BC9706E2B7C66D68DCB68D461462EF7BF97FD66EFE2B09'
+$GiftArchiveName = 'FREEUP-CONTENT-9B-HOC-VIEN-v1.3.1.zip'
+$GiftArchiveSha256 = 'DA972285481EBE2590E236D7BDC6896D60F66D1321EBB030D508D4EF65B6EB10'
 
 function Test-GiftBoundary {
     param([string] $Path, [string] $Boundary, [switch] $AllowRoot)
@@ -54,7 +54,7 @@ function Test-GiftArchiveHash {
 }
 
 function Save-GiftArchive {
-    param([string] $Repository, [string] $Ref, [string] $ArchivePath, [string] $ExpectedSha256, [string] $ArtifactPath = 'distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.0.zip')
+    param([string] $Repository, [string] $Ref, [string] $ArchivePath, [string] $ExpectedSha256, [string] $ArtifactPath = 'distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.1.zip')
     if ($Repository -notmatch '^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$') { throw 'Repository không hợp lệ.' }
     if ($Ref -ne 'main' -and $Ref -notmatch '^[0-9a-fA-F]{40}$') { throw 'Ref phải là main hoặc mã commit đầy đủ 40 ký tự.' }
     if ($ArtifactPath -notmatch '^[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*\.zip$' -or $ArtifactPath.Split('/') -contains '..') { throw 'ArtifactPath phải là đường dẫn ZIP tương đối an toàn trong repo.' }
@@ -122,7 +122,7 @@ function Expand-GiftArchive {
     $manifestPath = Join-Path $packageRoot 'distribution-manifest.json'
     if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) { throw 'Gói thiếu manifest.' }
     $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ($manifest.package_id -ne 'freeup-content-student-gift' -or $manifest.version -ne '1.3.0') { throw 'Manifest không khớp gói học viên 1.3.0.' }
+    if ($manifest.package_id -ne 'freeup-content-student-gift' -or $manifest.version -ne '1.3.1') { throw 'Manifest không khớp gói học viên 1.3.1.' }
     return $packageRoot
 }
 
@@ -177,7 +177,7 @@ $destinationRoot = [System.IO.Path]::GetFullPath($Destination)
 Assert-GiftNoReparsePoint $destinationRoot
 [void] [System.IO.Directory]::CreateDirectory($destinationRoot)
 $refLabel = $Ref.Substring(0, [Math]::Min(12, $Ref.Length))
-$runDirectory = Join-Path $destinationRoot ('v1.3.0-' + $refLabel + '-' + [Guid]::NewGuid().ToString('N'))
+$runDirectory = Join-Path $destinationRoot ('v1.3.1-' + $refLabel + '-' + [Guid]::NewGuid().ToString('N'))
 if (-not (Test-GiftBoundary $runDirectory $destinationRoot)) { throw 'Thư mục tải nằm ngoài đích.' }
 [void] [System.IO.Directory]::CreateDirectory($runDirectory)
 $archivePath = Join-Path $runDirectory $GiftArchiveName

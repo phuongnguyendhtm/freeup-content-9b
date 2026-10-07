@@ -8,7 +8,7 @@ const {spawnSync} = require('node:child_process');
 const lib = require('./lib/project.cjs');
 const profile = require('./lib/profile.cjs');
 const formats = ['story', 'founder-quote', 'visual-insight', 'image', 'carousel', 'infographic', 'comment-chain', 'reels', 'broll'];
-const files = ['expert_sources', 'source_library', 'story_bank', 'campaigns', 'production_queue', 'content_automations', 'content_automation_settings'];
+const files = ['expert_sources', 'source_library', 'story_bank', 'campaigns', 'production_queue', 'content_automations', 'content_automation_settings', 'research_preferences', 'source_scan_state'];
 const stamp = () => new Date().toISOString();
 function canonical(value) {
   if (Array.isArray(value)) return value.map(canonical);
@@ -125,7 +125,7 @@ function schedulerSpec(project, kind) {
   need(['scan', 'plan', 'produce'].includes(kind), 'kind là scan, plan hoặc produce.');
   const lead = `Dùng skill freeup-content-system tại ${lib.skillRoot}. Đọc references/automation.md. Project ${project}. `;
   const messages = {
-    scan: 'Đọc expert_sources; quét tối đa 10 mục mới mỗi nguồn đang bật bằng công cụ nguồn thật. Ghi cả nguồn không đọc được, chống trùng URL. Chọn insight phù hợp Brand DNA, lưu ý tưởng có candidate_id và nguồn. Không tạo lịch đã duyệt hoặc đăng bài. Báo khi có ý tưởng mới hữu ích hoặc cần xử lý nguồn.',
+    scan: 'Đọc research-profile và nguồn riêng của doanh nghiệp này. Gọi campaign.cjs scan-next --limit 5 để lấy nhóm nguồn đang bật tiếp theo; quét tối đa 10 mục mới mỗi nguồn bằng công cụ nguồn thật. Các lượt sau luân phiên nhóm kế tiếp, không giới hạn danh sách ở ba chuyên gia marketing. Ghi cả nguồn không đọc được, chống trùng URL. Chọn insight phù hợp ngành, khách hàng và Brand DNA, lưu ý tưởng có candidate_id và nguồn. Không tự thêm preset của ngành khác, duyệt lịch hoặc đăng bài. Báo khi có ý tưởng mới hữu ích hoặc cần xử lý nguồn.',
     plan: 'Đọc kho ý tưởng, lịch và nguồn lực thật. Tạo hoặc tái sử dụng bản nháp cho 7 ngày tới; không tạo thêm bản nháp trùng kỳ. Tối đa 7 dòng khi chưa có tần suất riêng. Gửi lịch có ID/bản để người dùng duyệt. Không tự duyệt, không đăng.',
     produce: 'Đọc campaign.cjs queue. Chỉ xử lý tối đa 2 tác vụ của lịch đã duyệt sản xuất còn hiệu lực. Claim bằng owner duy nhất của lượt này; tiếp tục đúng post_id đã tạo. Chạy skill viết/media đúng format, QA tệp thật, finish hoặc block với lý do. Không tạo approval chữ/ảnh/publish. Gửi thành phẩm để người dùng xem. Không có tác vụ thì kết thúc im lặng.'
   };
@@ -139,6 +139,32 @@ function execute(project, command, o) {
   initialize(project);
   const c = context(project);
   const input = () => lib.read(path.resolve(o.file || (() => {throw Error('Cần --file JSON.');})()));
+  if (command === 'research-profile') {
+    const current = c.get('research_preferences')[0] || {};
+    if (!o.file) return current;
+    const v = input();
+    need(v && typeof v === 'object' && !Array.isArray(v), 'Cấu hình nghiên cứu cần object.');
+    const allowed = ['industry', 'market', 'content_language', 'topics', 'source_types', 'source_selection_mode', 'basis'];
+    for (const field of Object.keys(v)) need(allowed.includes(field), 'Trường nghiên cứu không được hỗ trợ: ' + field);
+    for (const field of ['industry', 'market', 'content_language', 'basis']) if (field in v) need(text(v[field]), field + ' cần nội dung rõ.');
+    if ('topics' in v) need(Array.isArray(v.topics) && v.topics.every(text), 'topics cần mảng chuỗi.');
+    if ('source_types' in v) need(Array.isArray(v.source_types) && v.source_types.every(x => ['website','rss','youtube','facebook','linkedin','newsletter'].includes(x)), 'source_types không hợp lệ.');
+    if ('source_selection_mode' in v) need(['provided','suggest','automatic'].includes(v.source_selection_mode), 'Cách chọn nguồn là provided, suggest hoặc automatic theo yêu cầu học viên.');
+    const saved = {...current, ...v, id:'profile', updated_at:stamp()};
+    c.put('research_preferences', [saved]); return saved;
+  }
+  if (command === 'scan-next') {
+    const limit = o.limit === undefined ? 5 : Number(o.limit);
+    need(Number.isInteger(limit) && limit >= 1 && limit <= 20, 'Mỗi lượt lấy 1–20 nguồn; danh sách tổng không bị giới hạn ở số này.');
+    const sources = c.get('expert_sources').filter(v => v.enabled);
+    if (!sources.length) return {sources:[], total_active:0, research_profile:c.get('research_preferences')[0] || {}, note:'Chưa có nguồn được chọn cho doanh nghiệp này. Dùng /nguon theo hồ sơ riêng; không tự nhập nguồn marketing.'};
+    const state = c.get('source_scan_state')[0] || {offset:0};
+    const start = Number.isSafeInteger(state.offset) && state.offset >= 0 ? state.offset % sources.length : 0;
+    const count = Math.min(limit, sources.length);
+    const selected = Array.from({length:count}, (_, i) => sources[(start + i) % sources.length]);
+    c.put('source_scan_state', [{id:'round_robin', offset:(start + count) % sources.length, updated_at:stamp()}]);
+    return {sources:selected, total_active:sources.length, selected_count:count, research_profile:c.get('research_preferences')[0] || {}};
+  }
   if (command === 'sources') {
     if (!o.file && !o.preset) return c.get('expert_sources');
     need(!o.preset || o.preset === 'marketing', 'Preset hiện có: marketing.');
@@ -247,12 +273,12 @@ function execute(project, command, o) {
     need(!previous || previous.job_id === v.job_id, 'Đã có job cùng chức năng. Đọc/sửa đúng job cũ; không tạo job trùng.');
     c.put('content_automations', upsert(rows, [{id: v.kind, kind: v.kind, job_id: v.job_id, tool: v.tool, evidence: v.evidence, verified_enabled: v.verified_enabled, definition_hash: v.definition_hash, checked_at: stamp()}])); return {registered: v.job_id};
   }
-  if (command === 'status') return {sources: c.get('expert_sources'), source_counts: Object.fromEntries(['READ', 'UNREAD', 'BLOCKED'].map(status => [status, c.get('source_library').filter(v => v.status === status).length])), plans: c.get('campaigns'), queue: c.get('production_queue'), scheduler_receipts: c.get('content_automations'), scheduler_live_status_verified: false, publication_authorized: false, ...dashboard(project, c)};
+  if (command === 'status') return {research_profile:c.get('research_preferences')[0] || {}, sources: c.get('expert_sources'), source_counts: Object.fromEntries(['READ', 'UNREAD', 'BLOCKED'].map(status => [status, c.get('source_library').filter(v => v.status === status).length])), plans: c.get('campaigns'), queue: c.get('production_queue'), scheduler_receipts: c.get('content_automations'), scheduler_live_status_verified: false, publication_authorized: false, ...dashboard(project, c)};
   throw Error('Lệnh không có. Dùng help.');
 }
 function main(args = process.argv.slice(2)) {
   const {options, positional} = lib.parse(args), command = positional.shift() || 'help';
-  if (command === 'help') return {commands: 'sources [--preset marketing | --file JSON] | collect [--file JSON] | stories [--file JSON] | plan [--file JSON --id PLAN] | approve --id PLAN --revision N --by USER --note INSTRUCTION | queue [--id PLAN] | claim --task TASK --owner RUN | finish --task TASK --owner RUN | block --task TASK --owner RUN --reason TEXT | retry --task TASK --by USER --note INSTRUCTION | spec [--kind scan|plan|produce | --file SETTINGS] | register --file RECEIPT | status', project_option: '--project PATH', scope: 'Plan approval permits production only, never publication.'};
+  if (command === 'help') return {commands: 'research-profile [--file JSON] | sources [--preset marketing | --file JSON] | scan-next [--limit N] | collect [--file JSON] | stories [--file JSON] | plan [--file JSON --id PLAN] | approve --id PLAN --revision N --by USER --note INSTRUCTION | queue [--id PLAN] | claim --task TASK --owner RUN | finish --task TASK --owner RUN | block --task TASK --owner RUN --reason TEXT | retry --task TASK --by USER --note INSTRUCTION | spec [--kind scan|plan|produce | --file SETTINGS] | register --file RECEIPT | status', project_option: '--project PATH', scope: 'Plan approval permits production only, never publication.'};
   const project = lib.root(options.project);
   need(fs.existsSync(path.join(project, 'database')), 'Chạy /caidat trước.');
   return withLock(project, () => execute(project, command, options));

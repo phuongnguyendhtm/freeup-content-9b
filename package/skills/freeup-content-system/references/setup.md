@@ -1,5 +1,7 @@
 # Thiết lập: đọc hồ sơ đang có, chỉ hỏi phần còn thiếu
 
+Khi học viên cần lấy ý tưởng từ chuyên gia, dùng ngành/mục tiêu đã biết để chọn nguồn theo **automation.md** và lưu `campaign.cjs research-profile`. Chỉ hỏi tiêu chí nghiên cứu còn thiếu; học viên có thể tự gửi tên/link hoặc giao 9B tìm nguồn phù hợp. Không gán ngành marketing hoặc chuyên gia của người tặng cho mọi học viên. Nguồn tham khảo là tùy chọn cho viết bài từ dữ liệu doanh nghiệp, không tạo thêm hồ sơ bắt buộc.
+
 Lệnh thiết lập bắt đầu bằng kiểm tra hồ sơ, kể cả lần đầu cài gói và những lần chạy lại. Đừng mở đầu bằng biểu mẫu yêu cầu nhập lại tất cả. Thông tin đã đọc và đã lưu phải được sử dụng lại.
 
 ## 1. Đọc kho đang có trước khi hỏi

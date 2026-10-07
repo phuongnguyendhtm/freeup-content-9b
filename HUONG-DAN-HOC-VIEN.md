@@ -1,11 +1,11 @@
 # Cài hệ thống Content vào 9B
 
-Bạn cần máy Windows hoặc Mac có **9BizClaw v3 đã khởi tạo** và Internet. Bản 1.3.0 có 34 skill, 33 lệnh tiếng Việt và kho nội dung riêng; không cần thư mục Antigravity của giảng viên.
+Bạn cần máy Windows hoặc Mac có **9BizClaw v3 đã khởi tạo** và Internet. Bản 1.3.1 có 34 skill, 33 lệnh tiếng Việt và kho nội dung riêng; không cần thư mục Antigravity của giảng viên.
 
 ## Cài trong 3 bước
 
 1. **Mở 9B.** Kết thúc các lượt chat đang chạy và giữ 9B mở trong lúc cài.
-2. **[Tải bộ cài Content 1.3.0](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.0.zip)** → **nhấp phải ZIP và chọn Extract All / Giải nén tất cả** → mở thư mục mới được giải nén. Trên Windows nhấp đúp **CAI-DAT-9B.cmd**, trên Mac mở **CAI-DAT-MAC.command**. Không mở tệp cài ngay trong cửa sổ xem ZIP. Cài lần đầu thì nhấn Enter khi được hỏi nâng cấp. Nếu được hỏi agent, chọn agent bạn muốn dùng làm content. Chờ bộ cài tải công cụ ảnh/video và kiểm tra; lần đầu có thể mất vài phút.
+2. **[Tải bộ cài Content 1.3.1](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.3.1.zip)** → **nhấp phải ZIP và chọn Extract All / Giải nén tất cả** → mở thư mục mới được giải nén. Trên Windows nhấp đúp **CAI-DAT-9B.cmd**, trên Mac mở **CAI-DAT-MAC.command**. Không mở tệp cài ngay trong cửa sổ xem ZIP. Cài lần đầu thì nhấn Enter khi được hỏi nâng cấp. Nếu được hỏi agent, chọn agent bạn muốn dùng làm content. Chờ bộ cài tải công cụ ảnh/video và kiểm tra; lần đầu có thể mất vài phút.
 3. **Khi bộ cài báo “Đã cài và xác minh”** (`Da cai va xac minh`), mở **chat mới với đúng agent** trong 9B và gửi:
 
    ```text
@@ -85,18 +85,18 @@ Việc cài hệ thống không cấp quyền đăng bài. Bạn cần kết n�
 
 ## Nguồn chuyên gia và tự sản xuất sau duyệt lịch
 
-Bản 1.3.0 thêm ba lệnh: **/nguon**, **/duyetlich**, **/theodoi**. Có **33 lệnh tiếng Việt và 1 skill điều phối**. Thông tin doanh nghiệp, nguồn, giọng văn, câu chuyện và ảnh của mỗi học viên được lưu riêng; không cần thư mục Antigravity của giảng viên.
+Bản 1.3.1 có ba lệnh điều khiển nguồn/lịch: **/nguon**, **/duyetlich**, **/theodoi**. Có **33 lệnh tiếng Việt và 1 skill điều phối**. Thông tin doanh nghiệp, nguồn, giọng văn, câu chuyện và ảnh của mỗi học viên được lưu riêng; không cần thư mục Antigravity của giảng viên.
 
 Luồng sử dụng: chọn nguồn → đọc bài/video truy cập được → chọn insight phù hợp khách hàng → đề xuất lịch → bạn duyệt lịch → tự tạo bài và ảnh theo skill hiện có → bạn duyệt thành phẩm → đăng qua kênh đã kết nối → xem số liệu để cải tiến.
 
-Nguồn khởi đầu cho ngành marketing: **Alex Hormozi, Russell Brunson và Dan Koe**. Bạn đổi nguồn/ngành bằng chat. Hệ thống xây bài mới theo góc nhìn riêng, dùng câu chuyện/ảnh bạn cung cấp; nếu chưa có câu chuyện thật thì dùng nhận định hoặc ví dụ giả định được ghi rõ. Có lưu URL và lý do chọn ý tưởng.
+**Mỗi học viên chọn nguồn theo doanh nghiệp và ngành nghề của mình.** 9B đọc hồ sơ đã có, chỉ hỏi tiêu chí còn thiếu; học viên có thể gửi nhiều tên/link chuyên gia hoặc giao 9B tìm nguồn phù hợp ngành, thị trường, khách hàng và mục tiêu. Danh sách có thể gồm chuyên gia Việt Nam/quốc tế, thương hiệu, website, hiệp hội và bản tin. Không giới hạn ở ba chuyên gia hay ngành marketing; máy mới chưa bật sẵn nguồn nào. Hệ thống xây bài mới theo giọng văn, màu thương hiệu, ảnh và câu chuyện của học viên; có lưu URL và lý do chọn ý tưởng. Chưa có câu chuyện thật thì dùng nhận định hoặc ví dụ giả định được ghi rõ.
 
 **Duyệt lịch cho phép sản xuất bài và ảnh. Thành phẩm vẫn chờ bạn duyệt trước khi đăng.** Sửa lịch sẽ tạo bản mới; chạy lại tiếp tục bài đang làm và giữ bài cũ. Không có quyền đọc một nguồn thì báo nguồn đó chưa đọc được và tiếp tục các nguồn khác.
 
 Gửi lần lượt trong 9B sau khi cài:
 
 ```text
-/nguon Dùng Alex Hormozi, Russell Brunson và Dan Koe để tìm ý tưởng marketing.
+/nguon Đọc hồ sơ doanh nghiệp tôi đã cung cấp. Tìm chuyên gia và nguồn ý tưởng phù hợp ngành, khách hàng, thị trường và mục tiêu của tôi. Cho tôi xem danh sách đề xuất; chỉ hỏi thông tin còn thiếu.
 ```
 
 ```text

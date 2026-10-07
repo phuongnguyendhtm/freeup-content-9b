@@ -9,7 +9,7 @@ Mọi lệnh dùng hồ sơ thương hiệu và kho bài của **học viên hi�
 | Lệnh trong chat | Câu nói tương đương | Kết quả cần tạo |
 |---|---|---|
 | `/caidat` | Kiểm tra và thiết lập hệ thống content cho thương hiệu của tôi | Tạo nơi lưu riêng nếu chưa có. Đọc hồ sơ đã lưu, thông tin/tài liệu học viên đã cung cấp và hồ sơ native truy cập được; kiểm tra mục bắt buộc. Đủ thì tái sử dụng ngay, không hỏi lại; thiếu hoặc mâu thuẫn thì chỉ hỏi đúng những mục đó, lưu phần bổ sung và tiếp tục. Kiểm tài nguyên ảnh/kênh/voice theo bước thực sự cần chúng. |
-| `/nguon [chuyên gia, URL hoặc ngành]` | Theo dõi Alex Hormozi, Russell Brunson và Dan Koe để tìm ý tưởng | Lưu nguồn riêng có bật/tắt; preset marketing có ba nguồn chính thức. Dùng câu chuyện/ảnh thật của học viên. Đọc automation.md; lệnh này chưa tạo lịch nền. |
+| `/nguon [chuyên gia, URL hoặc ngành]` | Tìm chuyên gia và nguồn ý tưởng phù hợp doanh nghiệp của tôi | Đọc hồ sơ ngành/mục tiêu đã có, chỉ hỏi phần thiếu; dùng tên/link học viên gửi hoặc đề xuất/tự chọn theo yêu cầu. Lưu tiêu chí và nhiều nguồn riêng, có bật/tắt; không mặc định ngành marketing hay ba chuyên gia của giảng viên. Đọc automation.md; lệnh này chưa tạo lịch nền. |
 | `/lich [kỳ + mục tiêu]` | Lập kế hoạch content 7 ngày cho thương hiệu tôi | Đọc Brand DNA, trụ cột và kho ý tưởng có nguồn; dùng campaign.cjs tạo lịch chủ đề/Big Idea/kênh/format/CTA/nguồn có ID và revision, trình để duyệt. Lịch kế hoạch chưa phải lịch đăng đã đặt trên nền tảng. |
 | `/duyetlich [ID + bản]` | Tôi duyệt lịch này, bắt đầu làm bài và ảnh | Duyệt đúng bản, tạo hàng đợi chống trùng và thực hiện ngay sản xuất đã được phép. Thành phẩm chờ học viên duyệt trước khi đăng; sửa lịch cần duyệt lại. |
 | `/theodoi [bật, kiểm tra hoặc tắt]` | Mỗi sáng tìm ý tưởng, thứ Sáu gửi lịch, tiếp tục bài tôi đã duyệt | Tạo/cập nhật lịch chạy bằng native automations thật, đọc lại job và kiểm run history. Chưa kết nối được thì nói rõ bước chưa bật. Không tự tạo lịch trong lúc cài, không cấp quyền đăng cho các job này. |
@@ -154,7 +154,7 @@ Học viên không cần gõ lệnh kỹ thuật. AI dùng `scripts/content.cjs`
 ## Lệnh mẫu cho luồng chuyên gia
 
 ```text
-/nguon Dùng nguồn marketing: Alex Hormozi, Russell Brunson và Dan Koe.
+/nguon Đọc hồ sơ doanh nghiệp đã có. Tìm chuyên gia và nguồn ý tưởng phù hợp ngành, khách hàng và mục tiêu của tôi; cho tôi xem danh sách đề xuất.
 ```
 
 ```text

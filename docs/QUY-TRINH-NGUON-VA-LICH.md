@@ -11,14 +11,25 @@ Dùng cho `/nguon`, `/timy`, `/lich`, `/duyetlich`, `/theodoi` và xử lý hàn
 
 ## 1. Chọn nguồn và hồ sơ riêng
 
-`/nguon` đọc danh sách hiện có, dùng hồ sơ đã biết, chỉ hỏi phần còn thiếu. Mỗi học viên có danh sách riêng. Có thể thêm, tắt nguồn hoặc đổi ngành bằng lời nói trong chat.
+`/nguon` áp dụng cho doanh nghiệp của từng học viên và nhiều ngành nghề. Đọc danh sách nguồn, `research-profile`, hồ sơ/tài liệu doanh nghiệp và yêu cầu hiện tại trước. Giữ nguồn đã chọn; không reset khi cài lại hoặc chạy /caidat. Không có chuyên gia được bật mặc định trên máy mới. Có thể thêm, tắt nguồn hoặc đổi ngành bằng lời nói trong chat.
 
-Preset **marketing** gồm ba điểm xuất phát công khai: Alex Hormozi/Acquisition.com, blog Russell Brunson và bản tin Dan Koe. Chỉ nhập preset khi học viên yêu cầu nguồn này; không mặc định gán cả ba cho mọi ngành. URL được kiểm tra ngày 2026-10-07 và cần đọc lại ở lượt quét thực. Preset không chứa kho bài đã thu thập, ảnh hoặc câu chuyện của giảng viên.
+### Tìm nguồn theo doanh nghiệp của học viên
+
+1. Dùng lĩnh vực, sản phẩm, khách hàng, thị trường, ngôn ngữ và mục tiêu từ hồ sơ sẵn có. Chỉ hỏi phần chưa rõ thực sự ảnh hưởng đến chọn nguồn; không bắt khai lại doanh nghiệp hoặc nhập đủ một bộ hồ sơ thứ hai. Chưa chọn nguồn vẫn viết bài từ tài liệu/câu chuyện riêng được.
+2. Học viên gửi tên/link chuyên gia hoặc thương hiệu → xác minh đúng trang, lưu các nguồn họ chọn. Có thể nhiều chuyên gia Việt Nam/quốc tế, doanh nghiệp dẫn đầu, hiệp hội, website hoặc bản tin phù hợp; không giới hạn ở ba tên hoặc một ngành.
+3. Học viên yêu cầu đề xuất → tìm các nguồn công khai đang hoạt động theo lĩnh vực và mục tiêu riêng; mở trang thật để kiểm danh tính/chủ đề. Trình một danh sách khởi đầu khoảng 5–10 nguồn, lý do phù hợp và khả năng đọc. Đây là số đề xuất khởi đầu, không phải giới hạn danh sách.
+4. Học viên giao 9B tự chọn/tìm nguồn cho doanh nghiệp → được chọn và lưu nguồn phù hợp trong phạm vi đó, báo đã chọn gì và vì sao; không hỏi lại quyền chọn đã cấp. Nếu họ chỉ yêu cầu đề xuất để xem, chờ lựa chọn của họ trước khi bật nguồn đó. Có thể kết hợp chuyên gia ngành với nguồn về marketing/bán hàng/quản trị khi đúng mục tiêu nội dung.
+5. Đổi ngành/thị trường theo yêu cầu thực và cập nhật tiêu chí riêng; giữ dữ liệu cũ, tắt những nguồn không còn phù hợp khi học viên yêu cầu thay thế. Không đổi ngành của học viên theo một tài liệu tham khảo hoặc theo ngành của người tặng.
+
+AI lưu tiêu chí bằng `campaign.cjs research-profile --file JSON`, chấp nhận cập nhật từng phần: `industry`, `market`, `content_language`, `topics` (mảng), `source_types` (mảng), `source_selection_mode:provided|suggest|automatic`, `basis` (nguồn thông tin hoặc chỉ dẫn thực). Đọc lại bằng `research-profile`. Mục chưa rõ không cần điền giả. Chỉ chọn mode automatic khi học viên đã giao quyền tự chọn; đây không phải quyền tự duyệt lịch/đăng.
+
+Preset **marketing** chỉ là một ví dụ tùy chọn gồm Alex Hormozi/Acquisition.com, blog Russell Brunson và bản tin Dan Koe. Chỉ nhập khi học viên yêu cầu đúng bộ nguồn này; không coi đây là danh sách khởi đầu chung của gói. Các ngành khác dùng nguồn được tìm/xác minh theo hồ sơ riêng, không cần có preset đóng gói. URL ví dụ được kiểm tra ngày 2026-10-07 và cần đọc lại ở lượt quét thực. Preset không chứa kho bài đã thu thập, ảnh hoặc câu chuyện của giảng viên.
 
 AI gọi:
 
 ```text
-campaign.cjs sources --preset marketing
+campaign.cjs research-profile
+campaign.cjs research-profile --file research-preferences.json
 campaign.cjs sources --file sources.json
 campaign.cjs stories --file verified-stories.json
 ```
@@ -31,7 +42,7 @@ Kho câu chuyện: `title`, `story`, `source_type:user_message|business_document
 
 ## 2. Thu thập và chọn ý tưởng
 
-1. Đọc `expert_sources` đang bật. Ưu tiên website/bản tin/RSS công khai. Với danh sách bài/video, đọc bài/transcript cụ thể trước khi lấy insight; tiêu đề hoặc thumbnail chưa đủ.
+1. Đọc tiêu chí ngành/mục tiêu và `expert_sources` đang bật của project này. Với lịch nền, gọi `campaign.cjs scan-next --limit 5` để lấy nhóm nguồn tiếp theo; helper luân phiên qua toàn bộ danh sách đang bật. Không giới hạn tổng số nguồn ở 5; nguồn đã tắt được bỏ qua. Không có nguồn → báo cần chọn nguồn cho doanh nghiệp này, không tự nhập preset marketing. Ưu tiên website/bản tin/RSS công khai. Với danh sách bài/video, đọc bài/transcript cụ thể trước khi lấy insight; tiêu đề hoặc thumbnail chưa đủ.
 2. Dùng `web_search`, `web_fetch`, trình duyệt hoặc connector nguồn thực có. Skill `blogwatcher`/`summarize` có thể hỗ trợ nếu binary đã kiểm tra chạy được. Không giả định có quyền đọc toàn bộ Facebook, LinkedIn hoặc video; nếu yêu cầu đăng nhập/transcript thiếu, lưu **BLOCKED/UNREAD** và tiếp tục nguồn khác.
 3. Mỗi lượt mặc định tối đa 10 mục mới/nguồn. Chống trùng bằng URL chuẩn hóa; không quét lại vô hạn nội dung đã đọc. Thu thập tóm tắt riêng, URL, ngày đăng nếu biết và bằng chứng đã đọc; không lưu toàn bộ bài bên ngoài thành thư viện sao chép.
 4. `collect --file JSON` nhận `source_id,url,title,status:READ|UNREAD|BLOCKED,accessed_at` (ISO có múi giờ), `summary` khi READ, `evidence:{tool,reference}`, `reason` nếu bị chặn. `published_at` không biết thì để null. Chỉ READ mới đủ điều kiện đưa vào lịch. Không đổi bài đã đọc thành chưa đọc vì một lần truy cập sau bị lỗi; helper giữ lịch sử lần thử gần nhất.
@@ -124,6 +135,6 @@ Nguồn kỹ thuật đã xem: [OpenClaw Skills](https://docs.openclaw.ai/tools/
 
 ## Dữ liệu và giới hạn kiểm chứng
 
-Kho riêng thêm: `database/expert_sources.json`, `source_library.json`, `story_bank.json`, `campaigns.json`, `production_queue.json`, `content_automations.json`, `content_automation_settings.json`. Không ghi đè kho cũ; dashboard lịch ở `content-calendar/index.html`; thành phẩm vẫn ở `media_output/ngày/ID-bài/`.
+Kho riêng thêm: `database/expert_sources.json`, `research_preferences.json`, `source_scan_state.json`, `source_library.json`, `story_bank.json`, `campaigns.json`, `production_queue.json`, `content_automations.json`, `content_automation_settings.json`. Tiêu chí nghiên cứu và danh sách nguồn tách riêng theo doanh nghiệp/project. Không ghi đè kho cũ; dashboard lịch ở `content-calendar/index.html`; thành phẩm vẫn ở `media_output/ngày/ID-bài/`.
 
 Kiểm thử của gói xác minh lưu nguồn, chống trùng, phiên bản lịch, duyệt sản xuất, claim/lease, tiếp tục cùng post, QA trước hoàn tất và không tự publish. Crawl thực/lịch native/headless/publisher trên máy học viên phải kiểm bằng công cụ đang kết nối; fixture không chứng minh các kết nối này đã hoạt động.
