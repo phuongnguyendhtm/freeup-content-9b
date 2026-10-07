@@ -1,6 +1,6 @@
 # 7 lệnh nhóm và cách nhắn bình thường
 
-Gói 1.4.0 có **8 skill**: một skill điều phối và 7 nhóm chức năng. Có 7 lệnh native trong bảng dưới. Mỗi nhóm có nhiều nhánh chuyên biệt; bộ hướng dẫn và các định dạng vẫn giữ đủ. Học viên có thể nhắn câu thường, không cần nhớ lệnh hoặc gọi từng skill.
+Gói 1.4.1 có **8 skill**: một skill điều phối và 7 nhóm chức năng. Có 7 lệnh native trong bảng dưới. Mỗi nhóm có nhiều nhánh chuyên biệt; bộ hướng dẫn và các định dạng vẫn giữ đủ. Học viên có thể nhắn câu thường, không cần nhớ lệnh hoặc gọi từng skill.
 
 | Lệnh | Chức năng | Ví dụ câu thường |
 |---|---|---|
