@@ -1,13 +1,21 @@
-# FREEUP Content 9B — bản học viên 1.4.1
+# FREEUP Content 9B — bản học viên 1.5.0
 
 Tự tạo bài viết, ảnh và video theo hồ sơ doanh nghiệp của bạn. Có **8 skill: 1 điều phối + 7 nhóm chức năng**, cùng các nhánh nội dung/thiết kế bên trong. Bạn dùng lệnh hoặc nhắn câu bình thường; AI phối hợp các nhóm, không cần bạn gọi từng bước.
 
 ## Cài trên Windows hoặc Mac
-1. [Tải ZIP 1.4.1](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.4.1.zip). Nhấp phải ZIP, chọn **Extract All / Giải nén tất cả**, mở thư mục đã giải nén.
+1. [Tải ZIP 1.5.0](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.5.0.zip). Nhấp phải ZIP, chọn **Extract All / Giải nén tất cả**, mở thư mục đã giải nén.
 2. Giữ 9BizClaw v3 đã khởi tạo đang mở, kết thúc các lượt chat đang chạy. Windows mở **CAI-DAT-9B.cmd**; Mac mở **CAI-DAT-MAC.command**. Không mở tệp cài trong cửa sổ xem ZIP. Nhấn Enter nếu cài mới, nhập CO nếu nâng bản đã cài. Chờ báo **Đã cài và xác minh**.
 3. Mở chat mới với đúng trợ lý vừa cài, gửi **/thietlapcontent** hoặc “Kiểm tra hồ sơ doanh nghiệp tôi đã cung cấp và thiết lập content. Chỉ hỏi phần còn thiếu.”
 
 Máy học viên không cần bản Antigravity/thư mục giảng viên. Bộ cài tìm runtime trên máy; mỗi doanh nghiệp giữ hồ sơ/nguồn/ảnh/giọng/màu/tài khoản riêng. Internet cần cho tải gói và công cụ lần đầu.
+
+
+## Bảng chọn bằng ảnh
+Nhắn **hệ thống content** để 9B trả ảnh bảng chọn. Trả lời số 1–9 kèm chủ đề; chọn 0 để lập lịch nhiều định dạng. 9B trả ảnh hướng dẫn của dạng đã chọn và lệnh mẫu có thể sửa. Chọn bằng số hoặc tên trong chat; ảnh không phải nút bấm thực thi.
+
+Ví dụ: “Chọn 3. Dùng ảnh tôi đã tải, quote ‘Bắt đầu nhỏ, làm đều mỗi ngày’, màu thương hiệu, tỉ lệ 4:5.” Hoặc “Chọn 5. Làm carousel 6 trang về [chủ đề], dùng màu đã lưu.” Chỉ hỏi thông tin/ảnh còn thiếu, dùng hồ sơ đã có.
+
+Ảnh hướng dẫn lưu tại **freeup-content-data/help/content-menu/1.5.0/**; thành phẩm vẫn ở media_output. Ảnh AI trong bảng chỉ minh họa, không thay ảnh cá nhân học viên. Nếu công cụ gửi ảnh không được cấp quyền, 9B trả danh sách/lệnh và đường dẫn thật; không tự sửa quyền 9B.
 
 ## 7 nhóm lệnh
 | Lệnh | Bạn muốn làm gì? |

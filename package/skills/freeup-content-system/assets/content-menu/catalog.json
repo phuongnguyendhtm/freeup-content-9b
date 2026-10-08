@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "version": "1.5.0",
+  "entry_messages": [
+    "hệ thống content",
+    "he thong content",
+    "mở bảng chọn content",
+    "menu content"
+  ],
+  "intro_assets": [
+    "01-menu-content.jpg",
+    "00-quy-trinh.jpg"
+  ],
+  "choices": [
+    {
+      "choice": 1,
+      "id": "story",
+      "name": "Bài viết",
+      "short": "Bài viết",
+      "group": "vietbai",
+      "intent": "vietbai",
+      "asset": "02-bai-viet.jpg",
+      "use": "Chia sẻ bài học, hướng dẫn, phân tích hoặc câu chuyện thật.",
+      "inputs": "Chủ đề • mục tiêu • kênh đăng",
+      "command": "/vietbai Viết bài về [chủ đề], mục tiêu [mục tiêu], dùng giọng thương hiệu đã lưu.",
+      "example": "Chọn 1. Viết bài về cách bắt đầu quản lý tài chính cá nhân.",
+      "format": "Nội dung chữ và caption"
+    },
+    {
+      "choice": 2,
+      "id": "image",
+      "name": "Một ảnh đơn",
+      "short": "Một ảnh đơn",
+      "group": "thietkeanh",
+      "intent": "tao-anh",
+      "asset": "03-anh-don.jpg",
+      "use": "Một thông điệp chính cùng ảnh sản phẩm, công việc hoặc minh họa.",
+      "inputs": "Chủ đề • câu chính • ảnh nếu có • tỉ lệ",
+      "command": "/thietkeanh Tạo 1 ảnh đơn về [chủ đề], tỉ lệ [4:5 / 1:1 / 9:16], dùng màu thương hiệu và ảnh tôi đã cung cấp.",
+      "example": "Chọn 2. Một ảnh về 3 điều cần chuẩn bị trước buổi tư vấn.",
+      "format": "PNG/JPEG • tỉ lệ theo yêu cầu"
+    },
+    {
+      "choice": 3,
+      "id": "founder-quote",
+      "name": "Chân dung kèm câu quote",
+      "short": "Chân dung + quote",
+      "group": "thietkeanh",
+      "intent": "founder-quote",
+      "asset": "04-chan-dung-quote.jpg",
+      "use": "Ảnh cá nhân thật kèm câu quan điểm ngắn theo giọng của bạn.",
+      "inputs": "Ảnh cá nhân • câu quote hoặc chủ đề • tỉ lệ",
+      "command": "/thietkeanh Tạo ảnh chân dung kèm câu quote “[câu quote]”, dùng ảnh [tên ảnh], màu thương hiệu, tỉ lệ [4:5].",
+      "example": "Chọn 3. Dùng ảnh tôi đã tải, quote “Bắt đầu nhỏ, làm đều mỗi ngày”.",
+      "format": "PNG/JPEG • ưu tiên 4:5"
+    },
+    {
+      "choice": 4,
+      "id": "visual-insight",
+      "name": "Ảnh minh họa insight",
+      "short": "Ảnh insight",
+      "group": "thietkeanh",
+      "intent": "visual-insight",
+      "asset": "05-visual-insight.jpg",
+      "use": "Biến một ý sâu thành hình ẩn dụ, mô hình hoặc sự so sánh dễ nhớ.",
+      "inputs": "Chủ đề • thông điệp chính • kiểu minh họa nếu muốn",
+      "command": "/thietkeanh Tạo Visual Insight về [chủ đề], ưu tiên [ẩn dụ / mô hình / so sánh], chữ ngắn, dùng màu thương hiệu.",
+      "example": "Chọn 4. Minh họa “Kết quả tốt bắt đầu từ một hệ thống tốt”.",
+      "format": "PNG/JPEG • ưu tiên 4:5"
+    },
+    {
+      "choice": 5,
+      "id": "carousel",
+      "name": "Bộ ảnh nhiều trang",
+      "short": "Carousel",
+      "group": "thietkeanh",
+      "intent": "tao-carousel",
+      "asset": "06-carousel.jpg",
+      "use": "Giải thích nhiều ý theo trình tự; mỗi trang một ý.",
+      "inputs": "Chủ đề • số trang • tỉ lệ • lời kêu gọi cuối",
+      "command": "/thietkeanh Tạo carousel [số trang] về [chủ đề], mỗi trang một ý, tỉ lệ [1:1 / 4:5], dùng màu thương hiệu.",
+      "example": "Chọn 5. Làm 6 trang hướng dẫn chuẩn bị một buổi tư vấn.",
+      "format": "PNG/JPEG từng trang + caption"
+    },
+    {
+      "choice": 6,
+      "id": "infographic",
+      "name": "Sơ đồ / infographic",
+      "short": "Sơ đồ / infographic",
+      "group": "thietkeanh",
+      "intent": "tao-infographic",
+      "asset": "07-infographic.jpg",
+      "use": "Trình bày quy trình, hệ thống, so sánh hoặc dữ liệu có nguồn.",
+      "inputs": "Các bước hoặc dữ liệu thật • mục tiêu • tỉ lệ",
+      "command": "/thietkeanh Tạo infographic về [quy trình / dữ liệu], gồm [các bước / thông tin], dùng màu thương hiệu. Chỉ dùng số liệu có nguồn.",
+      "example": "Chọn 6. Vẽ quy trình tiếp nhận, tư vấn và chăm sóc khách hàng.",
+      "format": "PNG/JPEG • sơ đồ hoặc bảng so sánh"
+    },
+    {
+      "choice": 7,
+      "id": "comment-chain",
+      "name": "Bài và chuỗi bình luận",
+      "short": "Chuỗi bình luận",
+      "group": "vietbai",
+      "intent": "tao-comment-xau-chuoi",
+      "asset": "08-chuoi-binh-luan.jpg",
+      "use": "Bài mở đầu ngắn, phần chia sẻ tiếp nối trong các bình luận.",
+      "inputs": "Chủ đề • số bình luận • giọng văn",
+      "command": "/vietbai Viết bài ngắn và chuỗi [số] bình luận về [chủ đề], dùng giọng thương hiệu.",
+      "example": "Chọn 7. Viết một bài mở đầu và 5 bình luận về học thói quen mới.",
+      "format": "Bài mở đầu + bình luận có thứ tự"
+    },
+    {
+      "choice": 8,
+      "id": "reels",
+      "name": "Video ngắn có thoại",
+      "short": "Video có thoại",
+      "group": "taovideo",
+      "intent": "tao-video",
+      "asset": "09-video-co-thoai.jpg",
+      "use": "Trình bày một ý bằng lời thoại, cảnh quay và phụ đề.",
+      "inputs": "Chủ đề • thời lượng • giọng/ảnh/video thật",
+      "command": "/taovideo Tạo Reels [thời lượng] về [chủ đề], có lời thoại, phụ đề, tỉ lệ 9:16. Dùng tài nguyên tôi đã cung cấp.",
+      "example": "Chọn 8. Làm video 30 giây giải thích một mẹo học hiệu quả.",
+      "format": "MP4 khi có công cụ giọng và render"
+    },
+    {
+      "choice": 9,
+      "id": "broll",
+      "name": "Video cảnh minh họa",
+      "short": "Video không thoại",
+      "group": "taovideo",
+      "intent": "tao-video-broll",
+      "asset": "10-video-khong-thoai.jpg",
+      "use": "Cảnh hoặc ảnh chuyển động kèm hook ngắn, không có lời thoại.",
+      "inputs": "Chủ đề • thời lượng • cảnh/ảnh được phép dùng",
+      "command": "/taovideo Tạo video B-roll [thời lượng] về [chủ đề], không thoại, có câu hook, dùng cảnh và ảnh tôi đã cung cấp.",
+      "example": "Chọn 9. Video 15 giây về thói quen bắt đầu ngày mới.",
+      "format": "MP4 • ưu tiên 9:16"
+    }
+  ],
+  "automatic": {
+    "choice": 0,
+    "id": "automatic",
+    "group": "lapkehoach",
+    "intent": "ke-hoach-content",
+    "name": "Content theo lịch",
+    "command": "/lapkehoach Lập lịch content [7 ngày / 1 tháng] theo hồ sơ doanh nghiệp đã có. Chọn nhiều định dạng phù hợp, cho tôi duyệt lịch trước. Sau khi duyệt, tự sản xuất và chờ tôi duyệt thành phẩm rồi đăng."
+  }
+}

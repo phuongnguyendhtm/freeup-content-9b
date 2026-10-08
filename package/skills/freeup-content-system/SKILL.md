@@ -1,10 +1,13 @@
 ---
 name: freeup-content-system
-description: "Điều phối hệ thống content cho doanh nghiệp học viên: đọc hồ sơ, chọn nguồn, lập lịch, tạo nhiều dạng bài/ảnh/video và chờ duyệt trước khi đăng. Dùng khi yêu cầu làm content tự động, làm content tuần/tháng, hoặc một trong 7 nhóm lệnh tiếng Việt."
+description: "Điều phối hệ thống content cho doanh nghiệp học viên: đọc hồ sơ, chọn nguồn, lập lịch, tạo nhiều dạng bài/ảnh/video và chờ duyệt trước khi đăng. Dùng khi học viên nhắn “hệ thống content”, muốn xem bảng chọn dạng bài, yêu cầu làm content tự động, làm content tuần/tháng, hoặc một trong 7 nhóm lệnh tiếng Việt."
 user-invocable: true
 ---
 
 # Hệ thống Content — Quà tặng FREEUP
+
+## Bảng chọn bằng ảnh: “hệ thống content”
+Khi học viên trực tiếp yêu cầu mở menu bằng “hệ thống content” hoặc câu tương đương, đọc references/visual-menu.md. Trả ảnh bảng chọn thực và danh sách số; chọn số/tên rồi dùng intent trong catalog. Đây là bước xem hướng dẫn, không cần hồ sơ đầy đủ, không tạo job hoặc tự duyệt/đăng. Một số đơn lẻ chỉ là lựa chọn nếu hội thoại đang ở bảng chọn.
 
 ## Điều phối tự động và 7 nhóm chức năng
 Chỉ có 7 lệnh nhóm đăng ký native cùng skill điều phối này. Đọc references/commands.md để chọn nhóm và intent nội bộ. Câu bình thường và lệnh / dùng cùng dữ liệu/quy trình. Học viên không phải gọi mọi skill nối tiếp.

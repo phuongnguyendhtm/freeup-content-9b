@@ -1,6 +1,6 @@
 # 7 lệnh nhóm và cách nhắn bình thường
 
-Gói 1.4.1 có **8 skill**: một skill điều phối và 7 nhóm chức năng. Có 7 lệnh native trong bảng dưới. Mỗi nhóm có nhiều nhánh chuyên biệt; bộ hướng dẫn và các định dạng vẫn giữ đủ. Học viên có thể nhắn câu thường, không cần nhớ lệnh hoặc gọi từng skill.
+Gói 1.5.0 có **8 skill**: một skill điều phối và 7 nhóm chức năng. Có 7 lệnh native trong bảng dưới. Mỗi nhóm có nhiều nhánh chuyên biệt; bộ hướng dẫn và các định dạng vẫn giữ đủ. Học viên có thể nhắn câu thường, không cần nhớ lệnh hoặc gọi từng skill.
 
 | Lệnh | Chức năng | Ví dụ câu thường |
 |---|---|---|
@@ -11,6 +11,9 @@ Gói 1.4.1 có **8 skill**: một skill điều phối và 7 nhóm chức năng.
 | `/taovideo` | Tạo video content | Tạo video ngắn có lời thoại từ bài này, dùng giọng và tài nguyên của tôi. |
 | `/duyetvadang` | Duyệt và đăng content | Tôi duyệt chữ và ảnh của bài [ID], bản [số bản]. Đăng lên [kênh] lúc [thời gian]. |
 | `/xemketqua` | Xem thành phẩm và kết quả | Cho tôi xem các bài vừa làm, ảnh thật, trạng thái duyệt và thư mục lưu. |
+
+## Mở bảng chọn
+“Hệ thống content” là câu mở menu của skill điều phối, không thêm skill/lệnh native. Đọc visual-menu.md: 1–9 chọn dạng bài, 0 lập lịch. Nếu yêu cầu sản xuất đã rõ thì chạy thẳng nhánh, không bắt mở menu.
 
 ## Chọn nhánh
 Đọc command-map.json: commands là 7 nhóm, modes là chức năng nội bộ, legacy_commands là ánh xạ 33 tên cũ. Dựa vào yêu cầu, chọn intent cụ thể và thực hiện theo bảng chi tiết. Không lấy default_intent làm lý do bỏ qua lời nhắn rõ ràng: ví dụ /lapkehoach Tôi duyệt lịch là approve-editorial-plan, không phải tìm nguồn. /duyetvadang Cho tôi xem bản trước khi duyệt chưa cấp quyền duyệt/đăng.
