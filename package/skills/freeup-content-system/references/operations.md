@@ -1,6 +1,6 @@
 # Lưu dữ liệu và kiểm tra phiên bản
 
-Lịch có duyệt và tự sản xuất dùng `scripts/campaign.cjs` cùng **automation.md**: research-profile/sources/scan-next/collect/stories/plan/approve/queue/claim/finish/block/retry/spec/register/status. `content.cjs plan` bên dưới giữ tương thích với kho lịch cũ, chỉ là danh sách biên tập; không cấp quyền hay tạo hàng đợi. Dùng campaign.cjs cho `/lich` từ bản 1.5.0. `content.cjs new --task TASK_ID` chống tạo lại post của một việc đang tiếp tục. Đừng tự ghi trạng thái/approval vào JSON để vượt helper.
+Lịch có duyệt và tự sản xuất dùng `scripts/campaign.cjs` cùng **automation.md**: research-profile/sources/scan-next/collect/stories/plan/approve/queue/claim/finish/block/retry/spec/register/status. `content.cjs plan` bên dưới giữ tương thích với kho lịch cũ, chỉ là danh sách biên tập; không cấp quyền hay tạo hàng đợi. Dùng campaign.cjs cho `/lich` từ bản 1.5.1. `content.cjs new --task TASK_ID` chống tạo lại post của một việc đang tiếp tục. Đừng tự ghi trạng thái/approval vào JSON để vượt helper.
 
 Tài liệu này dành cho AI điều khiển helper; học viên chỉ dùng lệnh chat. Dùng Node do 9B cung cấp và truyền argument array qua exec khi có thể. Tất cả lệnh nhận `--project <path>`; nếu bỏ thì helper lấy `runtime.json` của skill. Không đổi project giữa các bước trong một bài. Với content.cjs, --file/--path/--receipt dùng **đường dẫn tuyệt đối** vì chúng được tính từ cwd; renderer tính input/media tương đối từ project.
 

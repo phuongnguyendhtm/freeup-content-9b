@@ -1,6 +1,6 @@
 {
   "name": "freeup-content-system",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "private": true,
   "description": "Bộ quà tặng content tự chứa cho học viên trên 9bizclaw",
   "type": "commonjs",

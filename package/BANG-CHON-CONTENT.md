@@ -1,6 +1,6 @@
-# Bảng chọn Content 9B — 1.5.0
+# Bảng chọn Content 9B — 1.5.1
 
-Sau khi cài hoặc nâng gói 1.5.0, mở chat mới với trợ lý đã cài và nhắn:
+Sau khi cài hoặc nâng gói 1.5.1, mở chat mới với trợ lý đã cài và nhắn:
 
 > hệ thống content
 
@@ -90,7 +90,7 @@ Một bài: mở bảng → chọn dạng + brief → 9B tạo chữ và ảnh/v
 
 Theo lịch: chọn 0 → chọn nguồn/ý tưởng theo doanh nghiệp → đề xuất lịch → bạn duyệt lịch → tự sản xuất → bạn duyệt thành phẩm → đăng → xem kết quả. Duyệt lịch chỉ cho phép sản xuất.
 
-Hướng dẫn nằm ở freeup-content-data/help/content-menu/1.5.0/; bài thật ở freeup-content-data/media_output/ngày/ID-bài/. Nhắn /xemketqua để xem thành phẩm. Điện thoại xem qua kênh chat có hỗ trợ gửi attachment, không mở bằng đường dẫn máy tính.
+Hướng dẫn nằm ở freeup-content-data/help/content-menu/1.5.1/; bài thật ở freeup-content-data/media_output/ngày/ID-bài/. Nhắn /xemketqua để xem thành phẩm. Điện thoại xem qua kênh chat có hỗ trợ gửi attachment, không mở bằng đường dẫn máy tính.
 
 ## Phạm vi tích hợp
 Bảng chọn nằm trong skill điều phối hiện có, gói vẫn có 8 skill / 7 nhóm lệnh. Không thay chính sách/quyền hay giao diện 9B. Mở menu chỉ xuất tài liệu, không tạo bài hoặc duyệt/đăng. Người trong hình mẫu là nhân vật AI; khi tạo chân dung thật phải dùng ảnh học viên. Nếu không có quyền gửi ảnh, 9B trả danh sách và đường dẫn, nói rõ ảnh chưa gửi được.

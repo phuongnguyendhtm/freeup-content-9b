@@ -15,10 +15,13 @@ function targetFolder(project,version){
  return dir;
 }
 function decode(asset){
- if(!/^[a-z0-9-]+\.jpg$/.test(asset.file)||asset.mime!=='image/jpeg')throw Error('Invalid menu filename/MIME');
+ const jpeg=/^[a-z0-9-]+\.jpg$/.test(asset.file)&&asset.mime==='image/jpeg';
+ const png=/^[a-z0-9-]+\.png$/.test(asset.file)&&asset.mime==='image/png';
+ if(!jpeg&&!png)throw Error('Invalid menu filename/MIME');
  if(typeof asset.data!=='string'||!Number.isInteger(asset.bytes)||asset.bytes<4||asset.bytes>2000000||asset.data.length>2800000)throw Error('Invalid menu image size');
  const bytes=Buffer.from(asset.data,'base64');
- if(bytes.toString('base64')!==asset.data||bytes.length!==asset.bytes||digest(bytes)!==asset.sha256||bytes[0]!==255||bytes[1]!==216||bytes.at(-2)!==255||bytes.at(-1)!==217)throw Error('Invalid menu image/checksum');
+ const magic=jpeg?bytes[0]===255&&bytes[1]===216&&bytes.at(-2)===255&&bytes.at(-1)===217:bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));
+ if(bytes.toString('base64')!==asset.data||bytes.length!==asset.bytes||digest(bytes)!==asset.sha256||!magic)throw Error('Invalid menu image/checksum');
  return {file:asset.file,bytes,sha256:asset.sha256,mime:asset.mime};
 }
 function exportMenu(c,options){

@@ -1,9 +1,9 @@
-# FREEUP Content 9B — bản học viên 1.5.0
+# FREEUP Content 9B — bản học viên 1.5.1
 
 Tự tạo bài viết, ảnh và video theo hồ sơ doanh nghiệp của bạn. Có **8 skill: 1 điều phối + 7 nhóm chức năng**, cùng các nhánh nội dung/thiết kế bên trong. Bạn dùng lệnh hoặc nhắn câu bình thường; AI phối hợp các nhóm, không cần bạn gọi từng bước.
 
 ## Cài trên Windows hoặc Mac
-1. [Tải ZIP 1.5.0](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.5.0.zip). Nhấp phải ZIP, chọn **Extract All / Giải nén tất cả**, mở thư mục đã giải nén.
+1. [Tải ZIP 1.5.1](https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.5.1.zip). Nhấp phải ZIP, chọn **Extract All / Giải nén tất cả**, mở thư mục đã giải nén.
 2. Giữ 9BizClaw v3 đã khởi tạo đang mở, kết thúc các lượt chat đang chạy. Windows mở **CAI-DAT-9B.cmd**; Mac mở **CAI-DAT-MAC.command**. Không mở tệp cài trong cửa sổ xem ZIP. Nhấn Enter nếu cài mới, nhập CO nếu nâng bản đã cài. Chờ báo **Đã cài và xác minh**.
 3. Mở chat mới với đúng trợ lý vừa cài, gửi **/thietlapcontent** hoặc “Kiểm tra hồ sơ doanh nghiệp tôi đã cung cấp và thiết lập content. Chỉ hỏi phần còn thiếu.”
 
@@ -15,7 +15,7 @@ Nhắn **hệ thống content** để 9B trả ảnh bảng chọn. Trả lời 
 
 Ví dụ: “Chọn 3. Dùng ảnh tôi đã tải, quote ‘Bắt đầu nhỏ, làm đều mỗi ngày’, màu thương hiệu, tỉ lệ 4:5.” Hoặc “Chọn 5. Làm carousel 6 trang về [chủ đề], dùng màu đã lưu.” Chỉ hỏi thông tin/ảnh còn thiếu, dùng hồ sơ đã có.
 
-Ảnh hướng dẫn lưu tại **freeup-content-data/help/content-menu/1.5.0/**; thành phẩm vẫn ở media_output. Ảnh AI trong bảng chỉ minh họa, không thay ảnh cá nhân học viên. Nếu công cụ gửi ảnh không được cấp quyền, 9B trả danh sách/lệnh và đường dẫn thật; không tự sửa quyền 9B.
+Ảnh hướng dẫn lưu tại **freeup-content-data/help/content-menu/1.5.1/**; thành phẩm vẫn ở media_output. Ảnh AI trong bảng chỉ minh họa, không thay ảnh cá nhân học viên. Nếu công cụ gửi ảnh không được cấp quyền, 9B trả danh sách/lệnh và đường dẫn thật; không tự sửa quyền 9B.
 
 ## 7 nhóm lệnh
 | Lệnh | Bạn muốn làm gì? |
@@ -58,3 +58,5 @@ Cài mới có 8 skill. Nâng máy từng cài bản cũ giữ dữ liệu và s
 
 ## Kiểm chứng
 Gói và các quy trình lưu/duyệt/hàng đợi được kiểm bằng fixture độc lập. Chưa xác nhận cài bản này trực tiếp trên máy học viên hoặc Mac. Nguồn thực, lịch nền, tạo ảnh/video AI và tài khoản đăng cần công cụ/kết nối thật trên máy; cài skill chưa tự bật các kết nối đó. Chỉ báo cài xong khi native inventory đủ 8 skill của gói eligible, kho và công cụ media đã được xác minh.
+
+Menu 1.5.1 đã có logo và linh vật FREEUP. Nhận diện menu không thay màu/ảnh của doanh nghiệp trong bài thật.

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "1.5.0",
+  "version": "1.5.1",
   "entry_messages": [
     "hệ thống content",
     "he thong content",
@@ -8,7 +8,7 @@
     "menu content"
   ],
   "intro_assets": [
-    "01-menu-content.jpg",
+    "01-menu-content.png",
     "00-quy-trinh.jpg"
   ],
   "choices": [
@@ -146,5 +146,6 @@
     "intent": "ke-hoach-content",
     "name": "Content theo lịch",
     "command": "/lapkehoach Lập lịch content [7 ngày / 1 tháng] theo hồ sơ doanh nghiệp đã có. Chọn nhiều định dạng phù hợp, cho tôi duyệt lịch trước. Sau khi duyệt, tự sản xuất và chờ tôi duyệt thành phẩm rồi đăng."
-  }
+  },
+  "menu_brand": "FREEUP"
 }
