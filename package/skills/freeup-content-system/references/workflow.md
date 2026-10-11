@@ -24,6 +24,8 @@ Tạo:
 
 Mỗi bài có ID riêng và brief gồm chủ đề, đối tượng, mục tiêu, một Big Idea, kênh, format, độ dài/thời lượng, nguồn, asset và CTA. Thu phần còn thiếu làm thay đổi nội dung; những lựa chọn hình thức nhỏ có thể dùng mặc định đã ghi.
 
+Thư mục lưu dùng mẫu loại nội dung - ngày - tiêu đề dễ đọc, còn ID chỉ là mã quản lý bên trong hồ sơ. Khi viết xong, ghi tiêu đề thật vào `headline` qua `content.cjs update`; helper đổi tên thư mục và trả đường dẫn mới. Đọc lại bằng `show --id` trước khi render/lưu ảnh nếu vừa sửa tiêu đề. Không dùng `media_output/<ngày>/<post_id>` để đoán đường dẫn.
+
 | Dữ liệu và mục tiêu | Format nên cân nhắc |
 |---|---|
 | Một nguyên tắc có quan hệ/ẩn dụ nhìn thấy được | Visual Insight |

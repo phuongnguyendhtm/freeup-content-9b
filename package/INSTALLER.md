@@ -1,4 +1,4 @@
-# Bộ cài content 1.5.1 cho 9B
+# Bộ cài content 1.5.2 cho 9B
 
 Đường đi: ZIP tải/đính kèm → kiểm hash và giải nén an toàn → install-job → chờ gateway rảnh → bootstrap → native skills install từng thư mục. Không cài/thay cấu hình ngay trong lượt model đang xử lý yêu cầu cài. Không đưa ZIP cho Skills Upload hoặc skills install.
 
@@ -22,7 +22,7 @@ Runtime/agent/workspace lấy từ native CLI. Chỉ thêm allowlist cho agent �
 
 Kho freeup-content-data ngoài skill, init chỉ tạo phần thiếu. Hồ sơ, bài, ý tưởng, ảnh không bị thay khi nâng. npm ci dùng package-lock của conductor, tải Chrome/FFmpeg riêng; không phụ thuộc node_modules hay cache của bộ Antigravity. completed cần inventory 8 skill eligible, kho thực và kiểm dependencies khi yêu cầu cài media. Không báo thành công chỉ vì đã tạo job.
 
-/thietlapcontent trong lượt mới đọc hồ sơ/tài liệu/native business data có quyền truy cập trước; chỉ hỏi phần bắt buộc thiếu/mâu thuẫn. Không dùng thông tin giảng viên hoặc buộc nhập lại hồ sơ đủ. Thành phẩm lưu theo ngày/ID; /xemketqua gửi tệp thật khi công cụ cho phép, /xemketqua Mở thư mục: mở trên máy chạy 9B. Điện thoại cần kênh đã kết nối và receipt gửi tệp thực.
+/thietlapcontent trong lượt mới đọc hồ sơ/tài liệu/native business data có quyền truy cập trước; chỉ hỏi phần bắt buộc thiếu/mâu thuẫn. Không dùng thông tin giảng viên hoặc buộc nhập lại hồ sơ đủ. Thành phẩm lưu theo mẫu loại nội dung - ngày - tiêu đề bài; /xemketqua gửi tệp thật khi công cụ cho phép, /xemketqua Mở thư mục: mở trên máy chạy 9B. Điện thoại cần kênh đã kết nối và receipt gửi tệp thực.
 
 ## Kiểm chứng
 

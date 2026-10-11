@@ -8,7 +8,7 @@ Có thể chạy trong thư mục skill đã được 9bizclaw cài hoặc gọi
 
 ```text
 node scripts/render-media.cjs --project <project-hoc-vien> --input <job.json>
-node scripts/render-media.cjs --project <project-hoc-vien> --input <job.json> --output media_output/2026-10-06/post_001/founder-quote/v1
+node scripts/render-media.cjs --project <project-hoc-vien> --input <job.json> --output "<thư-mục-bài-do-show-trả-về>/founder-quote/v1"
 node scripts/render-media.cjs --project <project-hoc-vien> --html <file.html> --format infographic
 node scripts/render-smoke.cjs --project <project-kiem-thu>
 ```

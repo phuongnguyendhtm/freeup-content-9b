@@ -17,6 +17,8 @@ Chọn nhánh theo ý định trong lời nhắn; học viên không cần nhớ
 
 Đọc delivery.md. Dùng outputs/open để xem/mở file thật trên máy chạy 9B; điện thoại cần tệp gửi qua kênh đã kết nối. Đọc số liệu có nguồn trước đánh giá; chỉ đồng bộ bảng khi học viên yêu cầu và có công cụ. Xem thành phẩm đã có không phụ thuộc hồ sơ đủ.
 
+Thư mục thành phẩm dùng tiêu đề bài viết từ bản 1.5.2. Khi học viên yêu cầu đổi các tên cũ `post_...`, xem danh sách `content.cjs rename-outputs`, áp dụng bằng `--apply true` sau khi xác minh tác vụ liên quan đã kết thúc, rồi trả đường dẫn thật. Tiếp tục quản lý bài bằng ID trong hồ sơ; không đổi ID hoặc tạo lại bài để đổi tên thư mục.
+
 Ví dụ câu thường hoặc sau /xemketqua:
 
 > Cho tôi xem các bài vừa làm, ảnh thật, trạng thái duyệt và thư mục lưu.

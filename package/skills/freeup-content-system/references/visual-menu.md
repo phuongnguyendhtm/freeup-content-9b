@@ -6,7 +6,7 @@ Chỉ mở khi lời nhắn trực tiếp của học viên yêu cầu xem bản
 Menu hoạt động trước khi hồ sơ đủ. Không chạy content.cjs init/setup, campaign, tạo bài, đăng hoặc cron chỉ để mở bảng chọn. Khi bắt đầu sản xuất mới đọc hồ sơ đã có và hỏi phần cần còn thiếu theo setup.md. Một số đơn lẻ chỉ là lựa chọn khi lượt gần đây đã mở menu/đang hỏi dạng content. Nếu không có ngữ cảnh đó thì hỏi học viên muốn chọn mục nào; không diễn giải mọi con số thành lệnh.
 
 ## Trả ảnh thật
-1. Chạy Node của 9B với argument arrays: `node "{baseDir}/scripts/menu.cjs" export`. Helper đọc runtime hiện có để tìm project; chỉ xuất ảnh hướng dẫn vào `help/content-menu/1.5.1/`. Không dùng đường dẫn máy giảng viên. Với project override hợp lệ dùng `--project PATH` như các helper khác.
+1. Chạy Node của 9B với argument arrays: `node "{baseDir}/scripts/menu.cjs" export`. Helper đọc runtime hiện có để tìm project; chỉ xuất ảnh hướng dẫn vào `help/content-menu/1.5.2/`. Không dùng đường dẫn máy giảng viên. Với project override hợp lệ dùng `--project PATH` như các helper khác.
 2. Trong Chat của ứng dụng 9B, trả ảnh bằng một dòng riêng `MEDIA:<localPath>` với đường dẫn thật từ files, ngoài code block (ảnh menu trước, sơ đồ sau khi phù hợp). Đây là cú pháp attachment hiện có của 9B, không tự tạo một công cụ gửi mới. Với kênh đã kết nối khác, dùng công cụ attachment/ảnh được cấp và kiểm receipt thực; không gọi gửi sang khách hàng chỉ để xem menu trong Chat ứng dụng. Trả kèm danh sách số/tên dạng và mời chọn số kèm chủ đề. Không gửi cả 11 ảnh trong lượt đầu.
 3. Nếu công cụ ảnh không có/bị từ chối, trả bảng chữ + lệnh + đường dẫn local thật và nói chưa gửi được ảnh trong kênh hiện tại. Không nói đã gửi nếu chỉ có path. Không sửa native policy, allowlist, AGENTS/SOUL/USER hay tải file lên nơi công khai để né quyền. Điện thoại chỉ xem qua attachment của kênh đã kết nối, path local không phải link điện thoại.
 
@@ -49,4 +49,4 @@ Chỉ khi muốn xem tất cả/đào tạo: `menu.cjs export --all true` xuất
 Helper chỉ dùng Node built-in để xuất tài liệu tĩnh, giữ nguyên hồ sơ/database/media_output, không gọi mạng, AI, lịch nền hoặc publisher. Kiểm thử local xác nhận định tuyến/export; việc gửi ảnh và tự gọi skill trong chat còn tùy quyền/công cụ thực trên máy học viên. Không nhận đã cài hay đã gửi khi chưa kiểm chứng native.
 
 ## Nhận diện menu FREEUP
-Menu 1.5.1 dùng logo FREEUP và linh vật trong bộ quà tặng. Linh vật trên menu chỉ minh họa; không dùng nó thay chân dung học viên trong bài thật, không ghi đè brand_config của doanh nghiệp. Các bài thật vẫn dùng hồ sơ, ảnh, màu và giọng của doanh nghiệp hiện tại.
+Menu 1.5.2 dùng logo FREEUP và linh vật trong bộ quà tặng. Linh vật trên menu chỉ minh họa; không dùng nó thay chân dung học viên trong bài thật, không ghi đè brand_config của doanh nghiệp. Các bài thật vẫn dùng hồ sơ, ảnh, màu và giọng của doanh nghiệp hiện tại.

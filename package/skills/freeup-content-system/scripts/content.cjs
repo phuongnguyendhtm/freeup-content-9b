@@ -3,6 +3,7 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const lib=require('./lib/project.cjs');
 const output=require('./lib/output.cjs');
+const names=require('./lib/output-names.cjs');
 const profile=require('./lib/profile.cjs');
 const {options:o,positional}=lib.parse(process.argv.slice(2));const command=positional.shift()||'help';
 const project=lib.root(o.project);
@@ -20,9 +21,9 @@ function active(r){return(r.artifacts||[]).filter(a=>a.active!==false);}
 const editable=['big_idea','sources','quote','quote_candidates','quote_type','layout','preset','source_photo','headline','headline_candidates','visual_format','concepts','selected_concept','mia','text_placement','cta','design_record','comments','blocker','parent_id'];
 function contentHash(r,folder){const fields=['format','topic','goal',...editable.filter(k=>k!=='blocker')];const data=Object.fromEntries(fields.map(k=>[k,r[k]??null]));for(const name of ['caption.txt','master_content.md']){const f=path.join(folder,name);data[name]=fs.existsSync(f)?fs.readFileSync(f,'utf8'):null;}return crypto.createHash('sha256').update(JSON.stringify(data)).digest('hex');}
 const fileHash=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
-function sync(r){const items=read(db('post_inventory'));const item={id:r.id,topic:r.topic,format:r.format,parent_id:r.parent_id||null,status:r.status,folder:path.relative(project,path.dirname(locate(r.id))),updated_at:r.updated_at};const at=items.findIndex(x=>x.id===r.id);at<0?items.push(item):items.splice(at,1,item);write(db('post_inventory'),items);}
+function sync(r){const items=read(db('post_inventory'));const item={id:r.id,title:names.title(r),topic:r.topic,format:r.format,parent_id:r.parent_id||null,status:r.status,folder:path.relative(project,path.dirname(locate(r.id))),updated_at:r.updated_at};const at=items.findIndex(x=>x.id===r.id);at<0?items.push(item):items.splice(at,1,item);write(db('post_inventory'),items);}
 function refreshIdea(id){if(!id)return;const all=jobs().map(f=>read(f)).filter(r=>r.idea_id===id);const produced=['READY_FOR_REVIEW','APPROVED','SCHEDULED','PUBLISHED'];const status=all.length&&all.every(r=>produced.includes(r.status))?'PRODUCED':all.length?'IN_PROGRESS':'NEW';const ideas=read(db('idea_bank')),idea=ideas.find(x=>x.id===id);if(!idea)fail('Idea ID không có.');idea.status=status;idea.job_ids=all.map(r=>r.id);idea.updated_at=stamp();write(db('idea_bank'),ideas);const pipeline=read(db('ideation_pipeline')),at=pipeline.findIndex(x=>x.idea_id===id),item={idea_id:id,status,jobs:all.map(r=>({id:r.id,format:r.format,status:r.status})),updated_at:stamp()};at<0?pipeline.push(item):pipeline.splice(at,1,item);write(db('ideation_pipeline'),pipeline);}
-function save(f,r,event,details){r.updated_at=stamp();r.history.push({at:stamp(),event,details});write(f,r);sync(r);refreshIdea(r.idea_id);output.jobOutput(project,path.dirname(f),r);}
+function save(f,r,event,details){const previous=path.dirname(f),folder=names.ensure(project,previous,r,contentHash);f=path.join(folder,'record.json');r.updated_at=stamp();r.history.push({at:stamp(),event,details});write(f,r);sync(r);refreshIdea(r.idea_id);if(previous!==folder)output.overview(project,names.records(project));else output.jobOutput(project,folder,r);}
 function check(r,folder,qaRequired=true){
 const errors=[];if(!r.big_idea?.trim())errors.push('Thiếu Big Idea.');
 const caption=path.join(folder,'caption.txt');if(!fs.existsSync(caption)||!fs.readFileSync(caption,'utf8').trim())errors.push('Caption trống.');
@@ -42,7 +43,7 @@ if(r.format==='visual-insight'&&qa){if(!Array.isArray(qa.checks)||qa.checks.leng
 return errors;}
 function approvalMatches(r,folder){return r.approval?.content_hash===contentHash(r,folder)&&r.approval?.artifact_hashes?.join('|')===active(r).map(a=>a.sha256).join('|');}
 function main(){
-if(command==='help')return print('init | doctor | profile | setup --file BRAND_JSON (partial updates allowed) | strategy --file STRATEGY_JSON | ideas [--file IDEAS_JSON] | assets [--file JSON] | channels [--file JSON] | plan [--file JSON] | new --topic TEXT --format FORMAT [--mode produce|review|plan --parent POST_ID --idea IDEA_ID --task TASK_ID] | list | show --id ID | outputs [--id ID] | open [--id ID | --all true] --confirm USER_INSTRUCTION | update --id ID --file JSON | artifact --id ID --path FILE [--role ROLE] | artifact --id ID --native UUID --receipt JSON | qa --id ID --file QA_JSON | validate --id ID | approve --id ID --by USER --note TEXT [--scope content|media|publish --channel TARGET --at now|ISO_OFFSET] | schedule --id ID --schedule-id REAL_ID --channel TARGET --at ISO_OFFSET --evidence TEXT | published --id ID --channel TARGET --url URL --evidence TEXT | feedback --id ID --text TEXT [--scope current|permanent --by USER] | metrics --id ID --file JSON | templates [--file JSON]. Every command accepts --project PATH. Publish approval requires --channel.');
+if(command==='help')return print('init | doctor | profile | setup --file BRAND_JSON (partial updates allowed) | strategy --file STRATEGY_JSON | ideas [--file IDEAS_JSON] | assets [--file JSON] | channels [--file JSON] | plan [--file JSON] | new --topic TEXT --format FORMAT [--title TEXT] [--mode produce|review|plan --parent POST_ID --idea IDEA_ID --task TASK_ID] | rename-outputs [--id ID --title TEXT] [--apply true] | list | show --id ID | outputs [--id ID] | open [--id ID | --all true] --confirm USER_INSTRUCTION | update --id ID --file JSON | artifact --id ID --path FILE [--role ROLE] | artifact --id ID --native UUID --receipt JSON | qa --id ID --file QA_JSON | validate --id ID | approve --id ID --by USER --note TEXT [--scope content|media|publish --channel TARGET --at now|ISO_OFFSET] | schedule --id ID --schedule-id REAL_ID --channel TARGET --at ISO_OFFSET --evidence TEXT | published --id ID --channel TARGET --url URL --evidence TEXT | feedback --id ID --text TEXT [--scope current|permanent --by USER] | metrics --id ID --file JSON | templates [--file JSON]. Every command accepts --project PATH. Publish approval requires --channel.');
 if(command==='init'){lib.init(project);return print({project,initialized:true,brand_configured:read(db('brand_config')).configured});}
 if(command==='doctor'){
  if(!process.env.PUPPETEER_CACHE_DIR&&fs.existsSync(path.join(lib.skillRoot,'.runtime','puppeteer')))process.env.PUPPETEER_CACHE_DIR=path.join(lib.skillRoot,'.runtime','puppeteer');
@@ -76,11 +77,19 @@ if(command==='new'){
  if(!o.topic?.trim()||!formats.includes(o.format))fail('Cần topic và format: '+formats.join(', '));
  if(o.task){if(!/^task_[a-f0-9]{24}$/.test(o.task))fail('Task ID không hợp lệ.');const existing=jobs().map(f=>({f,r:read(f)})).filter(x=>x.r.automation_task_id===o.task);if(existing.length>1)fail('Task có nhiều bài; cần kiểm tra trước tiếp tục.');if(existing.length){const {f,r}=existing[0];if(r.topic!==o.topic||r.format!==o.format||r.idea_id!==o.idea)fail('Task đã gắn với brief khác.');sync(r);refreshIdea(r.idea_id);return print({id:r.id,folder:path.dirname(f),status:r.status,reused:true});}}
  if(o.mode&&!['produce','review','plan'].includes(o.mode))fail('Mode không hợp lệ.');
- const day=localDate(),id='post_'+day.replaceAll('-','')+'_'+crypto.randomBytes(4).toString('hex'),folder=path.join(project,'media_output',day,id);
+ const day=localDate(),id='post_'+day.replaceAll('-','')+'_'+crypto.randomBytes(4).toString('hex');
  if(o.parent)locate(o.parent);const idea=o.idea?read(db('idea_bank')).find(x=>x.id===o.idea):null;if(o.idea&&!idea)fail('Idea ID không có.');
- fs.mkdirSync(folder,{recursive:true});const r={schema_version:1,id,topic:o.topic,format:o.format,goal:o.goal||'authority',mode:o.mode||'produce',parent_id:o.parent||null,date_local:day,status:'DRAFT',created_at:stamp(),updated_at:stamp(),sources:[{type:'user_brief',text:o.topic}],big_idea:null,artifacts:[],qa:null,approval:null,feedback:[],history:[{at:stamp(),event:'created'}]};
+ const r={schema_version:1,id,topic:o.topic,format:o.format,goal:o.goal||'authority',mode:o.mode||'produce',parent_id:o.parent||null,date_local:day,status:'DRAFT',created_at:stamp(),updated_at:stamp(),sources:[{type:'user_brief',text:o.topic}],big_idea:null,artifacts:[],qa:null,approval:null,feedback:[],history:[{at:stamp(),event:'created'}]};
+ if(o.title)r.output_title=o.title;const folder=names.create(project,day,r);
  if(o.task)r.automation_task_id=o.task;
  if(idea){r.idea_id=idea.id;r.sources=idea.sources;}const f=path.join(folder,'record.json');write(f,r);fs.writeFileSync(path.join(folder,'caption.txt'),'');sync(r);refreshIdea(r.idea_id);return print({id,folder,status:r.status});
+}
+if(command==='rename-outputs'){
+ if(o.apply!==undefined&&o.apply!=='true')fail('Chỉ dùng --apply true để xác nhận đổi tên.');if(o.title&&!o.id)fail('Tiêu đề riêng cần --id bài cụ thể.');
+ const items=names.records(project).filter(item=>!o.id||item.r.id===o.id);if(o.id&&!items.length)fail('Không tìm thấy bài '+o.id);
+ if(o.title)items[0].r.output_title=o.title;
+ const moves=names.plan(project,items);if(o.apply!=='true')return print({mode:'preview',moves});
+ const result=names.apply(project,moves,{contentHash,incoming:o.title?items[0].r:undefined});output.overview(project,names.records(project));return print({mode:'applied',...result});
 }
 if(command==='list')return print(read(db('post_inventory')));
 if(command==='outputs'||command==='open'){
@@ -132,7 +141,7 @@ if(command==='update'){
 }else if(command==='metrics'){
  const input=read(path.resolve(o.file||fail('Cần metrics JSON.')));if(!input.source||!input.observed_at)fail('Cần source/observed_at.');r.metrics=r.metrics||[];r.metrics.push(input);const all=read(db('metrics'));all.push({post_id:r.id,...input});write(db('metrics'),all);save(f,r,'metrics_recorded',{source:input.source});
 }else fail('Lệnh chưa hỗ trợ '+command);
-print({id:r.id,status:r.status,folder});
+print({id:r.id,status:r.status,folder:path.dirname(locate(r.id)),title:names.title(r)});
 }
 try{main();}catch(e){process.stderr.write(e.message+'\n');process.exitCode=1;}
 

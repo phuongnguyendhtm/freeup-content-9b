@@ -1,9 +1,9 @@
-Hãy tải bộ quà tặng content học viên 1.5.1 từ:
-https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.5.1.zip
+Hãy tải bộ quà tặng content học viên 1.5.2 từ:
+https://raw.githubusercontent.com/phuongnguyendhtm/freeup-content-9b/main/distribution/FREEUP-CONTENT-9B-HOC-VIEN-v1.5.2.zip
 
-SHA-256 phải đúng BC910B644DBDC863CB477E7BDB2CB115A2B790DFB64A04E09E5B2D55A1E5F38F. Nếu khác, dừng. Tải đúng rồi làm theo yêu cầu dưới đây:
+SHA-256 phải đúng B82CD225935C1CE70EAC2ED8E35E6E950A0CC3D90112D4BB3C7F602E228C8EE6. Nếu khác, dừng. Tải đúng rồi làm theo yêu cầu dưới đây:
 
-Hãy cài bộ quà tặng hệ thống content 1.5.1 trong ZIP vừa tải cho agent 9B đang dùng. Tôi cho phép tạo thư mục riêng, cài skill qua bộ cài native và tải công cụ ảnh/video của gói. Máy tôi không có bản Antigravity hay thư mục của giảng viên.
+Hãy cài bộ quà tặng hệ thống content 1.5.2 trong ZIP vừa tải cho agent 9B đang dùng. Tôi cho phép tạo thư mục riêng, cài skill qua bộ cài native và tải công cụ ảnh/video của gói. Máy tôi không có bản Antigravity hay thư mục của giảng viên.
 
 Tôi cho phép nâng phiên bản cũ của đúng package_id freeup-content-student-gift khi bộ cài xác minh receipt và quyền sở hữu/hash. Giữ toàn bộ hồ sơ doanh nghiệp, bài, ảnh, ý tưởng và dữ liệu riêng. Không ghi đè skill khác hoặc file đã sửa riêng chưa được quản lý; không dùng --upgrade để thử vượt lỗi policy.
 
@@ -19,4 +19,4 @@ Sau khi launch thành công, cho tôi biết job_file, log_file và cách kiểm
 
 Sau khi cài thành công, tôi dùng /thietlapcontent trong lượt mới. Đọc hồ sơ doanh nghiệp đã lưu, tài liệu và thông tin tôi đã cung cấp trong 9B, hồ sơ native khi có quyền đọc. Dùng lại dữ liệu đã rõ; chỉ hỏi tối đa ba nhóm bắt buộc còn thiếu hoặc mâu thuẫn mỗi lần. Hồ sơ đủ thì báo sẵn sàng, không hỏi lại. Thiếu logo, ảnh hay kênh đăng không buộc khai lại hồ sơ.
 
-Sau mỗi bài, lưu nội dung và tệp ảnh/video thật vào kho riêng theo ngày/ID. /xemketqua xem thành phẩm; /xemketqua Mở thư mục: mở thư mục trên máy chạy 9B. Điện thoại dùng kênh đã kết nối hỗ trợ gửi tệp và xác minh gửi thành công. Không tự đăng công khai, kết nối tài khoản hay đăng bài từ quyền cài này.
+Sau mỗi bài, lưu nội dung và tệp ảnh/video thật vào kho riêng theo mẫu loại nội dung - ngày - tiêu đề bài. /xemketqua xem thành phẩm; /xemketqua Mở thư mục: mở thư mục trên máy chạy 9B. Điện thoại dùng kênh đã kết nối hỗ trợ gửi tệp và xác minh gửi thành công. Không tự đăng công khai, kết nối tài khoản hay đăng bài từ quyền cài này.

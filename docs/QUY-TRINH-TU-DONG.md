@@ -9,7 +9,7 @@ Một skill điều phối giữ hồ sơ, ID bài/lịch, trạng thái, QA và
 2. **Nguồn và ý tưởng:** đọc tài liệu riêng, câu chuyện thật và các nguồn chuyên gia theo ngành; chọn góc nhìn mới phù hợp khách hàng.
 3. **Đề xuất lịch:** mỗi dòng có một Big Idea, định dạng, kênh, giờ dự kiến, nguồn và lý do chọn. Dùng campaign.cjs tạo ID/bản và trình để học viên duyệt. Lịch kế hoạch chưa cấp quyền đăng.
 4. **Duyệt lịch:** yêu cầu duyệt rõ và đúng bản tạo queue sản xuất. Sau khi đã duyệt, điều phối tiếp tục sản xuất các dòng trong phạm vi đó; người dùng không phải gọi riêng từng nhóm.
-5. **Sản xuất:** tạo brief/chữ, gọi nhánh ảnh hoặc video phù hợp, tạo tệp thật, mở và QA, lưu caption/media/nguồn/trạng thái theo ngày/ID. Chạy lại đọc queue và lease để tiếp tục phần còn thiếu, tránh làm trùng.
+5. **Sản xuất:** tạo brief/chữ, gọi nhánh ảnh hoặc video phù hợp, tạo tệp thật, mở và QA, lưu caption/media/nguồn/trạng thái theo mẫu loại nội dung - ngày - tiêu đề bài. Chạy lại đọc queue và lease để tiếp tục phần còn thiếu, tránh làm trùng.
 6. **Duyệt thành phẩm:** gửi chữ và media thật qua công cụ có sẵn cùng ID/bản/kênh/giờ; sửa tạo bản mới và kiểm phần duyệt bị ảnh hưởng. Chờ duyệt trước khi đăng.
 7. **Đăng và đo:** kiểm quyền bản hiện tại, kênh và giờ, đăng/hẹn đăng bằng công cụ đã kết nối, lưu receipt. Dùng dữ liệu thực cho kế hoạch sau.
 
@@ -34,4 +34,4 @@ Lựa chọn cụ thể của học viên/lịch đã duyệt ưu tiên hơn b�
 Để chạy khi không có lượt chat, /lapkehoach Bật theo dõi… phải tạo job native 9B và kiểm job/run history. Cài skill hoặc nói “đã bật” chưa tạo tự động hóa. Máy/Gateway cần hoạt động và có kết nối đọc nguồn, tạo media, gửi thành phẩm, đăng thực. Scheduler tiếp tục queue của lịch đã duyệt; không tự duyệt hoặc đăng sản phẩm. Đọc automation.md.
 
 ## Thành phẩm
-Kho nằm ở freeup-content-data/media_output/ngày/ID-bài/ trên máy chạy 9B. /xemketqua đọc nội dung và gửi tệp thật; /xemketqua Mở thư mục bài… mở trên máy. Điện thoại dùng kênh đã kết nối có gửi tệp; đường dẫn máy tính không phải link điện thoại.
+Kho nằm ở freeup-content-data/media_output/ngày/loại - ngày - tiêu-đề-bài/ trên máy chạy 9B. /xemketqua đọc nội dung và gửi tệp thật; /xemketqua Mở thư mục bài… mở trên máy. Điện thoại dùng kênh đã kết nối có gửi tệp; đường dẫn máy tính không phải link điện thoại.

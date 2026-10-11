@@ -1,6 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path');
 const lib=require('./project.cjs');
+const names=require('./output-names.cjs');
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const href=p=>p.split(path.sep).map(encodeURIComponent).join('/');
 const text=f=>fs.existsSync(f)?fs.readFileSync(f,'utf8'):'';
@@ -20,13 +21,14 @@ function jobOutput(project,folder,r){
   return `<figure><figcaption>${escape(a.role||'Thành phẩm')}</figcaption>${content}</figure>`;
  }).join('');
  const back=href(path.relative(folder,path.join(project,'media_output','index.html')));
- const body=`<nav><a href="${back}">Kho thành phẩm</a><a href="caption.txt" download>Tải nội dung đăng</a>${master?'<a href="master_content.md" download>Tải bài gốc</a>':''}</nav><h1>${escape(r.topic)}</h1><small>${escape(r.id)} · ${escape(status(r.status))}</small><article><h2>Nội dung đăng</h2><pre>${escape(caption||'Nội dung đang được soạn.')}</pre></article>${media?`<section><h2>Ảnh và video</h2><div class="assets">${media}</div></section>`:''}${master?`<article><h2>Bài gốc</h2><pre>${escape(master)}</pre></article>`:''}`;
- fs.writeFileSync(preview,shell(r.topic,body));
- return {id:r.id,topic:r.topic,status:r.status,folder,preview,caption,master_content:master,artifacts,phone:{local_path_accessible:false,note:'Muốn xem trên điện thoại, gửi caption và tệp/asset qua kênh chat đã kết nối bằng công cụ 9B thực có. Chỉ báo đã gửi khi công cụ xác nhận.'}};
+ const title=names.title(r);
+ const body=`<nav><a href="${back}">Kho thành phẩm</a><a href="caption.txt" download>Tải nội dung đăng</a>${master?'<a href="master_content.md" download>Tải bài gốc</a>':''}</nav><h1>${escape(title)}</h1><small>${escape(r.id)} · ${escape(status(r.status))}</small><article><h2>Nội dung đăng</h2><pre>${escape(caption||'Nội dung đang được soạn.')}</pre></article>${media?`<section><h2>Ảnh và video</h2><div class="assets">${media}</div></section>`:''}${master?`<article><h2>Bài gốc</h2><pre>${escape(master)}</pre></article>`:''}`;
+ fs.writeFileSync(preview,shell(title,body));
+ return {id:r.id,title,topic:r.topic,status:r.status,folder,preview,caption,master_content:master,artifacts,phone:{local_path_accessible:false,note:'Muốn xem trên điện thoại, gửi caption và tệp/asset qua kênh chat đã kết nối bằng công cụ 9B thực có. Chỉ báo đã gửi khi công cụ xác nhận.'}};
 }
 function overview(project,records){
  const root=path.join(project,'media_output');fs.mkdirSync(root,{recursive:true});
- const cards=records.map(({r,folder})=>{jobOutput(project,folder,r);const link=href(path.relative(root,path.join(folder,'index.html')));return `<article><h2><a href="${link}">${escape(r.topic)}</a></h2><small>${escape(r.id)} · ${escape(status(r.status))}</small></article>`;}).join('');
+ const cards=records.map(({r,folder})=>{jobOutput(project,folder,r);const link=href(path.relative(root,path.join(folder,'index.html')));return `<article><h2><a href="${link}">${escape(names.title(r))}</a></h2><small>${escape(r.id)} · ${escape(status(r.status))}</small></article>`;}).join('');
  const preview=path.join(root,'index.html');fs.writeFileSync(preview,shell('Kho thành phẩm',`<h1>Kho thành phẩm</h1><p>Mở một bài để đọc nội dung và xem ảnh/video đã lưu. Đây là trang xem trên máy tính của bạn.</p>${cards||'<p>Chưa có bài. Dùng /vietbai hoặc /anh để bắt đầu.</p>'}`));return {folder:root,preview,count:records.length};
 }
 module.exports={jobOutput,overview};
