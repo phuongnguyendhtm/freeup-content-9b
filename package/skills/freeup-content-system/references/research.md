@@ -11,9 +11,13 @@ Nếu 9B có công cụ như `search_business_documents` và `read_business_docu
 
 Một URL chưa truy cập được không là nội dung đã đọc. Nguồn cần đăng nhập hoặc công cụ thiếu quyền: lưu trạng thái chưa đọc, tiếp tục phần có dữ liệu; yêu cầu học viên gửi nội dung khi đó là đầu vào thiết yếu. Không dùng browser session/tài khoản của người tặng.
 
+## Lưu bản gốc trước khi trích insight
+
+Bắt buộc đọc original-source.md. Ngân hàng lưu nguyên văn bài/caption ở E và đúng ảnh bài nguồn ở D/N, kèm URL và bằng chứng. Phân tích AI/angle/brief đặt ở F hoặc trường phân tích riêng. Chưa đủ quyền/đọc đầy đủ thì giữ permalink và nêu thiếu dữ liệu, không thay bằng nội dung viết lại.
+
 ## Trích xuất insight
 
-Cho mỗi nguồn, ghi: URL/tệp/tài liệu ID; tiêu đề; ngày truy cập; đoạn hoặc tóm tắt hỗ trợ; dữ kiện so với ý kiến; điều còn chưa rõ. Không sao chép nguyên bài vào output; viết lại insight theo đối tượng học viên và dẫn nguồn nơi cần.
+Cho mỗi nguồn, ghi: URL/tệp/tài liệu ID; tiêu đề; ngày truy cập; đoạn hoặc tóm tắt hỗ trợ; dữ kiện so với ý kiến; điều còn chưa rõ. Bản gốc trong ngân hàng tuân theo original-source.md. Bài thành phẩm ở khâu sản xuất dùng insight riêng theo đối tượng học viên và dẫn nguồn; không trộn bản gốc với bản do AI viết.
 
 Mỗi ý tưởng lưu tối thiểu: ID, chủ đề, đối tượng, vấn đề, insight một câu, hook, trụ cột/góc nhìn, mục tiêu, format gợi ý, nguồn và trạng thái. Trùng insight → hợp nhất hoặc đổi góc nhìn có lý do. Không đổi một câu hook rồi coi là nhiều ý tưởng độc lập.
 

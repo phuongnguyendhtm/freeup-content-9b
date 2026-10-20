@@ -7,6 +7,7 @@ const crypto = require('node:crypto');
 const {spawnSync} = require('node:child_process');
 const lib = require('./lib/project.cjs');
 const profile = require('./lib/profile.cjs');
+const {sourceRecord} = require('./lib/source-record.cjs');
 const formats = ['story', 'founder-quote', 'visual-insight', 'image', 'carousel', 'infographic', 'comment-chain', 'reels', 'broll'];
 const files = ['expert_sources', 'source_library', 'story_bank', 'campaigns', 'production_queue', 'content_automations', 'content_automation_settings', 'research_preferences', 'source_scan_state'];
 const stamp = () => new Date().toISOString();
@@ -182,7 +183,7 @@ function execute(project, command, o) {
       if (v.status === 'BLOCKED') need(text(v.reason), 'Nguồn bị chặn cần reason.');
       const metrics = v.observed_metrics || null;
       if (metrics) { need(iso(metrics.observed_at) && text(metrics.evidence), 'Số tương tác cần thời điểm đo/bằng chứng.'); for (const [k, value] of Object.entries(metrics)) if (!['observed_at', 'evidence'].includes(k)) need(['views', 'likes', 'comments', 'shares'].includes(k) && Number.isFinite(value) && value >= 0, 'Số tương tác không hợp lệ.'); }
-      return {id: 'item_' + hash(address).slice(0, 20), source_id: v.source_id, url: address, title: v.title, status: v.status, accessed_at: v.accessed_at, published_at: iso(v.published_at) ? v.published_at : null, summary: v.status === 'READ' ? v.summary : null, evidence: v.evidence || null, reason: v.reason || null, observed_metrics: metrics};
+      return {id: 'item_' + hash(address).slice(0, 20), source_id: v.source_id, url: address, title: v.title, status: v.status, accessed_at: v.accessed_at, published_at: iso(v.published_at) ? v.published_at : null, summary: v.status === 'READ' ? v.summary : null, original_source: v.sourceCapture ? sourceRecord({sourceUrl:address,sourceCapture:v.sourceCapture}) : null, evidence: v.evidence || null, reason: v.reason || null, observed_metrics: metrics};
     });
     const existing = c.get('source_library');
     for (const item of incoming) { const previous = existing.find(v => v.id === item.id); if (previous?.status === 'READ' && item.status !== 'READ') { previous.last_attempt = {at: item.accessed_at, status: item.status, reason: item.reason}; } else upsert(existing, [item]); }

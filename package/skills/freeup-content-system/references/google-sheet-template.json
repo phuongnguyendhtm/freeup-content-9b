@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "template_version": "2026-10-20",
+  "template_version": "2026-10-20-original-source",
   "source_spreadsheet_id": "1h2hgN1vqZVsaPOpVw2GJBy9Jb1pwUCMAXn4JXYLDl4I",
   "source_url": "https://docs.google.com/spreadsheets/d/1h2hgN1vqZVsaPOpVw2GJBy9Jb1pwUCMAXn4JXYLDl4I/edit",
   "copy_url": "https://docs.google.com/spreadsheets/d/1h2hgN1vqZVsaPOpVw2GJBy9Jb1pwUCMAXn4JXYLDl4I/copy",
@@ -24,8 +24,8 @@
         "Mã ý tưởng",
         "Trạng thái",
         "Tiêu đề ý tưởng",
-        "Ảnh tham khảo",
-        "Nội dung chính / Góc triển khai",
+        "Ảnh gốc của bài nguồn",
+        "Bài viết gốc (nguyên văn)",
         "Yêu cầu sản xuất",
         "Kênh chính",
         "Định dạng",
@@ -60,8 +60,8 @@
         "Mã ý tưởng",
         "Trạng thái",
         "Tiêu đề ý tưởng",
-        "Ảnh tham khảo",
-        "Nội dung chính / Góc triển khai",
+        "Ảnh gốc của bài nguồn",
+        "Bài viết gốc (nguyên văn)",
         "Yêu cầu sản xuất",
         "Kênh chính",
         "Định dạng",
@@ -219,7 +219,8 @@
         "Điền nguồn và chiến lược của chính doanh nghiệp tại 05 và 06.",
         "Không cần cài Apps Script chỉ để cài skill, sao chép bảng hoặc đồng bộ theo lệnh."
       ]
-    ]
+    ],
+    "clear_fields": "userEnteredValue,note"
   },
   "workflow_statuses": {
     "ideas": [
@@ -248,5 +249,13 @@
     "O",
     "P",
     "Q"
-  ]
+  ],
+  "source_content_policy": {
+    "reference": "original-source.md",
+    "D": "verified original images of this exact source post",
+    "E": "verbatim original body/caption; no AI summary or rewrite",
+    "F": "production brief / AI proposal, preserving user requests",
+    "N": "all original image URLs in source order",
+    "legacy": "mark unverified; do not relabel AI briefs as original source"
+  }
 }

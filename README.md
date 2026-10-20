@@ -1,4 +1,4 @@
-# FREEUP Content — cài bằng link GitHub · 1.6.0
+# FREEUP Content — cài bằng link GitHub · 1.6.1
 
 **Học viên gửi câu này cho agent đang dùng trên OpenClaw, 9BizClaw, Claude Code hoặc Codex:**
 
@@ -42,4 +42,6 @@ Thành phẩm nằm trong `freeup-content-data/media_output/ngày/loại - ngày
 
 [Hướng dẫn học viên](HUONG-DAN-HOC-VIEN.md) · [Cài cho agent / xử lý thiếu công cụ](INSTALL.md) · [Theo nền tảng](package/skills/freeup-content-system/references/host-compatibility.md)
 
-Các ZIP 1.5.2 trở về trước trong distribution là bản lưu lịch sử. Luồng cài hiện tại dùng mã nguồn 1.6.0 ở repository này.
+Các ZIP 1.5.2 trở về trước trong distribution là bản lưu lịch sử. Luồng cài hiện tại dùng mã nguồn 1.6.1 ở repository này.
+
+Bản 1.6.1: Ngân hàng ý tưởng tách nguyên văn bài và ảnh gốc nguồn khỏi góc triển khai AI. Đọc [quy tắc bản gốc](package/skills/freeup-content-system/references/original-source.md). Bản cũ chưa đối chiếu được ghi rõ, không tự coi là nguyên văn.

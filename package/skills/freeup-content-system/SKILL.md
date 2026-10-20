@@ -17,6 +17,10 @@ Chỉ có 7 lệnh nhóm đăng ký native cùng skill điều phối này. Đ�
 Đọc references/host-compatibility.md để dùng công cụ theo nền tảng hiện tại; {baseDir} là thư mục thật chứa SKILL.md đang đọc, phải thay bằng đường dẫn thực trước khi gọi helper. Không giả có công cụ 9B trên host khác.
 Khi thiết lập hoặc làm việc với Google Sheets, bắt buộc đọc references/google-sheet-template.md và references/google-sheet-template.json. Dùng lại bảng riêng đúng mẫu; chưa có thì nhân bản toàn bộ nguồn giảng viên vào Drive học viên, giữ cấu trúc và làm sạch dữ liệu giảng viên chỉ trên bản sao mới. Không tự dựng bảng khác, không ghi vào source ID. Kiểm schema bằng scripts/sheet-template.cjs rồi lưu binding vào project. Tự động theo trạng thái chỉ được báo đã bật sau khi cơ chế nền thật được kiểm chứng.
 
+
+## Bản gốc trong ngân hàng ý tưởng
+Bắt buộc đọc references/original-source.md trước nghiên cứu/ghi ngân hàng. E là nguyên văn bài/caption nguồn đã xác minh, D/N là đúng ảnh của chính bài đó; góc/brief AI ở F hoặc nơi riêng, không ghi đè yêu cầu nhân sự. Không dùng angle/tóm tắt/ảnh AI làm bản gốc. Chưa đọc đủ hoặc thiếu ảnh thì báo rõ, không tự điền bù.
+
 ## Runtime của học viên
 Đây là hệ thống tự chứa; không đọc thư mục Antigravity hoặc dữ liệu của người tạo.
 Chạy helper bằng Node 20+ của host (9bizclaw ưu tiên Node đi kèm); thư mục công cụ là `{baseDir}/scripts`.

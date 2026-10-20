@@ -15,7 +15,7 @@
 
 ## Làm sạch chỉ trên bản sao vừa tạo
 
-Sheet nguồn có dữ liệu FreeUp thật; chỉ lấy cấu trúc. Xác nhận ID bản sao **khác source_spreadsheet_id** trước mọi ghi. Áp dụng `fresh_copy_cleanup_only` trong JSON: clear **giá trị** các hàng nhập liệu/nhận xét/link/id/số liệu, thay hướng dẫn bằng `guide_rows`, làm trống giá trị chiến lược để điền hồ sơ học viên đã đọc. Giữ header, định dạng, dropdown/validation, hàng/cột cố định và conditional formatting; giữ công thức ở tab 02/04. Không dùng deleteRows, không clear toàn bộ bảng.
+Sheet nguồn có dữ liệu FreeUp thật; chỉ lấy cấu trúc. Xác nhận ID bản sao **khác source_spreadsheet_id** trước mọi ghi. Áp dụng `fresh_copy_cleanup_only` trong JSON: clear **giá trị và ghi chú dữ liệu cũ** các hàng nhập liệu/nhận xét/link/id/số liệu, thay hướng dẫn bằng `guide_rows`, làm trống giá trị chiến lược để điền hồ sơ học viên đã đọc. Ghi chú cảnh báo bản gốc của dữ liệu giảng viên không được giữ trên các hàng trống của học viên. Giữ header, định dạng, dropdown/validation, hàng/cột cố định và conditional formatting; giữ công thức ở tab 02/04. Không dùng deleteRows, không clear toàn bộ bảng.
 
 Các range ghi trong JSON theo grid mẫu 1001 hàng. Trước khi clear, đọc grid thực bản sao và mở rộng đến hàng cuối thực nếu nguồn lớn hơn; không vượt columnCount. Không clear tab 02/04 vì đó là bảng công thức. Công thức Xem bộ ảnh ở các dòng bài cũ là dữ liệu bài cũ và được làm sạch cùng dòng; tạo công thức theo J của chính bài mới khi có ảnh.
 
@@ -36,6 +36,10 @@ Không chạy quy trình làm sạch này cho bảng học viên đang dùng ho�
 | 06. Chiến lược | Mục tiêu, trụ cột, hướng triển khai | Từ hồ sơ/tài liệu đã cung cấp |
 
 Locale `vi_VN`, timezone `Asia/Saigon` của mẫu được giữ; thay timezone chỉ khi học viên yêu cầu. Header/công thức chính xác nằm trong JSON. Sheet ID/gid bản sao phải đọc từ API; không dùng gid nguồn để đoán vị trí đích.
+
+## Dữ liệu bài và ảnh nguồn
+
+Bắt buộc đọc original-source.md: D — Ảnh gốc của bài nguồn; E — Bài viết gốc (nguyên văn); F giữ brief/đề xuất AI, không trộn vào E. N giữ đủ URL ảnh nguồn theo thứ tự; không dùng ảnh thay thế. Các dòng cũ chưa đối chiếu phải có nhãn/note rõ và giữ baseline/duyệt/thành phẩm, không tự xác nhận là nguyên văn.
 
 ## Kiểm và lưu liên kết
 
