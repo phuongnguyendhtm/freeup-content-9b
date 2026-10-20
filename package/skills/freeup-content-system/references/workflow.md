@@ -7,6 +7,7 @@ Với yêu cầu xây hệ thống theo dõi chuyên gia, đọc **automation.md
 Gói skill có đủ hướng dẫn biên tập, mẫu và công cụ lưu quy trình để khởi tạo trên máy học viên. Mỗi học viên tạo Brand DNA, nguồn tri thức, tài nguyên và tài khoản riêng. Các script của gói chạy từ `{baseDir}` và dùng thư mục làm việc lâu dài đã lưu trong cấu hình; không cần bản Antigravity hay thư mục máy người tặng.
 
 ## 1. Thiết lập một lần
+Đọc google-sheet-template.md/.json cho bảng Google: copy toàn bộ mẫu chuẩn vào tài khoản học viên, hoặc dùng binding riêng đã có. Không tự tạo cấu trúc Sheet. Đọc host-compatibility.md để dùng tool của nền tảng hiện tại.
 
 Đọc `SKILL.md`, bootstrap kho làm việc và kiểm tra công cụ thật. Thu tối thiểu tên thương hiệu, đối tượng, sản phẩm/lợi thế, giọng văn, mục tiêu và kênh. Nếu người dùng đã cung cấp, dùng ngay. Mục còn thiếu có thể ghi chưa xác định; không biến một ví dụ thành thành tích thương hiệu.
 

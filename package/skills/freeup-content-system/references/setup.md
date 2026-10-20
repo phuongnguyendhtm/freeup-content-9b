@@ -62,7 +62,11 @@ Chỉ ghi ID/đường dẫn/thời điểm thật. Đã cung cấp khác với 
 
 Hồ sơ cũ có thông tin thực được giữ tương thích dù chưa có metadata. Bản bổ sung chỉ ghi trường có dữ liệu mới: nhánh màu/font/giọng khác được giữ nguyên; ô trống không xóa dữ liệu; nguồn suy đoán không ghi đè giá trị đã xác nhận. Khách hàng muốn đổi doanh nghiệp thì cần tạo/chọn project riêng hoặc xác nhận rõ việc thay hồ sơ. Những yêu cầu sửa hồ sơ rõ ràng của khách hàng được lưu cùng nguồn xác nhận.
 
-## 4. Hoàn tất và chạy lại
+## 4. Sheet mẫu và kết nối riêng
+
+Bắt buộc đọc google-sheet-template.md và .json khi /thietlapcontent. Dùng lại binding đã lưu và bảng đúng mẫu của học viên; chưa có thì copy toàn bộ workbook chuẩn vào tài khoản học viên, giữ định dạng/công thức, dọn dữ liệu giảng viên trên bản sao mới rồi kiểm/bind. Không tạo Sheet tùy ý, không ghi vào Sheet nguồn, không làm sạch lại bảng đang dùng. Không hỏi lại link mẫu đã có trong reference. Thiếu Google connector thì báo đúng phần cần nối; hồ sơ đủ vẫn viết local được. Kiểm Google, sự kiện/lịch và quyền đăng riêng, không coi cài skill là đã bật tự động.
+
+## 5. Hoàn tất và chạy lại
 
 `complete` chỉ đánh giá sáu nhóm lõi, không phụ thuộc việc có công cụ native, màu/font riêng hay đã kết nối kênh. Khi đủ, báo ngắn rằng hệ thống đã sử dụng hồ sơ hiện có và có thể nhận lệnh viết. Tạo chiến lược/trụ cột phù hợp từ hồ sơ đã đủ; không hỏi lại các thông tin đó để làm bước chiến lược.
 

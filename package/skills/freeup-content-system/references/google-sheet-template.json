@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "template_version": "2026-10-20",
+  "source_spreadsheet_id": "1h2hgN1vqZVsaPOpVw2GJBy9Jb1pwUCMAXn4JXYLDl4I",
+  "source_url": "https://docs.google.com/spreadsheets/d/1h2hgN1vqZVsaPOpVw2GJBy9Jb1pwUCMAXn4JXYLDl4I/edit",
+  "copy_url": "https://docs.google.com/spreadsheets/d/1h2hgN1vqZVsaPOpVw2GJBy9Jb1pwUCMAXn4JXYLDl4I/copy",
+  "verified_at": "2026-10-20",
+  "locale": "vi_VN",
+  "time_zone": "Asia/Saigon",
+  "policy": "copy-entire-source-workbook; never-create-arbitrary-board; never-write-source",
+  "sheets": [
+    {
+      "title": "00. Hướng dẫn",
+      "headers": [
+        "VIỆC CẦN LÀM",
+        "THAO TÁC CỦA TEAM",
+        "9B / LƯU Ý"
+      ],
+      "read_only_view": false
+    },
+    {
+      "title": "01. Ngân hàng ý tưởng",
+      "headers": [
+        "Mã ý tưởng",
+        "Trạng thái",
+        "Tiêu đề ý tưởng",
+        "Ảnh tham khảo",
+        "Nội dung chính / Góc triển khai",
+        "Yêu cầu sản xuất",
+        "Kênh chính",
+        "Định dạng",
+        "CTA đề xuất",
+        "Khách hàng mục tiêu",
+        "Trụ cột",
+        "Nguồn tham khảo",
+        "Link nguồn",
+        "Link ảnh gốc",
+        "Điểm biên tập /100",
+        "Ngày tìm",
+        "Thời điểm nguồn",
+        "Like nguồn",
+        "Bình luận nguồn",
+        "Chia sẻ nguồn",
+        "Giới hạn nguồn / ảnh",
+        "Người duyệt",
+        "Ngày 9b nhận duyệt",
+        "Mã nội dung",
+        "Tiến độ sản xuất",
+        "Lý do tạm dừng",
+        "Ghi chú chọn / bỏ",
+        "Bản lưu Lark",
+        "Mã đồng bộ",
+        "Cập nhật cuối"
+      ],
+      "read_only_view": false
+    },
+    {
+      "title": "02. Ý tưởng đã duyệt",
+      "headers": [
+        "Mã ý tưởng",
+        "Trạng thái",
+        "Tiêu đề ý tưởng",
+        "Ảnh tham khảo",
+        "Nội dung chính / Góc triển khai",
+        "Yêu cầu sản xuất",
+        "Kênh chính",
+        "Định dạng",
+        "CTA đề xuất",
+        "Khách hàng mục tiêu",
+        "Trụ cột",
+        "Nguồn tham khảo",
+        "Link nguồn",
+        "Link ảnh gốc",
+        "Điểm biên tập /100",
+        "Ngày tìm",
+        "Thời điểm nguồn",
+        "Like nguồn",
+        "Bình luận nguồn",
+        "Chia sẻ nguồn",
+        "Giới hạn nguồn / ảnh",
+        "Người duyệt",
+        "Ngày 9b nhận duyệt",
+        "Mã nội dung",
+        "Tiến độ sản xuất",
+        "Lý do tạm dừng",
+        "Ghi chú chọn / bỏ",
+        "Bản lưu Lark",
+        "Mã đồng bộ",
+        "Cập nhật cuối"
+      ],
+      "read_only_view": true,
+      "formula_a2": "=IFERROR(FILTER('01. Ngân hàng ý tưởng'!A2:AD1001;REGEXMATCH('01. Ngân hàng ý tưởng'!B2:B1001;\"^Đã (duyệt ý tưởng|vào sản xuất|sản xuất)$\"));\"\")"
+    },
+    {
+      "title": "03. Sản xuất",
+      "headers": [
+        "Mã nội dung",
+        "Mã ý tưởng",
+        "Trạng thái",
+        "Tiêu đề",
+        "Nội dung bài viết",
+        "Yêu cầu / Brief",
+        "Kênh chính",
+        "Định dạng",
+        "CTA",
+        "Link thư mục Drive",
+        "Link ảnh đầu tiên",
+        "Xem bộ ảnh",
+        "Nhận xét & hành động tiếp theo",
+        "Người phụ trách",
+        "Lịch đăng dự kiến",
+        "Chế độ đăng",
+        "Tài khoản / Fanpage",
+        "Link bài đăng",
+        "Ngày giờ đăng thực tế",
+        "Lượt xem 24h",
+        "Like 24h",
+        "Bình luận 24h",
+        "Chia sẻ 24h",
+        "Lead có đối soát",
+        "Link nguồn",
+        "Lý do tạm dừng",
+        "Mã công việc AI",
+        "Thư mục trên máy",
+        "Phiên bản / Hash",
+        "Cập nhật cuối"
+      ],
+      "read_only_view": false
+    },
+    {
+      "title": "04. Lịch đăng",
+      "headers": [
+        "Mã nội dung",
+        "Tiêu đề",
+        "Kênh chính",
+        "Định dạng",
+        "Lịch đăng dự kiến",
+        "Chế độ đăng",
+        "Tài khoản / Fanpage",
+        "Link thư mục Drive",
+        "Link bài đăng",
+        "Ngày giờ đăng thực tế",
+        "Trạng thái"
+      ],
+      "read_only_view": true,
+      "formula_a2": "=IFERROR(QUERY('03. Sản xuất'!A2:AD1001;\"select A,D,G,H,O,P,Q,J,R,S,C where C = 'Đã duyệt đăng' or C = 'Đã duyệt thành phẩm' or C = 'Đã lên lịch' or C = 'Đang đăng' or C = 'Lỗi đăng' or C = 'Hủy đăng' or C = 'Đã đăng'\";0);\"\")"
+    },
+    {
+      "title": "05. Nguồn & cố vấn",
+      "headers": [
+        "Tên nguồn / cố vấn",
+        "Bật tham khảo",
+        "Loại nguồn",
+        "Kênh",
+        "Link chuẩn",
+        "Link người dùng gửi",
+        "Chủ đề tham khảo",
+        "Trụ cột FreeUp",
+        "Cách áp dụng",
+        "Tình trạng đọc / giới hạn",
+        "Lưu ý",
+        "Link bài đã kiểm tra gần nhất",
+        "Ghi chú nhân sự"
+      ],
+      "read_only_view": false
+    },
+    {
+      "title": "06. Chiến lược",
+      "headers": [
+        "THIẾT LẬP",
+        "GIÁ TRỊ / HƯỚNG TRIỂN KHAI",
+        "GHI CHÚ"
+      ],
+      "read_only_view": false
+    }
+  ],
+  "fresh_copy_cleanup_only": {
+    "clear_values": [
+      "'00. Hướng dẫn'!A2:C1001",
+      "'01. Ngân hàng ý tưởng'!A2:AD1001",
+      "'03. Sản xuất'!A2:AD1001",
+      "'05. Nguồn & cố vấn'!A2:M1001",
+      "'06. Chiến lược'!B2:C1001"
+    ],
+    "preserve": "All headers, formulas in views 02/04, formatting, validation, frozen rows/columns and conditional rules; clear values only on the new student copy, never on an existing student board.",
+    "guide_rows": [
+      [
+        "1. Thiết lập",
+        "Dùng hồ sơ doanh nghiệp đã có, bổ sung phần thiếu.",
+        "Bảng này thuộc doanh nghiệp học viên; không dùng dữ liệu giảng viên."
+      ],
+      [
+        "2. Nghiên cứu",
+        "AI tìm thông tin có nguồn, đưa đề xuất vào 01. Ngân hàng ý tưởng.",
+        "Chỉ ghi URL/số liệu thật đã đọc; nguồn không cấp quyền đăng."
+      ],
+      [
+        "3. Duyệt ý tưởng",
+        "Đổi trạng thái thành Đã duyệt ý tưởng.",
+        "Cho phép sản xuất; chưa cho phép đăng. Muốn tự kích hoạt cần kết nối và lịch/sự kiện đã kiểm chứng."
+      ],
+      [
+        "4. Sản xuất & sửa",
+        "Xem chữ, link ảnh tại 03. Sản xuất. Cần sửa: ghi nhận xét và đổi Cần sửa.",
+        "Bài lỗi: Tạm dừng và lý do ở cột Z; tiếp tục bài sau. Kiểm worker thật trước khi nói tự chạy."
+      ],
+      [
+        "5. Duyệt thành phẩm",
+        "Duyệt đúng bản chữ/ảnh/video và tài khoản/thời gian đăng.",
+        "Đã duyệt thành phẩm mới cho phép đăng trong phạm vi đã duyệt."
+      ],
+      [
+        "6. Theo dõi",
+        "04. Lịch đăng và 02. Ý tưởng đã duyệt là bảng công thức.",
+        "Không sửa tay hai tab này. Sheet không tự chạy AI nếu chưa bật cơ chế sự kiện/lịch."
+      ],
+      [
+        "7. Nguồn & chiến lược",
+        "Điền nguồn và chiến lược của chính doanh nghiệp tại 05 và 06.",
+        "Không cần cài Apps Script chỉ để cài skill, sao chép bảng hoặc đồng bộ theo lệnh."
+      ]
+    ]
+  },
+  "workflow_statuses": {
+    "ideas": [
+      "Nhờ AI tạo ý tưởng",
+      "Chờ duyệt ý tưởng",
+      "Đã duyệt ý tưởng",
+      "Đã vào sản xuất",
+      "Đã sản xuất",
+      "Lưu trữ",
+      "Tạm dừng"
+    ],
+    "production": [
+      "Chờ sản xuất",
+      "Đang viết",
+      "Đang tạo ảnh",
+      "Chờ duyệt",
+      "Cần sửa",
+      "Đã duyệt thành phẩm",
+      "Đã đăng",
+      "Tạm dừng"
+    ]
+  },
+  "human_owned_production_columns": [
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q"
+  ]
+}

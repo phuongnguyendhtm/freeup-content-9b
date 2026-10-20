@@ -1,0 +1,3 @@
+# Payload bytes must match SHA-256 after checkout on Windows, macOS and Linux.
+# Do not let core.autocrlf rewrite scripts, JSON or references during download.
+* -text

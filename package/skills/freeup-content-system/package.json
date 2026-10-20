@@ -1,8 +1,8 @@
 {
   "name": "freeup-content-system",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "private": true,
-  "description": "Bộ quà tặng content tự chứa cho học viên trên 9bizclaw",
+  "description": "Hệ thống content tự chứa cho học viên: OpenClaw, 9BizClaw, Claude Code và Codex local",
   "type": "commonjs",
   "engines": {
     "node": ">=20"

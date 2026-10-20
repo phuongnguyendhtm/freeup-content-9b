@@ -58,7 +58,7 @@ Cài mới chỉ đăng ký 7 lệnh nhóm và điều phối. Tên cũ được
 | `/dang [ID]` | Đăng bài đã duyệt này | Kiểm tra phiên bản/phạm vi duyệt, dùng công cụ đăng thực. Lưu receipt ID/permalink/đích/thời gian thực; chưa có công cụ thì xuất gói đăng tay và giữ trạng thái chưa đăng. |
 | `/tudong [ý tưởng + định dạng]` | Làm trọn quy trình cho các chủ đề này | Chạy lần lượt brief → nghiên cứu cần thiết → viết → sản xuất → QA → bàn giao/duyệt. Chỉ thêm bước đăng trong phạm vi người dùng đã cho phép. |
 | `/ketqua [dữ liệu hoặc kỳ]` | Phân tích kết quả content tháng này | Đọc số liệu thật, chuẩn hóa định nghĩa và kỳ đo, tìm mẫu có bằng chứng, lưu bài học cho vòng tiếp theo. Không tự điền view/lead/doanh thu. |
-| `/bang [Sheet hoặc thao tác]` | Đồng bộ kế hoạch/bài đã duyệt với bảng tính của tôi | Dùng connector Sheet thực nếu học viên đã kết nối và chỉ định bảng: đọc/ghi cột theo schema xác minh, ánh xạ bằng ID bài/phiên bản. Phê duyệt từ Sheet chỉ áp dụng khi rõ người/phạm vi/phiên bản và không tự coi ô bất kỳ là quyền đăng. Thiếu connector thì tiếp tục dùng kho nội bộ, xuất bảng CSV/JSON để nhập tay. |
+| `/bang [Sheet hoặc thao tác]` | Đồng bộ kế hoạch/bài đã duyệt với bảng tính của tôi | Bắt buộc đọc google-sheet-template.md/.json, dùng bản sao riêng đúng mẫu đã bind; chưa có thì copy nguồn chuẩn, không tạo bảng khác. Dùng connector Sheet thực đã kết nối: đọc/ghi cột theo schema xác minh, ánh xạ bằng ID bài/phiên bản. Phê duyệt từ Sheet chỉ áp dụng khi rõ người/phạm vi/phiên bản và không tự coi ô bất kỳ là quyền đăng. Thiếu connector thì tiếp tục dùng kho nội bộ, lưu dữ liệu local và báo kết nối Google còn thiếu; không tạo Sheet thay thế từ CSV/JSON. |
 
 ## Quy tắc định tuyến
 
