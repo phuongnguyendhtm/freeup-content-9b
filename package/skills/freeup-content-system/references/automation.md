@@ -140,3 +140,5 @@ Nguồn kỹ thuật đã xem: [OpenClaw Skills](https://docs.openclaw.ai/tools/
 Kho riêng thêm: `database/expert_sources.json`, `research_preferences.json`, `source_scan_state.json`, `source_library.json`, `story_bank.json`, `campaigns.json`, `production_queue.json`, `content_automations.json`, `content_automation_settings.json`. Tiêu chí nghiên cứu và danh sách nguồn tách riêng theo doanh nghiệp/project. Không ghi đè kho cũ; dashboard lịch ở `content-calendar/index.html`; thành phẩm vẫn ở `media_output/ngày/loại - ngày - tiêu-đề-bài/`.
 
 Kiểm thử của gói xác minh lưu nguồn, chống trùng, phiên bản lịch, duyệt sản xuất, claim/lease, tiếp tục cùng post, QA trước hoàn tất và không tự publish. Crawl thực/lịch native/headless/publisher trên máy học viên phải kiểm bằng công cụ đang kết nối; fixture không chứng minh các kết nối này đã hoạt động.
+
+Khi quét cố vấn hằng ngày/top3, đọc references/kol-daily.md và dùng scripts/kol-daily.cjs. Đọc các KOL đang bật, giữ nguyên bài/ảnh nguồn; không dùng nhóm web lấp quota. Cài bộ đọc công khai/kết nối và lịch native riêng của học viên khi được yêu cầu, kiểm nguồn thật trước báo tự động đã dùng được.

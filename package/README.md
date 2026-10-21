@@ -1,4 +1,4 @@
-# FREEUP Content 1.6.1 — payload 8 skill
+# FREEUP Content 1.6.2 — payload 8 skill
 
 Học viên gửi [link GitHub](https://github.com/phuongnguyendhtm/freeup-content-9b) và yêu cầu cài cho agent. Agent đọc [INSTALL.md](../INSTALL.md) rồi chạy installer theo host. Không yêu cầu tải/giải nén ZIP.
 

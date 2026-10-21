@@ -61,7 +61,7 @@ function sourceRows(input) {
     const id = v.id || 'source_' + hash(address).slice(0, 12);
     need(keyPattern.test(id), 'ID nguồn không hợp lệ.');
     const kind = v.kind || 'website';
-    need(['website', 'rss', 'youtube', 'facebook', 'linkedin', 'newsletter'].includes(kind), 'Loại nguồn không hợp lệ.');
+    need(['website', 'rss', 'youtube', 'facebook', 'instagram', 'tiktok', 'linkedin', 'newsletter'].includes(kind), 'Loại nguồn không hợp lệ.');
     need(!v.topics || Array.isArray(v.topics) && v.topics.every(text), 'topics cần mảng chuỗi.');
     return {id, name: v.name.trim(), url: address, kind, topics: v.topics || [], enabled: v.enabled !== false, identity_evidence: v.identity_evidence || null, updated_at: stamp()};
   });
@@ -149,7 +149,7 @@ function execute(project, command, o) {
     for (const field of Object.keys(v)) need(allowed.includes(field), 'Trường nghiên cứu không được hỗ trợ: ' + field);
     for (const field of ['industry', 'market', 'content_language', 'basis']) if (field in v) need(text(v[field]), field + ' cần nội dung rõ.');
     if ('topics' in v) need(Array.isArray(v.topics) && v.topics.every(text), 'topics cần mảng chuỗi.');
-    if ('source_types' in v) need(Array.isArray(v.source_types) && v.source_types.every(x => ['website','rss','youtube','facebook','linkedin','newsletter'].includes(x)), 'source_types không hợp lệ.');
+    if ('source_types' in v) need(Array.isArray(v.source_types) && v.source_types.every(x => ['website','rss','youtube','facebook','instagram','tiktok','linkedin','newsletter'].includes(x)), 'source_types không hợp lệ.');
     if ('source_selection_mode' in v) need(['provided','suggest','automatic'].includes(v.source_selection_mode), 'Cách chọn nguồn là provided, suggest hoặc automatic theo yêu cầu học viên.');
     const saved = {...current, ...v, id:'profile', updated_at:stamp()};
     c.put('research_preferences', [saved]); return saved;

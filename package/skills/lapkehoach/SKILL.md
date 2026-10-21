@@ -28,3 +28,5 @@ Ví dụ câu thường hoặc sau /lapkehoach:
 Khi thiết lập/đọc/ghi Google Sheets, bắt buộc đọc references/google-sheet-template.md và .json trong conductor. Dùng lại bản sao riêng đúng mẫu đã kết nối hoặc copy toàn bộ mẫu giảng viên; không tự tạo bố cục khác, không ghi nguồn. Kiểm schema và binding trước khi đồng bộ. Công cụ native riêng 9B chỉ dùng nếu host hiện tại có; đọc references/host-compatibility.md.
 
 Đọc references/original-source.md trong conductor: ngân hàng phải có nguyên văn bài và đúng ảnh nguồn đã xác minh; tách phần AI đề xuất khỏi bản gốc.
+
+Khi quét cố vấn hằng ngày/top3, đọc references/kol-daily.md và dùng scripts/kol-daily.cjs. Đọc các KOL đang bật, giữ nguyên bài/ảnh nguồn; không dùng nhóm web lấp quota. Cài bộ đọc công khai/kết nối và lịch native riêng của học viên khi được yêu cầu, kiểm nguồn thật trước báo tự động đã dùng được.
