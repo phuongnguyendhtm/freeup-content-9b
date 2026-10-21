@@ -29,10 +29,6 @@ Trạng thái mới Chờ duyệt ý tưởng, chưa cho sản xuất hoặc đ�
 
 Máy/Gateway, mạng, kết nối và cơ chế lịch phải hoạt động. Cài skill chưa tự bật thu thập cả bốn nền tảng; chỉ báo từng nguồn dùng được sau lần đọc bài cụ thể thành công.
 
-## Chọn bộ thu thập khi chưa có tài khoản
+## Bộ đọc nguồn
 
-Đề xuất thử ScrapeCreators trước cho nhu cầu đọc profile/posts công khai của cả bốn nền tảng. Theo trang chính thức được kiểm tra 21/10/2026, có 100 credit thử không cần thẻ; gói nạp 47 USD/25.000 credit, không hết hạn. Giá và số credit từng endpoint phải kiểm tra lại trước tư vấn/mua: https://scrapecreators.com/#pricing ; tài liệu https://docs.scrapecreators.com/ . Facebook chỉ trả các bài công khai nhìn thấy khi không đăng nhập, không bảo đảm đầy đủ timeline. Không gọi bộ đọc này đã chạy nếu chưa kết nối và thử bài cụ thể.
-
-Apify là lựa chọn dự phòng khi cần Actor chuyên biệt; trang https://apify.com/pricing hiện có Free với 5 USD credit/tháng, Starter 19 USD/tháng và tính thêm theo mức dùng/Actor. Chọn sau thử cùng các link nguồn, không khẳng định rẻ hơn chỉ từ giá gói.
-
-Người dùng tự tạo tài khoản; kết nối trong phần Connections của máy chạy bằng công cụ native được hỗ trợ, không yêu cầu gửi API key trong chat hoặc ghi key vào Sheet/GitHub. Học viên dùng tài khoản/quota riêng. Chỉ mua/nạp/bật tự nạp khi người dùng chấp thuận cụ thể; thử miễn phí trước, đo credit thực cho từng nguồn. Khi chưa có kết nối, báo “Chưa kết nối bộ thu thập nguồn công khai”, giữ lịch đã được chọn và tiếp tục các nguồn đọc được. Lỗi nguồn không làm kẹt các nguồn sau.
+Đọc collection-routing.md và collection-routing.json. Lựa chọn hiện tại: Facebook/Instagram dùng Apify; YouTube API chính thức, TikTok và chuyển lời nói thành chữ dùng phương án miễn phí được kiểm chứng. Chưa kết nối hoặc hết quota thì báo rõ, không tự mua hay đổi dịch vụ. Giữ nguyên top 3 và lịch native đã được chủ chọn.

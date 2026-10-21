@@ -64,3 +64,7 @@ Không sửa AGENTS/SOUL/USER của 9bizclaw để giả đăng ký bộ lệnh;
 
 
 Khi quét cố vấn hằng ngày/top3, đọc references/kol-daily.md và dùng scripts/kol-daily.cjs. Đọc các KOL đang bật, giữ nguyên bài/ảnh nguồn; không dùng nhóm web lấp quota. Cài bộ đọc công khai/kết nối và lịch native riêng của học viên khi được yêu cầu, kiểm nguồn thật trước báo tự động đã dùng được.
+
+
+## Bộ đọc nguồn được chọn
+Trước thu thập, đọc references/collection-routing.md và collection-routing.json: Facebook/Instagram dùng Apify trong hạn mức Free; YouTube dùng API chính thức; TikTok và chép lời chỉ dùng phương án miễn phí có thật. Không tự nâng gói/đổi sang bộ đọc trả phí. Kết nối và khả năng đọc nguồn phải kiểm chứng riêng.

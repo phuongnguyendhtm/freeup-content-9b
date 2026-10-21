@@ -1,4 +1,4 @@
-# FREEUP Content — cài bằng link GitHub · 1.6.2
+# FREEUP Content — cài bằng link GitHub · 1.6.3
 
 **Học viên gửi câu này cho agent đang dùng trên OpenClaw, 9BizClaw, Claude Code hoặc Codex:**
 
@@ -42,8 +42,8 @@ Thành phẩm nằm trong `freeup-content-data/media_output/ngày/loại - ngày
 
 [Hướng dẫn học viên](HUONG-DAN-HOC-VIEN.md) · [Cài cho agent / xử lý thiếu công cụ](INSTALL.md) · [Theo nền tảng](package/skills/freeup-content-system/references/host-compatibility.md)
 
-Các ZIP 1.5.2 trở về trước trong distribution là bản lưu lịch sử. Luồng cài hiện tại dùng mã nguồn 1.6.2 ở repository này.
+Các ZIP 1.5.2 trở về trước trong distribution là bản lưu lịch sử. Luồng cài hiện tại dùng mã nguồn 1.6.3 ở repository này.
 
-Bản 1.6.2: Ngân hàng ý tưởng tách nguyên văn bài và ảnh gốc nguồn khỏi góc triển khai AI. Đọc [quy tắc bản gốc](package/skills/freeup-content-system/references/original-source.md). Bản cũ chưa đối chiếu được ghi rõ, không tự coi là nguyên văn.
+Bản 1.6.3: Ngân hàng ý tưởng tách nguyên văn bài và ảnh gốc nguồn khỏi góc triển khai AI. Đọc [quy tắc bản gốc](package/skills/freeup-content-system/references/original-source.md). Bản cũ chưa đối chiếu được ghi rõ, không tự coi là nguyên văn.
 
 Quét nhóm cố vấn mỗi ngày: thêm link KOL tại tab05, bật tham khảo, nhờ /lapkehoach theo dõi. [Quy tắc top3](package/skills/freeup-content-system/references/kol-daily.md) chọn tối đa3 bài tổng cộng, lưu nguồn nguyên bản và nhãn dữ liệu viral. Cần công cụ đọc từng nguồn và lịch native thực trên máy học viên; không nhận đã hỗ trợ đủ4 nền tảng chỉ từ việc cài skill.

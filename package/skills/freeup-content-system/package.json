@@ -1,6 +1,6 @@
 {
   "name": "freeup-content-system",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "private": true,
   "description": "Hệ thống content tự chứa cho học viên: OpenClaw, 9BizClaw, Claude Code và Codex local",
   "type": "commonjs",

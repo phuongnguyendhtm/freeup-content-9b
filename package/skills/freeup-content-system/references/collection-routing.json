@@ -1,0 +1,13 @@
+{
+  "schema": "freeup-collection-routing/v1",
+  "selected_at": "2026-10-21",
+  "routes": {
+    "facebook": {"provider": "apify", "actor": "apify/facebook-posts-scraper", "scope": "public_posts", "connection_required": true},
+    "instagram": {"provider": "apify", "actor": "apify/instagram-post-scraper", "scope": "public_posts", "connection_required": true},
+    "youtube": {"provider": "youtube_data_api", "scope": "public_metadata_and_metrics", "paid_fallback": false},
+    "tiktok": {"provider": "free_public_access", "scope": "only_verified_readable_public_content", "paid_fallback": false, "on_unavailable": "blocked_with_reason"},
+    "transcription": {"provider": "existing_subtitles_or_local_whisper", "paid_fallback": false, "selected_videos_only": true}
+  },
+  "spending": {"apify_free_only": true, "apify_shared_monthly_credit_usd": 5, "auto_upgrade": false, "auto_top_up": false, "on_exhausted": "stop_apify_continue_free_sources"},
+  "readiness": "routing_configured_connection_and_source_reads_must_be_verified"
+}
