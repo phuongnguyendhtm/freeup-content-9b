@@ -1,14 +1,29 @@
-# Bắt đầu dùng hệ thống content
+# Hướng dẫn cho học viên
 
-1. Mở agent bạn muốn dùng và gửi:
+## Cài lần đầu
+Gửi yêu cầu sau cho agent đang dùng:
 
-   > Cài hệ thống content từ https://github.com/phuongnguyendhtm/freeup-content-9b cho agent tôi đang dùng. Tự tải/cài đúng nền tảng, giữ dữ liệu cũ, dùng hồ sơ doanh nghiệp đã có và Sheet mẫu đóng gói trong skill.
+```text
+Cài hệ thống content từ https://github.com/phuongnguyendhtm/freeup-content-9b cho agent tôi đang dùng. Tự tải và cài đúng nền tảng, giữ dữ liệu đã có. Dùng bản làm việc trong chat và lưu trên máy, không kết nối Google Sheets, không đăng Facebook tự động. Đọc hồ sơ doanh nghiệp sẵn có và chỉ hỏi phần thiếu.
+```
 
-2. Agent thực hiện tải/cài. Với 9BizClaw, khi agent báo đã khởi chạy, kết thúc lượt đó; mở lượt mới yêu cầu “Kiểm tra kết quả cài vừa rồi”. Chờ xác nhận cài xong trước bước tiếp. Nếu thiếu quyền/công cụ, agent nêu đúng phần cần bổ sung.
-3. Gửi `/thietlapcontent`. Hệ thống dùng lại hồ sơ đã có, chỉ hỏi phần thiếu; dùng Sheet riêng đã kết nối hoặc nhân bản Sheet mẫu chuẩn vào Drive của bạn. Chưa kết nối Google thì kết nối tài khoản của bạn qua ứng dụng đang dùng.
+Agent tải/cài và kiểm tra đúng nền tảng. Riêng 9B có thể hoàn tất cài nền sau lượt chat; mở chat mới để kiểm kết quả. Không cần nhân bản bảng tính hoặc đăng nhập Facebook.
 
-Không cần tải ZIP hoặc có thư mục content cũ. Claude web/Cowork chỉ tự cài khi phiên có công cụ cài skill được hỗ trợ; nếu chỉ có chat, agent nêu bước cài còn thiếu.
+## Làm bài hằng ngày
 
-Sau đó gửi `/vietbai [chủ đề]`, `/thietkeanh Carousel: [chủ đề]`, hoặc “Làm content 7 ngày, dùng hồ sơ đã có, đề xuất ý tưởng để tôi duyệt trước”. `/xemketqua` xem các bài đã tạo. Duyệt ý tưởng cho phép sản xuất; duyệt thành phẩm đúng bản/kênh/thời gian mới cho phép đăng.
+- “/thietlapcontent Kiểm tra hồ sơ và ảnh doanh nghiệp tôi đã cung cấp, chỉ hỏi phần còn thiếu.”
+- “/lapkehoach Tìm 3 ý tưởng về quản lý đội ngũ cho khách hàng của tôi.”
+- “Duyệt ý [ID]. Viết bài và làm bộ 4 ảnh, bìa 1080×540, ba ảnh 1080×1080, ưu tiên ảnh và ghi chú.”
+- “/vietbai Viết về [chủ đề], dùng giọng thương hiệu đã lưu.”
+- “Chuyển chữ video [link/file] này, giữ bản chép lời và viết bài riêng theo góc nhìn [ý kiến của tôi].”
+- “Sửa bài [ID]: rút ngắn phần mở đầu, giữ ảnh hiện tại.”
+- “/duyetbai Tôi duyệt chữ và ảnh của bài [ID], xuất bộ file để tôi tự đăng.”
+- “/xemketqua Mở lại bài [ID]” hoặc “/mothumuc Mở thư mục bài [ID] trên máy này.”
 
-Sheet giữ 7 tab của mẫu. Agent không tự chọn bố cục khác. Tự động theo trạng thái/định kỳ cần kết nối và cơ chế nền đã kiểm chứng, không chỉ cài skill là có.
+Không phải nhớ mọi lệnh; nhắn tiếng Việt bình thường được. Duyệt ý tưởng để làm bài là thao tác trong chat, không đợi02:00. AI trả caption và media thật, giữ ID/phiên bản khi sửa. Thư mục bài có caption.txt, ảnh/video, record.json và index.html. Khách tự copy caption và tải media để đăng.
+
+## Tài nguyên và điện thoại
+AI dùng hồ sơ, ảnh, logo, màu đã cung cấp; chỉ hỏi phần thiếu. Có thể dùng Hình ảnh doanh nghiệp của 9B hoặc thư mục local được AI trả đúng đường dẫn. Máy học viên không cần dữ liệu của giảng viên. Điện thoại xem tệp đính kèm hoặc link chia sẻ có thật qua kênh đang dùng; folder trên máy không phải link điện thoại.
+
+## Nguồn và giới hạn
+Facebook/Instagram dùng Apify khi đã kết nối và trong hạn mức đã chọn; YouTube dùng API chính thức, TikTok/chép lời ưu tiên phương án miễn phí đọc được. Thiếu quyền/audio/công cụ thì AI báo phần thiếu và giữ nháp. Gói không tự cài dịch vụ trả phí, đăng hoặc hẹn đăng.

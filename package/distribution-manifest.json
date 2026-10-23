@@ -1,6 +1,6 @@
 {
   "package_id": "freeup-content-student-gift",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "skills": [
     {
       "name": "freeup-content-system",
@@ -37,9 +37,9 @@
       "intent": "grouped-workflow"
     },
     {
-      "name": "duyetvadang",
-      "source": "skills/duyetvadang",
-      "command_alias": "/duyetvadang",
+      "name": "duyetbai",
+      "source": "skills/duyetbai",
+      "command_alias": "/duyetbai",
       "intent": "grouped-workflow"
     },
     {
@@ -48,5 +48,8 @@
       "command_alias": "/xemketqua",
       "intent": "grouped-workflow"
     }
+  ],
+  "retired_skills": [
+    "duyetvadang"
   ]
 }

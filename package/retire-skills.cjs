@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+function inside(file,root){const rel=path.relative(root,path.resolve(file));return rel&&rel!=='..'&&!rel.startsWith('..'+path.sep)&&!path.isAbsolute(rel);}
+function inspect(target,name,packageId){
+ if(fs.lstatSync(target).isSymbolicLink())throw Error('Không gỡ skill qua link.');
+ const receipt=path.join(target,'freeup-gift-origin.json');if(!fs.existsSync(receipt))throw Error('Skill cũ không có ownership của gói; giữ nguyên: '+name);
+ const o=JSON.parse(fs.readFileSync(receipt));if(o.package_id!==packageId||o.skill_name!==name||!o.installed_files)throw Error('Skill cũ không thuộc gói: '+name);
+ for(const [rel,expected]of Object.entries(o.installed_files)){const f=path.resolve(target,rel);if(!inside(f,target)||!fs.existsSync(f)||fs.lstatSync(f).isSymbolicLink()||!fs.statSync(f).isFile()||hash(fs.readFileSync(f))!==expected)throw Error('Skill cũ đã được sửa; giữ nguyên trước khi gỡ: '+name);}
+ return hash(fs.readFileSync(receipt));
+}
+function plan(skillRoot,manifest){return(manifest.retired_skills||[]).flatMap(name=>{if(name!=='duyetvadang')throw Error('Tên skill nghỉ dùng không được hỗ trợ');const target=path.resolve(skillRoot,name);if(!inside(target,path.resolve(skillRoot)))throw Error('Invalid retirement path');if(!fs.existsSync(target))return[];const marker=path.join(target,'freeup-retired.json');if(!fs.existsSync(path.join(target,'SKILL.md'))&&fs.existsSync(marker)){const m=JSON.parse(fs.readFileSync(marker));if(m.package_id===manifest.package_id&&m.skill_name===name&&m.entry_removed===true)return[];}return[{name,target,packageId:manifest.package_id,receiptHash:inspect(target,name,manifest.package_id)}];});}
+function apply(items,backupRoot){fs.mkdirSync(backupRoot,{recursive:true});const done=[];for(const item of items){if(inspect(item.target,item.name,item.packageId)!==item.receiptHash)throw Error('Skill thay đổi sau kiểm tra');const dest=path.resolve(backupRoot,'retired-'+Date.now()+'-'+item.name);if(!inside(dest,path.resolve(backupRoot)))throw Error('Invalid backup path');try{fs.renameSync(item.target,dest);}catch(error){if(!['EPERM','EBUSY','EACCES'].includes(error.code)||fs.existsSync(dest))throw error;fs.cpSync(item.target,dest,{recursive:true,force:false,errorOnExist:true,dereference:false});inspect(dest,item.name,item.packageId);const entry=path.join(item.target,'SKILL.md');if(hash(fs.readFileSync(entry))!==hash(fs.readFileSync(path.join(dest,'SKILL.md'))))throw Error('Bản sao skill cũ chưa khớp');fs.unlinkSync(entry);fs.writeFileSync(path.join(item.target,'freeup-retired.json'),JSON.stringify({package_id:item.packageId,skill_name:item.name,entry_removed:true,backup:dest})+'\n');}done.push({name:item.name,backup:dest});}return done;}
+module.exports={plan,apply};

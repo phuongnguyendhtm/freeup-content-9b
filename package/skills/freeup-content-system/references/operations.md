@@ -32,9 +32,7 @@ Chạy `node "{baseDir}/scripts/content.cjs" help` để đọc giao diện. Ví
 | QA | `qa --id <ID> --file qa.json`, rồi `validate --id <ID>` |
 | Duyệt chữ | `approve --id <ID> --by "học viên" --note "chỉ dẫn thật" --scope content` |
 | Duyệt media | `approve --id <ID> --by "học viên" --note "chỉ dẫn thật" --scope media` |
-| Duyệt đăng | `approve --id <ID> --by "học viên" --note "chỉ dẫn thật" --scope publish --channel <ID-kenh> --at now` hoặc ISO có múi giờ |
-| Ghi lịch tool đã tạo | `schedule --id <ID> --schedule-id <ID-that> --channel <ID-kenh> --at <ISO-offset> --evidence <receipt>` |
-| Ghi bài đã đăng | `published --id <ID> --channel <ID-kenh> --url <permalink> --evidence <receipt>` |
+| Duyệt bộ file | `approve --id <ID> --by "học viên" --note "chỉ dẫn thật" --scope bundle` rồi `outputs --id <ID>` |
 | Feedback | `feedback --id <ID> --text "..." --scope current`; dùng permanent và --by chỉ khi học viên yêu cầu lưu làm quy tắc lâu dài |
 | KPI | `metrics --id <ID> --file metrics.json` — cần source, observed_at, định nghĩa và các số liệu thật |
 | Mẫu | `templates`; `templates --file template.json` — cần id/name/format/definition, ID mới khi sửa |
@@ -58,12 +56,12 @@ Mở caption/master và toàn bộ media thật trước QA. JSON cơ sở:
 
 Story/comment-chain chỉ chữ có thể không cần media, nhưng vẫn phải đọc bản chữ thật. Comment-chain cần `comments` là mảng chuỗi không rỗng đúng thứ tự. Founder Quote thêm `scores` (big_idea 20, quote 15, photo 15, composition 15, typography 10, color 10, personal_brand 10, mobile 5), `hard_rejection:false`, tổng ít nhất 90. Visual Insight thêm `checks` là 10 boolean; từ hai mục sai phải sửa. Xem tài liệu từng kiểu để đánh giá đúng nội dung.
 
-`qa` chụp hash chữ và media. `validate` kiểm file tồn tại, hash, dữ liệu bắt buộc và QA; sai trả exit code 2. Duyệt chữ chuyển CONTENT_APPROVED với bài chỉ chữ hoặc PENDING_MEDIA với format cần media. Duyệt media không cấp quyền đăng. Duyệt đăng ghi đúng kênh và thời gian; helper từ chối lịch khác hoặc kênh khác. Chỉ ghi SCHEDULED/PUBLISHED sau khi native tool đã trả bằng chứng thật. Không viết receipt giả để qua kiểm tra.
+`qa` chụp hash chữ và media. `validate` kiểm file tồn tại, hash, dữ liệu bắt buộc và QA; sai trả exit code 2. Duyệt chữ chuyển CONTENT_APPROVED với bài chỉ chữ hoặc PENDING_MEDIA với format cần media. Duyệt media ghi nhận phần hình/âm thanh. Duyệt bundle ghi nhận chữ và media đúng phiên bản để xuất thành phẩm; người dùng tự đăng. Không ghi lịch hoặc biên nhận đăng từ gói này.
 
-BLOCKED_TOOL chỉ dùng khi năng lực/asset cần thiết chưa có: ghi blocker và trả phần đã tạo. DRAFT → CONTENT_READY → MEDIA_READY → READY_FOR_REVIEW → APPROVED → SCHEDULED/PUBLISHED là các mốc thực, không phải lời hứa. Khi sửa chữ/media, chạy QA và nhận duyệt phù hợp cho phiên bản mới.
+BLOCKED_TOOL chỉ dùng khi năng lực/asset cần thiết chưa có: ghi blocker và trả phần đã tạo. DRAFT → CONTENT_READY → MEDIA_READY → READY_FOR_REVIEW → APPROVED → xuất file cho người dùng là các mốc thực, không phải lời hứa. Khi sửa chữ/media, chạy QA và nhận duyệt phù hợp cho phiên bản mới.
 
 ## Native capabilities
 
-Tra danh sách tool thực trong phiên 9B. Ưu tiên native business documents và media library của học viên khi có. `company_media_generate` dùng ID asset thật và trả native asset; nếu local file chưa import, dùng công cụ import được hỗ trợ hoặc renderer local. Không gửi local path như một native UUID. Khi không có native publisher/Sheets/voice, vẫn làm content và xuất file; giải thích năng lực cần kết nối cho bước còn lại.
+Tra danh sách tool thực trong phiên 9B. Ưu tiên native business documents và media library của học viên khi có. `company_media_generate` dùng ID asset thật và trả native asset; nếu local file chưa import, dùng công cụ import được hỗ trợ hoặc renderer local. Không gửi local path như một native UUID. Chỉ kiểm công cụ cần cho bài đang làm; thiếu công cụ thì giữ nháp và báo rõ.
 
-`/lien_ket_kenh` dùng màn hình hoặc tool kết nối của 9B; học viên tự đăng nhập/OAuth. Không yêu cầu dán cookie/mật khẩu vào chat. Sau kết nối, xác minh account và kênh; kết nối không đồng nghĩa duyệt đăng. `/sheets_action` bắt buộc đọc google-sheet-template.md/.json, dùng bảng riêng theo mẫu đã xác minh/bind và connector có thật; chưa có thì copy mẫu chuẩn, không tạo bảng tùy ý. Thiếu connector thì làm local và báo bước Google chưa nối. `/ke_hoach_content` tạo lịch biên tập trong kho; lịch này chưa phải lịch đã đặt trên nền tảng.
+`/ke_hoach_content` tạo lịch biên tập local. `/xemketqua` hoặc `outputs` trả chữ, media và đường dẫn thư mục; người dùng tự đăng.

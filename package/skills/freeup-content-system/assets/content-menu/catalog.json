@@ -7,10 +7,7 @@
     "mở bảng chọn content",
     "menu content"
   ],
-  "intro_assets": [
-    "01-menu-content.png",
-    "00-quy-trinh.jpg"
-  ],
+  "intro_assets": [],
   "choices": [
     {
       "choice": 1,
@@ -145,7 +142,8 @@
     "group": "lapkehoach",
     "intent": "ke-hoach-content",
     "name": "Content theo lịch",
-    "command": "/lapkehoach Lập lịch content [7 ngày / 1 tháng] theo hồ sơ doanh nghiệp đã có. Chọn nhiều định dạng phù hợp, cho tôi duyệt lịch trước. Sau khi duyệt, tự sản xuất và chờ tôi duyệt thành phẩm rồi đăng."
+    "command": "/vietbai Làm nội dung và media theo yêu cầu, giao file để tôi tự đăng.",
+    "asset": "02-bai-viet.jpg"
   },
   "menu_brand": "FREEUP"
 }

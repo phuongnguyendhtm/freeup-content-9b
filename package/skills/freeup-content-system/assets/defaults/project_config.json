@@ -15,13 +15,17 @@
     "mascot": "media-input/mascot"
   },
   "publishing": {
-    "provider": "native-connected-apps",
+    "provider": "manual",
+    "enabled": false,
     "default_target": null
   },
   "media": {
     "preferred_renderer": "native-image-tools",
     "local_renderer_fallback": true
   },
-  "setup_complete": false
+  "setup_complete": false,
+  "storage": {
+    "provider": "local",
+    "sheets_enabled": false
+  }
 }
-

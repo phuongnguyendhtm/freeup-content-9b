@@ -34,7 +34,7 @@ Kho Tri thức truy cập bằng tool thực có: `search_business_documents` t�
 
 Gợi ý ba nhóm khi còn thiếu: (1) tên thương hiệu + khách hàng, (2) sản phẩm + điểm khác biệt, (3) giọng văn + mục tiêu. Bỏ mọi trường đã đủ khỏi câu hỏi. Nếu chỉ thiếu mục tiêu, chỉ hỏi mục tiêu. Giá trị “chưa rõ”, ô trống hay gợi ý do AI suy đoán chưa phải dữ liệu đã cung cấp.
 
-Không bắt khách hàng nhập màu/font/logo/ảnh/kênh để bắt đầu viết. Kiểm tra chúng khi cần tạo media hoặc đăng bài: ảnh thật cho ảnh cá nhân; nguồn ảnh/video/âm thanh được phép dùng cho video; kênh đã kết nối và xác minh cho việc đăng. Màu trung tính và Arial/Georgia của gói là mặc định làm việc, không phải nhận diện khách hàng đã xác nhận.
+Không bắt khách hàng nhập màu/font/logo/ảnh/kênh để bắt đầu viết. Kiểm tra chúng khi cần tạo media: ảnh thật cho ảnh cá nhân; nguồn ảnh/video/âm thanh được phép dùng cho video. Màu trung tính và Arial/Georgia của gói là mặc định làm việc, không phải nhận diện khách hàng đã xác nhận.
 
 ## 3. Lưu nguồn và trạng thái
 
@@ -62,9 +62,9 @@ Chỉ ghi ID/đường dẫn/thời điểm thật. Đã cung cấp khác với 
 
 Hồ sơ cũ có thông tin thực được giữ tương thích dù chưa có metadata. Bản bổ sung chỉ ghi trường có dữ liệu mới: nhánh màu/font/giọng khác được giữ nguyên; ô trống không xóa dữ liệu; nguồn suy đoán không ghi đè giá trị đã xác nhận. Khách hàng muốn đổi doanh nghiệp thì cần tạo/chọn project riêng hoặc xác nhận rõ việc thay hồ sơ. Những yêu cầu sửa hồ sơ rõ ràng của khách hàng được lưu cùng nguồn xác nhận.
 
-## 4. Sheet mẫu và kết nối riêng
+## 4. Kho local
 
-Bắt buộc đọc google-sheet-template.md và .json khi /thietlapcontent. Dùng lại binding đã lưu và bảng đúng mẫu của học viên; chưa có thì copy toàn bộ workbook chuẩn vào tài khoản học viên, giữ định dạng/công thức, dọn dữ liệu giảng viên trên bản sao mới rồi kiểm/bind. Không tạo Sheet tùy ý, không ghi vào Sheet nguồn, không làm sạch lại bảng đang dùng. Không hỏi lại link mẫu đã có trong reference. Thiếu Google connector thì báo đúng phần cần nối; hồ sơ đủ vẫn viết local được. Kiểm Google, sự kiện/lịch và quyền đăng riêng, không coi cài skill là đã bật tự động.
+Đọc local-workflow.md. Không kết nối Google Sheets hoặc Facebook; lưu hồ sơ, nguồn và thành phẩm trong project hiện có. Chỉ kiểm công cụ phục vụ yêu cầu hiện tại.
 
 ## 5. Hoàn tất và chạy lại
 

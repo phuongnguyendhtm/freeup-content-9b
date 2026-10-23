@@ -2,12 +2,9 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs'), path = require('node:path'), os = require('node:os'), crypto = require('node:crypto');
 const installer = require('../install.cjs');
-const sheet = require('../package/skills/freeup-content-system/scripts/sheet-template.cjs');
 const downloader = require('../scripts/download.cjs');
-const contract = require('../package/skills/freeup-content-system/references/google-sheet-template.json');
 const fixtureBase = process.env.FREEUP_TEST_DIR || os.tmpdir(); fs.mkdirSync(fixtureBase, { recursive: true });
 const fixture = fs.mkdtempSync(path.join(fixtureBase, 'freeup-universal-test-'));
-function snapshot(id = 'student-copy-fixture') { return { spreadsheetId: id, sheets: contract.sheets.map(x => ({ title: x.title, headers: [...x.headers], ...(x.formula_a2 ? { formula_a2: x.formula_a2 } : {}) })) }; }
 function quiet(fn) { const log = console.log; try { console.log = () => {}; return fn(); } finally { console.log = log; } }
 test('running host signals and explicit target choose exactly one host', () => {
   assert.equal(installer.target({ target: 'claude' }, { CODEX_HOME: 'other-app' }), 'claude');
@@ -28,7 +25,10 @@ for (const host of ['codex', 'claude']) test(host + ': fresh install, Unicode/sp
   const base = path.join(result.skills_dir, 'freeup-content-system');
   const runtime = JSON.parse(fs.readFileSync(path.join(base, 'runtime.json')));
   assert.equal(path.resolve(base, runtime.project_relative), result.data_dir);
-  assert(fs.existsSync(path.join(base, 'references', 'google-sheet-template.json')));
+  assert(fs.existsSync(path.join(base, 'references', 'local-workflow.md')));
+  assert(!fs.existsSync(path.join(base, 'references', 'google-sheet-template.json')));
+  assert(fs.existsSync(path.join(result.skills_dir, 'duyetbai', 'SKILL.md')));
+  assert(!fs.existsSync(path.join(result.skills_dir, 'duyetvadang')));
   const profile = path.join(result.data_dir, 'database', 'brand_config.json');
   fs.writeFileSync(profile, JSON.stringify({ brand_name: 'Doanh nghiệp của học viên', usp: 'Giữ riêng' }));
   const again = quiet(() => installer.main(['--target', host, '--apply', '--upgrade'], context));
@@ -56,23 +56,44 @@ test('native targets cannot be redirected through the file-copy adapter', () => 
   assert.throws(() => installer.main(['--target', '9bizclaw', '--skills-dir', fixture]), /Native host/);
   assert.throws(() => installer.main(['--target', 'openclaw', '--data-dir', fixture]), /Native host/);
 });
-test('sheet validator accepts the exact template and rejects source, missing tab, arbitrary headers or formula', () => {
-  assert.equal(sheet.validate(snapshot()).student_spreadsheet_id, 'student-copy-fixture');
-  assert.throws(() => sheet.validate(snapshot(contract.source_spreadsheet_id)), /Sheet gốc/);
-  const missing = snapshot(); missing.sheets.pop(); assert.throws(() => sheet.validate(missing), /Thiếu/);
-  const headers = snapshot(); headers.sheets[3].headers[0] = 'Random ID'; assert.throws(() => sheet.validate(headers), /Header/);
-  const formula = snapshot(); formula.sheets[2].formula_a2 = '=1'; assert.throws(() => sheet.validate(formula), /Công thức/);
+test('upgrade retires only an unchanged owned publishing group and preserves user data', () => {
+  const context={home:path.join(fixture,'retire-owned'),env:{}};
+  const result=quiet(()=>installer.main(['--target','codex','--apply'],context));
+  const folder=path.join(result.skills_dir,'duyetvadang');fs.mkdirSync(folder);
+  const content='Old owned skill';fs.writeFileSync(path.join(folder,'SKILL.md'),content);
+  const manifest=require('../package/distribution-manifest.json');
+  fs.writeFileSync(path.join(folder,'freeup-gift-origin.json'),JSON.stringify({package_id:manifest.package_id,skill_name:'duyetvadang',installed_files:{'SKILL.md':crypto.createHash('sha256').update(content).digest('hex')}}));
+  quiet(()=>installer.main(['--target','codex','--apply','--upgrade'],context));
+  assert(!fs.existsSync(folder));
+  const reports=path.join(path.dirname(result.skills_dir),'freeup-content-install-reports');
+  assert(fs.readdirSync(reports).some(n=>n.startsWith('retired-')&&fs.readFileSync(path.join(reports,n,'SKILL.md'),'utf8')===content));
 });
-test('sheet bind reuses the existing board and preserves automation state; does not switch IDs', () => {
-  const project = path.join(fixture, 'binding'), input = path.join(fixture, 'snapshot.json'); fs.writeFileSync(input, JSON.stringify(snapshot()));
-  const a = quiet(() => sheet.main(['bind', '--file', input, '--project', project]));
-  const data = JSON.parse(fs.readFileSync(a.binding_file)); data.automation_state = 'verified-fixture'; data.account = 'own-account'; fs.writeFileSync(a.binding_file, JSON.stringify(data));
-  quiet(() => sheet.main(['bind', '--file', input, '--project', project]));
-  assert.equal(JSON.parse(fs.readFileSync(a.binding_file)).automation_state, 'verified-fixture');
-  assert.equal(JSON.parse(fs.readFileSync(a.binding_file)).account, 'own-account');
-  fs.writeFileSync(input, JSON.stringify(snapshot('different-copy')));
-  assert.throws(() => quiet(() => sheet.main(['bind', '--file', input, '--project', project])), /Sheet riêng khác/);
+test('unowned retired name blocks before changing any active skill', () => {
+  const context={home:path.join(fixture,'retire-conflict'),env:{}};
+  const folder=path.join(context.home,'.codex','skills','duyetvadang');fs.mkdirSync(folder,{recursive:true});fs.writeFileSync(path.join(folder,'SKILL.md'),'Student owned');
+  assert.throws(()=>quiet(()=>installer.main(['--target','codex','--apply','--upgrade'],context)),/ownership/);
+  assert(!fs.existsSync(path.join(path.dirname(folder),'freeup-content-system')));
 });
+
+test('locked Windows directory can retire the skill entry after a verified backup, and reruns are safe', () => {
+  const retire=require('../package/retire-skills.cjs'),manifest=require('../package/distribution-manifest.json');
+  const skillRoot=path.join(fixture,'locked-retirement','skills'),folder=path.join(skillRoot,'duyetvadang');fs.mkdirSync(folder,{recursive:true});
+  const content='Owned publishing group';fs.writeFileSync(path.join(folder,'SKILL.md'),content);
+  fs.writeFileSync(path.join(folder,'freeup-gift-origin.json'),JSON.stringify({package_id:manifest.package_id,skill_name:'duyetvadang',installed_files:{'SKILL.md':crypto.createHash('sha256').update(content).digest('hex')}}));
+  const plan=retire.plan(skillRoot,manifest),original=fs.renameSync;
+  let done;try{fs.renameSync=()=>{throw Object.assign(Error('Fixture locked directory'),{code:'EBUSY'});};done=retire.apply(plan,path.join(fixture,'locked-retirement','backup'));}finally{fs.renameSync=original;}
+  assert(!fs.existsSync(path.join(folder,'SKILL.md')));assert.equal(fs.readFileSync(path.join(done[0].backup,'SKILL.md'),'utf8'),content);assert.deepEqual(retire.plan(skillRoot,manifest),[]);
+});
+
+test('local morning report is read only and never reports a missing scan as completed', () => {
+  const {report}=require('../package/skills/freeup-content-system/scripts/local-report.cjs');const project=path.join(fixture,'report-no-data');
+  const text=report(project,new Date('2026-10-22T18:00:00Z'));
+  assert.match(text,/2026-10-23/);assert.match(text,/Chưa có biên bản nghiên cứu/);assert(!fs.existsSync(project));
+  fs.mkdirSync(path.join(project,'database/research_runs'),{recursive:true});const file=path.join(project,'database/research_runs/2026-10-23.json');
+  fs.writeFileSync(file,JSON.stringify({status:'PARTIAL',selected:[{topic:'Ý đã đọc thật'}],reason:'Nguồn bị chặn'}));const before=fs.readFileSync(file,'utf8');
+  const result=report(project,new Date('2026-10-22T18:00:00Z'));assert.match(result,/PARTIAL/);assert.match(result,/Nguồn bị chặn/);assert.equal(fs.readFileSync(file,'utf8'),before);
+});
+
 test('no-Git download pins a commit, checks every digest and refuses corruption/existing destination', async () => {
   const originalFetch = global.fetch, commit = 'a'.repeat(40), bytes = Buffer.from('reviewed fixture');
   const digest = crypto.createHash('sha256').update(bytes).digest('hex');

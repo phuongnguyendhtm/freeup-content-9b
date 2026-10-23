@@ -8,6 +8,7 @@ const path = require('node:path');
 const os = require('node:os');
 const crypto = require('node:crypto');
 const cp = require('node:child_process');
+const retirement = require('./retire-skills.cjs');
 
 const PACKAGE_ROOT = fs.realpathSync(__dirname);
 const PACKAGE_ID = 'freeup-content-student-gift';
@@ -348,6 +349,7 @@ function main(argv = process.argv.slice(2)) {
   const skillRoot = assertContained(path.join(workspace, 'skills'), workspace);
   assertNoLinks(skillRoot, workspace);
   const names = manifest.skills.map(skill => skill.name);
+  const retired = retirement.plan(skillRoot, manifest);
   const plan = manifest.skills.map(skill => {
     const target = assertContained(path.join(skillRoot, skill.name), workspace);
     assertNoLinks(target, workspace);
@@ -410,6 +412,7 @@ function main(argv = process.argv.slice(2)) {
       const afterAgents = readAgents(runtime);
       if (allowlistBatch(afterAgents, selectAgent(afterAgents, agent.id), names).length) fail('Đọc lại allowlist chưa thấy đủ skill của gói.');
     }
+    transaction.retired_skills = retirement.apply(retired, reportFolder);
     const installedRoot = path.join(skillRoot, CONDUCTOR);
     const helper = assertContained(path.join(installedRoot, 'scripts', 'content.cjs'), installedRoot);
     if (!exists(helper)) fail('Conductor thiếu scripts/content.cjs để khởi tạo project.');

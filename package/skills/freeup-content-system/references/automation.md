@@ -4,10 +4,7 @@ Dùng cho `/nguon`, `/timy`, `/lich`, `/duyetlich`, `/theodoi` và xử lý hàn
 
 ## Phạm vi duyệt
 
-- Duyệt lịch là **PRODUCE_ONLY**: cho phép tự viết và làm ảnh cho các dòng của đúng phiên bản lịch. Sau QA, thành phẩm ở **READY_FOR_REVIEW**. Không tự ghi duyệt chữ, ảnh hoặc publish.
-- Học viên xem thành phẩm rồi `/duyetdang [ID + kênh + giờ]`; dùng quy trình đăng hiện có. Chỉ dẫn rõ từ cùng một yêu cầu có thể duyệt chữ, ảnh và đăng cùng lúc.
-- Thời gian trên lịch biên tập là thời gian dự kiến đăng; không phải giờ đã đặt trên Facebook và không trì hoãn việc sản xuất sau khi duyệt lịch.
-- Khi sửa lịch, helper tăng revision, hủy phạm vi sản xuất cũ và dừng tác vụ cũ. Giữ nguyên bài đã tạo để tham khảo; không xóa thành phẩm hoặc tự đăng theo lịch hết hiệu lực.
+Duyệt lịch chỉ cho phép sản xuất và chờ duyệt thành phẩm. /duyetbai ghi duyệt đúng bản để xuất file; người dùng tự đăng. Không publisher/hẹn đăng hay đồng bộ bảng tính.
 
 ## 1. Chọn nguồn và hồ sơ riêng
 
@@ -36,7 +33,7 @@ campaign.cjs stories --file verified-stories.json
 
 Mọi lệnh chấp nhận `--project PATH` và chạy bằng Node của runtime 9B. Học viên chỉ dùng chat; không yêu cầu học viên viết JSON/lệnh kỹ thuật.
 
-Nguồn JSON: `id` tùy chọn, `name`, `url` HTTPS, `kind` (website/rss/youtube/facebook/linkedin/newsletter), `topics` mảng và `enabled`. Tắt nguồn bằng cách lưu lại chính ID với `enabled:false`. Chỉ ghi `identity_evidence` khi đã đối chiếu trang chính thức; người nổi tiếng không tự chứng minh mọi phát ngôn đúng.
+Nguồn JSON: `id` tùy chọn, `name`, `url` HTTPS, `kind` (website/rss/youtube/facebook/instagram/tiktok/linkedin/newsletter), `topics` mảng và `enabled`. Tắt nguồn bằng cách lưu lại chính ID với `enabled:false`. Chỉ ghi `identity_evidence` khi đã đối chiếu trang chính thức; người nổi tiếng không tự chứng minh mọi phát ngôn đúng.
 
 Kho câu chuyện: `title`, `story`, `source_type:user_message|business_document`, `confirmed:true`, `confirmed_by`, `evidence`. Chỉ dùng trải nghiệm từ chat/tài liệu thực của học viên. Nếu chưa có, viết nhận định hoặc ví dụ được ghi rõ là giả định; không đổi “Alex đã làm…” thành “tôi đã làm…”.
 
@@ -105,7 +102,7 @@ Ngay sau `/duyetlich`, xử lý hàng đợi trong lượt hiện tại. Nếu c
 5. Đọc thành phẩm thật và ghi QA bằng `content.cjs qa`; chỉ khi `validate` đạt mới `campaign.cjs finish --task ... --owner ...`. Finish không tạo quyền đăng. Giao caption/ảnh/đường dẫn `/xem` để học viên duyệt.
 6. Tối đa 2 dòng mỗi lượt nền, tối đa 3 lần claim tự động mỗi tác vụ; lease 2 giờ. Sau khi đã bổ sung/sửa nguyên nhân và học viên yêu cầu thử lại: `retry --task ... --by ... --note ...`. Không tự lặp lỗi hoặc trả trạng thái hoàn tất chỉ vì đã viết prompt ảnh.
 
-Sau duyệt thành phẩm, dùng `/duyetdang` và `/dang` với kênh, giờ và phiên bản chính xác. Native `facebook-publisher`/`use-connected-apps` chọn schema hiện có. Timeout đăng phải đối chiếu bài/lịch thật trước khi thử lại. Không có công cụ đăng → xuất gói đăng tay.
+Sau duyệt thành phẩm, dùng `/duyetbai`, kiểm đúng phiên bản và xuất caption/media bằng `outputs`. Trả đường dẫn thực và file đính kèm khi host hỗ trợ; người dùng tự đăng.
 
 ## 6. Bật lịch chạy trong 9B
 
@@ -131,7 +128,7 @@ Chỉ tạo lịch khi học viên yêu cầu theo dõi định kỳ, ví dụ `
 | Viết lại thành bản gốc | Skill viết của gói này | Giữ Brand DNA, nguồn và câu chuyện thật |
 | Ảnh/carousel/video | Skill media đã có của gói + native 9B | Ảnh AI/voice cần tool/asset thực của học viên |
 | Lịch chạy nền | Native automations của 9B | Có job ID, đọc lại và run history |
-| Đăng | use-connected-apps / facebook-publisher | Duyệt thành phẩm, tài khoản và schema thực |
+| Giao thành phẩm | content.cjs outputs | Caption, media thật và thư mục xem trên máy |
 
 Nguồn kỹ thuật đã xem: [OpenClaw Skills](https://docs.openclaw.ai/tools/skills), [ClawHub Quickstart](https://docs.openclaw.ai/clawhub/quickstart), [blogwatcher source](https://github.com/Hyaxia/blogwatcher), [summarize source](https://github.com/steipete/summarize). Các listing [AI Content Repurposer](https://clawhub.ai/lvjunjie-byte/skills/ai-content-repurposer) và [Social Publisher](https://clawhub.ai/fuczy/skills/clawd-social-publisher) đã đọc để khảo sát nhưng **không được đóng gói/cài hoặc xác minh vận hành**. Không dựa vào các listing đó để hứa có crawler hay publisher hoàn chỉnh. Nếu chọn thêm một skill trong tương lai, cần kiểm đúng mã nguồn và lượt chạy trên runtime học viên.
 

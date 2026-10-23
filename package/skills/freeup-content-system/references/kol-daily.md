@@ -4,7 +4,7 @@ Dùng khi người dùng yêu cầu theo dõi cố vấn/KOL hằng ngày, tìm 
 
 ## Đầu vào và phạm vi
 
-- Đọc sống tab 05. Nguồn & cố vấn. Chỉ các dòng Creator / chuyên gia có Bật tham khảo = Bật và link cụ thể mới tham gia top 3. Các nhóm Web/blog/tài liệu/nội bộ dùng để đối chiếu, không thay bài KOL nhằm đủ số.
+- Đọc database/expert_sources.json trong project; chỉ nguồn KOL được người dùng bật mới tham gia. Nguồn web/tài liệu dùng đối chiếu, không lấp quota KOL.
 - Facebook, Instagram, TikTok và YouTube là nền tảng nguồn. Một dòng có một link chính thức cho một KOL/nền tảng; có thể thêm nhiều dòng cho cùng người ở các nền tảng khác nhau. Giữ link và bật/tắt của người dùng. Không suy tài khoản từ tên; chỉ thêm link khác khi xác minh bằng liên kết chính thức và trong phạm vi người dùng giao.
 - Mỗi ca thử đọc tất cả link KOL đang bật; lấy bài mới trong 72 giờ, dùng lịch sử để so hiệu suất. Nhiều nguồn vượt thời lượng thì lưu tiến độ/độ phủ và báo chưa quét hết, không gọi kết quả là tốt nhất toàn bộ nguồn.
 - Công cụ phải có thật trên máy chạy. Tài khoản connected chưa chứng minh đọc được KOL bên thứ ba. API Display/Insights chỉ hỗ trợ tài khoản sở hữu/được ủy quyền không được nhận là bộ quét mọi KOL. Bài riêng tư/đăng nhập/quota/policy bị chặn: ghi giới hạn, không vượt chặn hoặc tự mua dịch vụ dữ liệu.
@@ -15,7 +15,7 @@ Dùng khi người dùng yêu cầu theo dõi cố vấn/KOL hằng ngày, tìm 
 2. Lưu views, likes, comments, shares thật cùng lúc đọc/bằng chứng. Thiếu giữ trống, không coi bằng 0. Số UI làm tròn phải ghi xấp xỉ; không tự biến thành số chính xác. Không suy lead/doanh thu từ các số này.
 3. Ưu tiên hiệu suất tương đối: so một chỉ số với trung vị ít nhất 5 bài của cùng KOL, nền tảng, định dạng và nhóm tuổi bài tương đương. Từ 2 lần nền có thể ghi vượt nền; đây là quy tắc chọn của hệ thống, không phải một định nghĩa viral chung. Không so thẳng views Facebook với YouTube hoặc video ngắn với video dài.
 4. Thiếu dữ liệu nền: ghi Chưa đủ dữ liệu viral, chỉ xếp theo giá trị biên tập/độ mới. Không bịa tỷ lệ tăng trưởng, không gọi là viral đã xác minh. Lý do chọn và giới hạn luôn đi cùng bài.
-5. Khử trùng permalink với kho 01 và nguồn đã dùng tại 03; cùng nội dung đăng lại ở nhiều nền tảng chỉ chọn một khi xác minh trùng. Không làm 3 góc AI từ một bài để đủ 3.
+5. Khử trùng permalink với idea_bank và nguồn đã dùng tại post_inventory; cùng nội dung đăng lại ở nhiều nền tảng chỉ chọn một khi xác minh trùng. Không làm 3 góc AI từ một bài để đủ 3.
 
 Dùng scripts/kol-daily.cjs --file <kết quả đọc thật.json>. Input gồm now, sources [{id,name,url,enabled}], coverage [{sourceId,status,reason,evidence}], knownSourceUrls và candidates. Candidate có advisorUrl, publishedAt ISO, sourceFormat, score, sourceCapture (thêm creatorUrl đã xác minh), observedMetrics {views/likes/comments/shares,observedAt,evidence} và baseline khi có. Baseline có creatorUrl/platform/format/metric/ageWindowHours/evidence và samples [{url,value,publishedAt,observedAt,evidence}]. Không tự tạo các bằng chứng để hợp thức hóa dữ liệu.
 
@@ -23,11 +23,7 @@ Helper giữ tối đa **3 bài tổng cộng**; chưa đủ bài có bằng ch�
 
 ## Ngân hàng và bàn giao
 
-Ghi output mode kol_daily vào đúng bảng riêng: D/N đúng ảnh nguồn; E nguyên văn theo original-source.md trong quyền được phép lưu; F đề xuất triển khai riêng, không ghi đè yêu cầu người dùng; M permalink; O điểm biên tập; R/S/T lượt thích/bình luận/chia sẻ đã quan sát; U lý do chọn, số view, thời điểm đo và giới hạn viral/nguồn. Bài lỗi giữ local và báo rõ; không lấy bài web khác thay vào quota KOL.
-
-Trạng thái mới Chờ duyệt ý tưởng, chưa cho sản xuất hoặc đăng. Sau ghi, đọc lại đúng ID và ô đã ghi. Báo cáo gồm tối đa 3 bài, KOL/nền tảng/link, lý do nổi bật, số liệu thật, độ phủ nguồn và lỗi kết nối. Giữ quyền gửi/kênh/thời gian báo cáo người dùng đã chọn; không tự gửi thêm nơi khác.
-
-Máy/Gateway, mạng, kết nối và cơ chế lịch phải hoạt động. Cài skill chưa tự bật thu thập cả bốn nền tảng; chỉ báo từng nguồn dùng được sau lần đọc bài cụ thể thành công.
+Lưu bản gốc và bằng chứng vào source_library qua campaign.cjs collect; lưu ý tưởng local qua content.cjs ideas với topic, nguồn, góc AI và lý do. Chống trùng URL với kho đã có. Trình tối đa 3 bài trong chat/báo cáo; người dùng duyệt bằng lời nhắn để bắt đầu sản xuất. Không đọc/ghi cột bảng tính. Đọc local-workflow.md.
 
 ## Bộ đọc nguồn
 

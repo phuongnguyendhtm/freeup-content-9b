@@ -1,10 +1,10 @@
 {
-  "version": "1.5.2",
+  "version": "1.7.0",
   "commands": [
     {
       "skill": "thietlapcontent",
       "alias": "/thietlapcontent",
-      "description": "Đọc hồ sơ doanh nghiệp đã có, bổ sung phần thiếu, quản lý thương hiệu, ảnh và kết nối kênh.",
+      "description": "Đọc hồ sơ doanh nghiệp đã có, bổ sung phần thiếu, quản lý thương hiệu, ảnh và tài nguyên riêng.",
       "default_intent": "setup",
       "modes": [
         {
@@ -12,12 +12,6 @@
           "alias": "/caidat",
           "intent": "setup",
           "description": "Kiểm tra hồ sơ doanh nghiệp đã có và chỉ hỏi phần còn thiếu"
-        },
-        {
-          "skill": "thietlapcontent",
-          "alias": "/kenh",
-          "intent": "lien-ket-kenh",
-          "description": "Hướng dẫn kết nối và kiểm tra kênh đăng của học viên"
         },
         {
           "skill": "thietlapcontent",
@@ -73,7 +67,7 @@
           "skill": "lapkehoach",
           "alias": "/duyetlich",
           "intent": "approve-editorial-plan",
-          "description": "Duyệt đúng phiên bản lịch và bắt đầu tự tạo bài, ảnh; chờ duyệt thành phẩm trước đăng"
+          "description": "Duyệt đúng phiên bản lịch và bắt đầu tự tạo bài, ảnh; chờ duyệt thành phẩm trước bàn giao"
         },
         {
           "skill": "lapkehoach",
@@ -192,34 +186,22 @@
       ]
     },
     {
-      "skill": "duyetvadang",
-      "alias": "/duyetvadang",
-      "description": "Ghi duyệt đúng bản chữ/ảnh/video, phạm vi kênh và thời gian; đăng hoặc hẹn đăng bằng kết nối thật.",
+      "skill": "duyetbai",
+      "alias": "/duyetbai",
+      "description": "Duyệt chữ, ảnh hoặc trọn bộ thành phẩm để tải về và tự đăng.",
       "default_intent": "duyet-content",
       "modes": [
         {
-          "skill": "duyetvadang",
+          "skill": "duyetbai",
           "alias": "/duyetchu",
           "intent": "duyet-content",
           "description": "Ghi duyệt phần chữ đúng phiên bản theo chỉ dẫn học viên"
         },
         {
-          "skill": "duyetvadang",
+          "skill": "duyetbai",
           "alias": "/duyetanh",
           "intent": "duyet-media",
           "description": "Ghi duyệt ảnh hoặc video thật đúng phiên bản"
-        },
-        {
-          "skill": "duyetvadang",
-          "alias": "/duyetdang",
-          "intent": "duyet-dang",
-          "description": "Ghi duyệt đăng đúng bài, phiên bản, kênh và thời gian"
-        },
-        {
-          "skill": "duyetvadang",
-          "alias": "/dang",
-          "intent": "publish",
-          "description": "Đăng bài đã được yêu cầu và duyệt qua công cụ thực đã kết nối"
         }
       ]
     },
@@ -246,12 +228,6 @@
           "alias": "/ketqua",
           "intent": "analyze-kpi",
           "description": "Phân tích số liệu content thật và lưu bài học"
-        },
-        {
-          "skill": "xemketqua",
-          "alias": "/bang",
-          "intent": "sheets-action",
-          "description": "Đồng bộ kho content với Google Sheets khi học viên đã kết nối"
         }
       ]
     }
@@ -360,28 +336,16 @@
       "description": "Xem bài, caption, ảnh hoặc video thật đã tạo"
     },
     {
-      "skill": "duyetvadang",
+      "skill": "duyetbai",
       "alias": "/duyetchu",
       "intent": "duyet-content",
       "description": "Ghi duyệt phần chữ đúng phiên bản theo chỉ dẫn học viên"
     },
     {
-      "skill": "duyetvadang",
+      "skill": "duyetbai",
       "alias": "/duyetanh",
       "intent": "duyet-media",
       "description": "Ghi duyệt ảnh hoặc video thật đúng phiên bản"
-    },
-    {
-      "skill": "duyetvadang",
-      "alias": "/duyetdang",
-      "intent": "duyet-dang",
-      "description": "Ghi duyệt đăng đúng bài, phiên bản, kênh và thời gian"
-    },
-    {
-      "skill": "duyetvadang",
-      "alias": "/dang",
-      "intent": "publish",
-      "description": "Đăng bài đã được yêu cầu và duyệt qua công cụ thực đã kết nối"
     },
     {
       "skill": "vietbai",
@@ -402,12 +366,6 @@
       "description": "Xem ngân hàng ý tưởng và chọn ý tưởng tiếp tục"
     },
     {
-      "skill": "xemketqua",
-      "alias": "/bang",
-      "intent": "sheets-action",
-      "description": "Đồng bộ kho content với Google Sheets khi học viên đã kết nối"
-    },
-    {
       "skill": "thietkeanh",
       "alias": "/minhhoa",
       "intent": "visual-insight",
@@ -418,12 +376,6 @@
       "alias": "/anhchu",
       "intent": "founder-quote",
       "description": "Tạo ảnh cá nhân kèm câu quan điểm ngắn theo bố cục P01–P06"
-    },
-    {
-      "skill": "thietlapcontent",
-      "alias": "/kenh",
-      "intent": "lien-ket-kenh",
-      "description": "Hướng dẫn kết nối và kiểm tra kênh đăng của học viên"
     },
     {
       "skill": "lapkehoach",

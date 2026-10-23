@@ -43,7 +43,8 @@ if(r.format==='visual-insight'&&qa){if(!Array.isArray(qa.checks)||qa.checks.leng
 return errors;}
 function approvalMatches(r,folder){return r.approval?.content_hash===contentHash(r,folder)&&r.approval?.artifact_hashes?.join('|')===active(r).map(a=>a.sha256).join('|');}
 function main(){
-if(command==='help')return print('init | doctor | profile | setup --file BRAND_JSON (partial updates allowed) | strategy --file STRATEGY_JSON | ideas [--file IDEAS_JSON] | assets [--file JSON] | channels [--file JSON] | plan [--file JSON] | new --topic TEXT --format FORMAT [--title TEXT] [--mode produce|review|plan --parent POST_ID --idea IDEA_ID --task TASK_ID] | rename-outputs [--id ID --title TEXT] [--apply true] | list | show --id ID | outputs [--id ID] | open [--id ID | --all true] --confirm USER_INSTRUCTION | update --id ID --file JSON | artifact --id ID --path FILE [--role ROLE] | artifact --id ID --native UUID --receipt JSON | qa --id ID --file QA_JSON | validate --id ID | approve --id ID --by USER --note TEXT [--scope content|media|publish --channel TARGET --at now|ISO_OFFSET] | schedule --id ID --schedule-id REAL_ID --channel TARGET --at ISO_OFFSET --evidence TEXT | published --id ID --channel TARGET --url URL --evidence TEXT | feedback --id ID --text TEXT [--scope current|permanent --by USER] | metrics --id ID --file JSON | templates [--file JSON]. Every command accepts --project PATH. Publish approval requires --channel.');
+if(['publish','published','schedule','connect-sheet','sync-sheet'].includes(command))fail('Gói này chỉ sản xuất và xuất file; Google Sheets và đăng/hẹn đăng tự động đã được gỡ.');
+if(command==='help')return print('init | doctor | profile | setup --file BRAND_JSON (partial updates allowed) | strategy --file STRATEGY_JSON | ideas [--file IDEAS_JSON] | assets [--file JSON] | channels [--file JSON] | plan [--file JSON] | new --topic TEXT --format FORMAT [--title TEXT] [--mode produce|review|plan --parent POST_ID --idea IDEA_ID --task TASK_ID] | rename-outputs [--id ID --title TEXT] [--apply true] | list | show --id ID | outputs [--id ID] | open [--id ID | --all true] --confirm USER_INSTRUCTION | update --id ID --file JSON | artifact --id ID --path FILE [--role ROLE] | artifact --id ID --native UUID --receipt JSON | qa --id ID --file QA_JSON | validate --id ID | approve --id ID --by USER --note TEXT [--scope content|media|bundle] | feedback --id ID --text TEXT | metrics --id ID --file JSON | templates. Every command accepts --project PATH.');
 if(command==='init'){lib.init(project);return print({project,initialized:true,brand_configured:read(db('brand_config')).configured});}
 if(command==='doctor'){
  if(!process.env.PUPPETEER_CACHE_DIR&&fs.existsSync(path.join(lib.skillRoot,'.runtime','puppeteer')))process.env.PUPPETEER_CACHE_DIR=path.join(lib.skillRoot,'.runtime','puppeteer');
@@ -122,20 +123,12 @@ if(command==='update'){
 }else if(command==='qa'){
  const input=read(path.resolve(o.file||fail('Cần QA_JSON.')));r.qa={...input,content_hash:contentHash(r,folder),artifact_hashes:active(r).map(a=>a.sha256),reviewed_at:stamp()};r.approval=null;const errors=check(r,folder);r.status=errors.length?'REVISE':'READY_FOR_REVIEW';save(f,r,'qa_recorded',{errors});
 }else if(command==='approve'){
- if(!o.by||!o.note)fail('Cần người duyệt và chỉ dẫn thật.');const scope=o.scope||'publish';
- if(!['content','media','publish'].includes(scope))fail('Scope duyệt không hợp lệ.');
- if(scope==='publish'&&!o.channel?.trim())fail('Duyệt đăng cần --channel đích cụ thể.');
- if(scope==='publish'&&o.at&&o.at!=='now'&&(!/(Z|[+-]\d{2}:\d{2})$/.test(o.at)||!Number.isFinite(Date.parse(o.at))))fail('Thời gian duyệt cần now hoặc ISO có timezone.');
+ if(!o.by||!o.note)fail('Cần người duyệt và chỉ dẫn thật.');const scope=o.scope||'bundle';
+ if(!['content','media','bundle'].includes(scope))fail('Chỉ duyệt content/media/bundle để xuất file, không có duyệt đăng.');
  const errors=check(r,folder,scope!=='content');if(errors.length)fail(errors.join(' '));
  if(scope==='content'){r.content_approval={by:o.by,instruction:o.note,hash:contentHash(r,folder),at:stamp()};r.status=['story','comment-chain'].includes(r.format)?'CONTENT_APPROVED':'PENDING_MEDIA';}
- else{r.approval={by:o.by,instruction:o.note,scope,target:scope==='publish'?{channel:o.channel,at:o.at||'now'}:null,content_hash:contentHash(r,folder),artifact_hashes:active(r).map(a=>a.sha256),at:stamp()};r.status='APPROVED';}
- save(f,r,'approved',{scope,by:o.by});
-}else if(command==='schedule'||command==='published'){
- if(!['APPROVED','SCHEDULED'].includes(r.status)||!approvalMatches(r,folder)||r.approval?.scope!=='publish')fail('Bản đang dùng chưa có duyệt đăng hợp lệ.');if(!o.channel||o.channel!==r.approval.target?.channel)fail('Đích đăng không khớp phạm vi đã duyệt.');const errors=check(r,folder);if(errors.length)fail(errors.join(' '));
- if(!o.evidence)fail('Cần evidence công cụ thật.');
- if(command==='schedule'){if(!o['schedule-id']||!o.at||!/(Z|[+-]\d{2}:\d{2})$/.test(o.at)||!Number.isFinite(Date.parse(o.at)))fail('Cần schedule ID/kênh/ISO có timezone.');if(r.approval.target.at==='now'||Date.parse(o.at)!==Date.parse(r.approval.target.at))fail('Lịch không khớp thời gian đã duyệt.');r.schedule={id:o['schedule-id'],channel:o.channel,at:o.at,evidence:o.evidence};r.status='SCHEDULED';}
- else{const url=new URL(o.url||fail('Cần permalink thật.'));if(!['https:','http:'].includes(url.protocol))fail('URL không hợp lệ.');r.publication={url:url.href,channel:o.channel,evidence:o.evidence,at:stamp()};r.status='PUBLISHED';}
- save(f,r,command+'_recorded',command==='schedule'?r.schedule:r.publication);
+ else{r.approval={by:o.by,instruction:o.note,scope,target:null,content_hash:contentHash(r,folder),artifact_hashes:active(r).map(a=>a.sha256),at:stamp()};r.status='APPROVED';}
+ save(f,r,'approved_for_manual_delivery',{scope,by:o.by});
 }else if(command==='feedback'){
  if(!o.text?.trim())fail('Cần feedback.');const scope=o.scope||'current';if(!['current','permanent'].includes(scope)||scope==='permanent'&&!o.by)fail('Permanent cần chỉ dẫn người dùng.');const item={text:o.text,scope,by:o.by||null,at:stamp()};r.feedback.push(item);if(scope==='permanent'){const prefs=read(db('preferences'));prefs.push(item);write(db('preferences'),prefs);}save(f,r,'feedback_recorded',item);
 }else if(command==='metrics'){

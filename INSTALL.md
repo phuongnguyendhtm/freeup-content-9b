@@ -40,10 +40,10 @@ Installer chỉ nâng cùng package có receipt/hash còn nguyên; giữ dữ li
 
 ## 3. Xác minh và thiết lập
 
-1. Mở lượt mới, xác nhận host tìm thấy 8 skill; kiểm `freeup-content-system/SKILL.md` và reference Sheet đã nằm trong bản cài. `files-verified` ở Codex/Claude mới xác nhận file, chưa chứng minh phiên đã nạp.
+1. Mở lượt mới, xác nhận host tìm thấy 8 skill; kiểm `freeup-content-system/SKILL.md` và references/local-workflow.md đã nằm trong bản cài. `files-verified` ở Codex/Claude mới xác nhận file, chưa chứng minh phiên đã nạp.
 2. Gọi `/thietlapcontent`: đọc hồ sơ/tài liệu hiện có, chỉ hỏi trường thiếu/mâu thuẫn. `{baseDir}` trong tài liệu là thư mục thật của SKILL.md đang đọc; thay bằng đường dẫn host cung cấp. Đọc `references/host-compatibility.md` khi khác 9B.
-3. Đọc **`references/google-sheet-template.md` và `.json`**. Nếu đã có bản sao đúng mẫu đã kết nối thì dùng lại. Chưa có: nhân bản toàn bộ mẫu vào Drive của học viên, làm sạch dữ liệu mẫu trên bản sao, xác minh lại rồi lưu ID. Không tự dựng Sheet khác, không sửa Sheet của giảng viên. Chưa kết nối Google thì hỏi kết nối Google của học viên qua cơ chế host; phần nội dung local vẫn dùng được.
-4. Chạy `content.cjs doctor`. Công cụ media chỉ cài khi cần: trong thư mục conductor, dùng package manager của runtime để `npm install --omit=dev`, rồi doctor/kiểm render lại; 9B có thể truyền `--install-deps` cho job native. Không đòi API key để viết bài. Không gộp “cài skill” với “đã kết nối Google/Facebook/đã bật lịch nền”.
-5. Trả kết quả ngắn: nền tảng, số skill thực nạp, thư mục dữ liệu, link Sheet riêng (nếu đã xác minh), phần kết nối còn thiếu. Sau đó nhận yêu cầu content; giữ nguyên `/vietbai`.
+3. Đọc references/local-workflow.md. Dùng kho local ngoài skill, không yêu cầu Google Sheets/Apps Script hoặc đăng nhập Facebook. Lưu hồ sơ và thành phẩm sẵn có, không reset dữ liệu.
+4. Chạy `content.cjs doctor`. Công cụ media chỉ cài khi cần: trong thư mục conductor, dùng package manager của runtime để `npm install --omit=dev`, rồi doctor/kiểm render lại; 9B có thể truyền `--install-deps` cho job native. Không đòi API key để viết bài. Không gộp “cài skill” với “đã kết nối bộ đọc nguồn/đã bật lịch nền”.
+5. Trả kết quả ngắn: nền tảng, số skill thực nạp, thư mục dữ liệu, cách xem file và phần công cụ còn thiếu. Sau đó nhận yêu cầu content; giữ nguyên `/vietbai`.
 
 Tham khảo nền tảng: [OpenClaw local installs](https://docs.openclaw.ai/cli/skills), [Claude Code skills](https://code.claude.com/docs/en/skills). ZIP cũ là bản lưu lịch sử, không phải luồng bắt đầu của bản này.

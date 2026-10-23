@@ -7,6 +7,7 @@ const path = require('node:path');
 const os = require('node:os');
 const cp = require('node:child_process');
 const bootstrap = require('./package/bootstrap.cjs');
+const retirement = require('./package/retire-skills.cjs');
 const packageRoot = path.join(__dirname, 'package');
 const receiptName = 'freeup-gift-origin.json';
 
@@ -95,8 +96,9 @@ function main(argv = process.argv.slice(2), context = {}) {
   const dataRoot = path.resolve(o.dataDir || path.join(config, 'freeup-content-data'));
   noLinks(skillRoot); noLinks(dataRoot);
   if (skillRoot === dataRoot || bootstrap.contained(dataRoot, skillRoot) || bootstrap.contained(skillRoot, dataRoot)) throw Error('Kho dữ liệu phải tách khỏi thư mục skill.');
+  const retired = retirement.plan(skillRoot, manifest);
   const items = manifest.skills.map(skill => { const dest = path.join(skillRoot, skill.name); noLinks(dest); return { skill, dest, ...bootstrap.verifyManagedSkill(skill, dest, manifest, o) }; });
-  const plan = { version: manifest.version, target: host, state: 'plan', skills_dir: skillRoot, data_dir: dataRoot, skills: items.map(x => ({ name: x.skill.name, action: x.action })) };
+  const plan = { version: manifest.version, target: host, state: 'plan', skills_dir: skillRoot, data_dir: dataRoot, skills: items.map(x => ({ name: x.skill.name, action: x.action })), retired_skills: retired.map(x => x.name) };
   if (!o.apply) { console.log(JSON.stringify(plan, null, 2)); return plan; }
   // Validate every target first; preserve existing company profile and assets.
   fs.mkdirSync(skillRoot, { recursive: true });
@@ -113,10 +115,11 @@ function main(argv = process.argv.slice(2), context = {}) {
     fs.renameSync(stage, item.dest);
   }
   const installedRoot = path.join(skillRoot, 'freeup-content-system');
+  const retiredResults = retirement.apply(retired, reports);
   const project = require(path.join(installedRoot, 'scripts', 'lib', 'project.cjs'));
   project.init(dataRoot);
   for (const item of items) if (bootstrap.verifyManagedSkill(item.skill, item.dest, manifest, o).action !== 'keep') throw Error('Đọc lại skill chưa khớp gói.');
-  const report = { ...plan, state: 'files-verified', next: 'Mở lượt mới, xác nhận đủ 8 skill trong danh sách của host rồi dùng /thietlapcontent. Google/Facebook và lịch tự động kiểm riêng.' };
+  const report = { ...plan, state: 'files-verified', retired_skills: retiredResults, next: 'Mở lượt mới, xác nhận đủ 8 skill rồi /thietlapcontent. Dùng chat và kho local, xuất file để tự đăng.' };
   fs.writeFileSync(path.join(reports, 'latest.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
   return report;
